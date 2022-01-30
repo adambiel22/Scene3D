@@ -28,10 +28,6 @@ namespace _3DAdamBielecki._3DScene
                     Projection.Project(
                         Camera.LookAt(
                             Transformation.Transform(vectors[i])));
-                vectors[i][0] /= vectors[i][3];
-                vectors[i][1] /= vectors[i][3];
-                vectors[i][2] /= vectors[i][3];
-                vectors[i][3] = 1;
                 //jeszcze potrzebna jest transformacja wektora normalnego
             }
             //a tutaj jeszcze potrzebne jest rozciągnięcie? no chyba tak.
