@@ -10,10 +10,8 @@ namespace _3DAdamBielecki._3DScene
         private Vector cameraPosition;
         private Vector cameraTarget;
         private Vector upVector;
-
         public Vector CameraPosition { get => cameraPosition; set { cameraPosition = value; generateViewMarix(); } }
-        public Vector CameraTarget { get => cameraTarget; set { cameraTarget = value; generateViewMarix(); }
-}
+        public Vector CameraTarget { get => cameraTarget; set { cameraTarget = value; generateViewMarix(); }}
         public Vector UpVector { get => upVector; set { upVector = value; generateViewMarix(); } }
 
         public Camera(Vector cameraPosition, Vector cameraTarget, Vector upVector)

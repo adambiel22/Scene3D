@@ -20,5 +20,15 @@ namespace _3DAdamBielecki._3DScene
 
             return result;
         }
+
+        public static double Norm(DLA.Vector vector)
+        {
+            double sum = 0;
+            foreach (double i in vector)
+            {
+                sum += i * i;
+            }
+            return Math.Sqrt(sum);
+        }
     }
 }

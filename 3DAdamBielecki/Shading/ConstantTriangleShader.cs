@@ -11,7 +11,7 @@ namespace _3DAdamBielecki.Shading
     public class ConstantTriangleShader : PixelShader
     {
         Triangle triangle;
-        Material material;
+        Surface material;
         Light[] lights;
         PixelTester pixelTester;
         TriangleDrawer triangleDrawer;
@@ -19,7 +19,7 @@ namespace _3DAdamBielecki.Shading
 
         public override void ShadeTriangle(
             Triangle triangle,
-            Material material,
+            Surface material,
             Light[] lights,
             PixelTester pixelTester,
             TriangleDrawer triangleDrawer,
@@ -39,7 +39,7 @@ namespace _3DAdamBielecki.Shading
             putPixel((int)pixelPosition[0], (int)pixelPosition[2], color);
         }
 
-        private Color computeColor(Vector pixelPosition, Material material, Light[] lights)
+        private Color computeColor(Vector pixelPosition, Surface material, Light[] lights)
         {
             throw new NotImplementedException();
         }

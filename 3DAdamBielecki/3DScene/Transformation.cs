@@ -6,6 +6,7 @@ namespace _3DAdamBielecki._3DScene
     public class Transformation
     {
         private Matrix transformationMatrix;
+        private Matrix inversedTransposedTransformationMatrix;
         
         public Transformation()
         {
@@ -14,7 +15,12 @@ namespace _3DAdamBielecki._3DScene
 
         public void AddTransformation(Matrix matrix)
         {
+            if (matrix.ColumnCount != 4 || matrix.RowCount != 4)
+            {
+                throw new ArgumentException("Transformation matrix should by 4x4");
+            }
             transformationMatrix = (Matrix)(transformationMatrix * matrix);
+            inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
         }
 
         public void SetTransformation(Matrix matrix)
@@ -24,6 +30,8 @@ namespace _3DAdamBielecki._3DScene
                 throw new ArgumentException("Transformation matrix should by 4x4");
             }
             transformationMatrix = matrix;
+            inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
+
         }
 
         public Triangle Transform(Triangle triangle)
@@ -31,9 +39,14 @@ namespace _3DAdamBielecki._3DScene
             return triangle;
         }
 
-        public Vector Transform(Vector vector)
+        public Vector TransformPoint(Vector positionVector)
         {
-            return (Vector)(transformationMatrix * vector);
+            return (Vector)(transformationMatrix * positionVector);
+        }
+
+        public Vector TransformNormalVector(Vector normalVector)
+        {
+            return (Vector)(inversedTransposedTransformationMatrix * normalVector);
         }
     }
 }

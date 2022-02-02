@@ -1,4 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
+﻿using _3DAdamBielecki._3DScene;
+using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -13,26 +14,34 @@ namespace _3DAdamBielecki.Shading
         public Light[] Lights { get; set; }
         public PixelTester PixelTester { get; set; }
         public Action<int, int, Color> SetPixel { get; set; }
-        public Triangle Triangle { get; set; }
-        public Material Material { get; set; }
+        public Camera Camera { get; set; }
+        public virtual Triangle TriangleInWorld { get; set; }
+        public Triangle ProjectedTriangle { get; set; }
+        public Surface Surface { get; set; }
 
-        public void ShadePixel(int x, int y)
+        public void ShadePixel(int pixelX, int pixelY)
         {
-            Vector pixelPosition = computePixelPosition(x, y);  
-            if (!PixelTester.isPixelToDraw(pixelPosition))
+
+            var (alpha, beta, gamma) =
+                BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
+            //TODO: TRZEBA TO PRZETESTOWAĆ CZY DA TE same współrzędne x,y
+            var point =
+                BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);
+
+            //porady ogólne:
+            //wektor normaln do trjkąta można obliczyć jako średnią arytmetyczną wektorów normalnych z wierzchołków
+            //jak mnożymy wektory normalne przez macierz to ostatnia współrzędna to 0;
+
+            if (!PixelTester.isPixelToDraw((int)point.x, (int)point.y, point.z))
             {
                 return;
             }
-            Color color = computeColor(pixelPosition);
-            SetPixel((int)pixelPosition[0], (int)pixelPosition[2], color);
+            Color color = computeColor(alpha, beta, gamma);
+            SetPixel(pixelX, pixelY, color);
         }
 
-        protected abstract Color computeColor(Vector pixelPosition);
+        protected abstract Color computeColor(double alfa, double beta, double gamma);
 
-        private Vector computePixelPosition(int x, int y)
-        {
-            throw new NotImplementedException();
-        }
         //aby narysować trójkąt potrzebujemy:
         //- trójkąta: wierzchołki, wektory normalne, itd
         //- materiału: stałe do phonga i kolor
@@ -41,5 +50,6 @@ namespace _3DAdamBielecki.Shading
         //- zBuffer jako sprawdzacz Czy w ogóle liczyć pixel
         //- metodę/obiekt do rasteryzacji/rysowania trójkąta.
         //      - Do tej metody trzeba dostarczyć funkcję do stawiania pixela bez koloru
+        //
     }
 }

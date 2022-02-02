@@ -29,6 +29,14 @@ namespace _3DAdamBielecki._3DScene
             Vector C = VectorExtender.Cross(A, B);
             return (Vector)C.Normalize(2);
         }
+
+        public Vector GetMiddle()
+        {
+            Vector middle =
+                (Vector)((Verticies[0].PositionVector
+                + Verticies[1].PositionVector
+                + Verticies[2].PositionVector) / 3);
+        }
     }
 
 

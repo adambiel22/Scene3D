@@ -1,4 +1,4 @@
-﻿namespace _3DAdamBielecki.Shading
+﻿namespace _3DAdamBielecki._3DScene
 {
     public class Block
     {

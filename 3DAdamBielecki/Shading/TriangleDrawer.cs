@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _3DAdamBielecki._3DScene;
+using System;
 
 namespace _3DAdamBielecki.Shading
 {

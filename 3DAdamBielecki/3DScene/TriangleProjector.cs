@@ -13,9 +13,10 @@ namespace _3DAdamBielecki._3DScene
         public Camera Camera { get; set; }
         public Projection Projection { get; set; }
         
-        Triangle ProjectTriangle(Triangle triangle)
+        public Triangle ProjectTriangle(Triangle triangle)
         {
-            Vector[] vectors = new Vector[3];
+            Vector[] verticiesInWorld = new Vector[3];
+            Vector[] pro = new Vector[3];
             for (int i = 0; i < 3; i++) 
             {
                 vectors[i] = DenseVector.OfArray(new double[] {
@@ -30,7 +31,7 @@ namespace _3DAdamBielecki._3DScene
                             Transformation.Transform(vectors[i])));
                 //jeszcze potrzebna jest transformacja wektora normalnego
             }
-            //a tutaj jeszcze potrzebne jest rozciągnięcie? no chyba tak.
+            //a tutaj jeszcze potrzebne jest rozciągnięcie do ekranu? no chyba tak.
             Triangle projectedTriangle = new Triangle()
         }
     }

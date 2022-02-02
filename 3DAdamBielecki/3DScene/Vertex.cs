@@ -1,7 +1,7 @@
 ﻿using Algebra;
 using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace _3DAdamBielecki
+namespace _3DAdamBielecki._3DScene
 {
     public class Vertex
     {
@@ -12,6 +12,11 @@ namespace _3DAdamBielecki
         {
             PositionVector = positionVector;
             NormalVector = normalVector;
+        }
+
+        public Vertex(Vector positionVector)
+        {
+            PositionVector = positionVector;
         }
     }
 }
