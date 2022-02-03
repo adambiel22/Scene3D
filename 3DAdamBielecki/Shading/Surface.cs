@@ -7,6 +7,6 @@ namespace _3DAdamBielecki.Shading
         public double diffuseConst { get; set; }
         public double specularConst { get; set; }
         public double ambientConst { get; set; }
-        public (double, double, double) Color { get; set; }
+        public Color Color { get; set; }
     }
 }

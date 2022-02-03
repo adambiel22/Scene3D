@@ -30,5 +30,10 @@ namespace _3DAdamBielecki._3DScene
             }
             return Math.Sqrt(sum);
         }
+
+        public static DLA.Vector Vector4D(double x, double y, double z, double w)
+        {
+            return DLA.DenseVector.OfArray(new double[] { x, y, z, w });
+        }
     }
 }

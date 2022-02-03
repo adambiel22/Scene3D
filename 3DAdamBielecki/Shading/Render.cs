@@ -12,10 +12,10 @@ namespace _3DAdamBielecki.Shading
 {
     public class Render
     {
-        Scene Scene { get; set; }
-        TriangleDrawer TriangleDrawer { get; set; } 
-        PixelShader PixelShader { get; set; } 
-        PixelTester PixelTester { get; set; }
+        public Scene Scene { get; set; }
+        public TriangleDrawer TriangleDrawer { get; set; } 
+        public PixelShader PixelShader { get; set; } 
+        public PixelTester PixelTester { get; set; }
 
         private BitmapManager bitmapManager;
 
