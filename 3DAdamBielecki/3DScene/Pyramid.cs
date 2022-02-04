@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Algebra;
 
 namespace _3DAdamBielecki._3DScene
 {
@@ -17,16 +18,16 @@ namespace _3DAdamBielecki._3DScene
             //Teraz te przy podstawie są błędne, bo nie są skierowane do środka ciężkości ostrosłupa.
             Vertex[] pyramidVerices = new Vertex[]
             {
-                new Vertex(VectorExtender.Vector4D(0, 0, 2, 1),
-                    VectorExtender.Vector4D(0, 0, 1, 0)),
-                new Vertex(VectorExtender.Vector4D(1, 1, 0, 1),
-                    VectorExtender.Vector4D(Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(VectorExtender.Vector4D(1, -1, 0, 1),
-                    VectorExtender.Vector4D(Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(VectorExtender.Vector4D(-1, -1, 0, 1),
-                    VectorExtender.Vector4D(-Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(VectorExtender.Vector4D(-1, 1, 0, 1),
-                    VectorExtender.Vector4D(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0))
+                new Vertex(new Vector(0, 0, 2, 1),
+                    new Vector(0, 0, 1, 0)),
+                new Vertex(new Vector(1, 1, 0, 1),
+                    new Vector(Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                new Vertex(new Vector(1, -1, 0, 1),
+                    new Vector(Math.Sqrt(2) / 2, -Math.Sqrt(2) /  2, 0, 0)),
+                new Vertex(new Vector(-1, -1, 0, 1),
+                    new Vector(-Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
+                new Vertex(new Vector(-1, 1, 0, 1),
+                    new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0))
             };
             vertices.AddRange(pyramidVerices);
 

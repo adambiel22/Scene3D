@@ -1,6 +1,5 @@
 ﻿using System;
-using MathNet.Numerics.LinearAlgebra.Double;
-
+using Algebra;
 namespace _3DAdamBielecki._3DScene
 {
     public class Transformation
@@ -10,26 +9,18 @@ namespace _3DAdamBielecki._3DScene
         
         public Transformation()
         {
-            transformationMatrix = DenseMatrix.CreateIdentity(4);
-            inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
+            transformationMatrix = Matrix.CreateIdentity();
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
         }
 
         public void AddTransformation(Matrix matrix)
         {
-            if (matrix.ColumnCount != 4 || matrix.RowCount != 4)
-            {
-                throw new ArgumentException("Transformation matrix should by 4x4");
-            }
-            transformationMatrix = (Matrix)(transformationMatrix * matrix);
-            inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
+            transformationMatrix = (transformationMatrix * matrix);
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
         }
 
         public void SetTransformation(Matrix matrix)
         {
-            if (matrix.ColumnCount != 4 || matrix.RowCount != 4)
-            {
-                throw new ArgumentException("Transformation matrix should by 4x4");
-            }
             transformationMatrix = matrix;
             inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
 
@@ -42,12 +33,12 @@ namespace _3DAdamBielecki._3DScene
 
         public Vector TransformPoint(Vector positionVector)
         {
-            return (Vector)(transformationMatrix * positionVector);
+            return transformationMatrix * positionVector;
         }
 
         public Vector TransformNormalVector(Vector normalVector)
         {
-            return (Vector)(inversedTransposedTransformationMatrix * normalVector);
+            return inversedTransposedTransformationMatrix * normalVector;
         }
     }
 }

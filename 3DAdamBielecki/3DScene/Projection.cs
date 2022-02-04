@@ -1,5 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using System;
+﻿using System;
+using Algebra;
 
 namespace _3DAdamBielecki._3DScene
 {
@@ -23,17 +23,17 @@ namespace _3DAdamBielecki._3DScene
             this.farPlaneDistance = farPlaneDistance;
             this.aspectRatio = aspectRatio;
             this.nearPlaneDistance = nearPlaneDistance;
-            projectionMatrix = DenseMatrix.Create(4, 4, 0);
+            projectionMatrix = new Matrix();
             UpdateProjectionMatrix();
         }
 
         public Vector Project(Vector vector)
         {
-            Vector projectedVector = (Vector)(projectionMatrix * vector);
+            Vector projectedVector = projectionMatrix * vector;
             projectedVector[0] /= projectedVector[3];
             projectedVector[1] /= projectedVector[3];
             projectedVector[2] /= projectedVector[3];
-            projectedVector[3] = 1;
+            projectedVector[3] = 1.0;
             return projectedVector;
         }
         private void UpdateProjectionMatrix()
@@ -48,7 +48,7 @@ namespace _3DAdamBielecki._3DScene
             projectionMatrix[2, 3] =
                 2 * nearPlaneDistance * nearPlaneDistance
                 / (nearPlaneDistance - farPlaneDistance);
-            projectionMatrix[3, 2] = -1;
+            projectionMatrix[3, 2] = -1.0;
         }
     }
 }

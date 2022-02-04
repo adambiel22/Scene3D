@@ -31,14 +31,14 @@ namespace _3DAdamBielecki
         {
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.fovNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.trackBar = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fovNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -66,36 +66,38 @@ namespace _3DAdamBielecki
             0});
             this.fovNumericUpDown.ValueChanged += new System.EventHandler(this.fovNumericUpDown_ValueChanged);
             // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(201, 23);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(150, 27);
-            this.numericUpDown2.TabIndex = 2;
-            this.numericUpDown2.ValueChanged += new System.EventHandler(this.numericUpDown2_ValueChanged);
-            // 
             // numericUpDown3
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(384, 23);
+            this.numericUpDown3.Location = new System.Drawing.Point(537, 23);
             this.numericUpDown3.Name = "numericUpDown3";
             this.numericUpDown3.Size = new System.Drawing.Size(150, 27);
             this.numericUpDown3.TabIndex = 3;
             // 
             // numericUpDown4
             // 
-            this.numericUpDown4.Location = new System.Drawing.Point(569, 23);
+            this.numericUpDown4.Location = new System.Drawing.Point(783, 23);
             this.numericUpDown4.Name = "numericUpDown4";
             this.numericUpDown4.Size = new System.Drawing.Size(150, 27);
             this.numericUpDown4.TabIndex = 4;
+            // 
+            // trackBar
+            // 
+            this.trackBar.Location = new System.Drawing.Point(218, 12);
+            this.trackBar.Maximum = 800;
+            this.trackBar.Name = "trackBar";
+            this.trackBar.Size = new System.Drawing.Size(278, 56);
+            this.trackBar.TabIndex = 5;
+            this.trackBar.Value = 50;
+            this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 621);
+            this.Controls.Add(this.trackBar);
             this.Controls.Add(this.numericUpDown4);
             this.Controls.Add(this.numericUpDown3);
-            this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.fovNumericUpDown);
             this.Controls.Add(this.pictureBox);
             this.Name = "Form1";
@@ -104,10 +106,11 @@ namespace _3DAdamBielecki
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fovNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -115,9 +118,9 @@ namespace _3DAdamBielecki
 
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.NumericUpDown fovNumericUpDown;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
+        private System.Windows.Forms.TrackBar trackBar;
     }
 }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
-using MathNet.Numerics.LinearAlgebra.Double;
+using Algebra;
 
 
 
@@ -24,16 +24,17 @@ namespace _3DAdamBielecki._3DScene
 
         public Vector GetNormalVector()
         {
-            Vector A = (Vector)(Verticies[1].PositionVector - Verticies[0].PositionVector); 
-            Vector B = (Vector)(Verticies[2].PositionVector - Verticies[0].PositionVector);
-            Vector C = VectorExtender.Cross(A, B);
-            return (Vector)C.Normalize(2);
+            Vector A = Verticies[1].PositionVector - Verticies[0].PositionVector; 
+            Vector B = Verticies[2].PositionVector - Verticies[0].PositionVector;
+            Vector C = Vector.Cross(A, B);
+            C.Normalize();
+            return C;
         }
 
         public Vector GetMiddle()
         {
             Vector middle =
-                (Vector)((Verticies[0].PositionVector
+                ((Verticies[0].PositionVector
                 + Verticies[1].PositionVector
                 + Verticies[2].PositionVector) / 3);
             return middle;

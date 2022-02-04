@@ -6,7 +6,7 @@ namespace _3DAdamBielecki._3DScene
 {
     public class Camera
     {
-        private Matrix viewMatrix;
+        public Matrix viewMatrix;
         private Vector cameraPosition;
         private Vector cameraTarget;
         private Vector upVector;
@@ -29,16 +29,14 @@ namespace _3DAdamBielecki._3DScene
 
         public void GenerateViewMarix()
         {
-
             Vector zAxis = (cameraPosition - cameraTarget);
             zAxis.Normalize();
             Vector xAxis = Vector.Cross(upVector, zAxis);
             zAxis.Normalize();
             Vector yAxis = Vector.Cross(zAxis, xAxis);
 
-            viewMatrix =
-                new Matrix(new Vector[] { xAxis, yAxis, zAxis, cameraPosition })
-            viewMatrix = (Matrix)viewMatrix.Inverse();
+            viewMatrix = new Matrix(new Vector[] { xAxis, yAxis, zAxis, cameraPosition });
+            viewMatrix = viewMatrix.Inverse();
         }
     }
 }

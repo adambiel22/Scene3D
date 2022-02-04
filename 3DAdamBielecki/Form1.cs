@@ -27,7 +27,7 @@ namespace _3DAdamBielecki
             fovNumericUpDown.Minimum = 40;
             fovNumericUpDown.Value = 90;
 
-            numericUpDown2.Value = 50;
+            trackBar.Value = 50;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,9 +40,9 @@ namespace _3DAdamBielecki
             appManager.SetFieldOfView((int)fovNumericUpDown.Value);
         }
 
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        private void trackBar_Scroll(object sender, EventArgs e)
         {
-            appManager.SetCameraPosition((int)numericUpDown2.Value);
+            appManager.SetCameraPosition(trackBar.Value);
         }
     }
 }

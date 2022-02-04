@@ -1,5 +1,5 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using System.Drawing;
+﻿using System.Drawing;
+using Algebra;
 
 namespace _3DAdamBielecki._3DScene
 {

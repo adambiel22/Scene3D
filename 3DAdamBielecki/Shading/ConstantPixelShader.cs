@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using _3DAdamBielecki._3DScene;
-using MathNet.Numerics.LinearAlgebra.Double;
+using Algebra;
 
 namespace _3DAdamBielecki.Shading
 {
@@ -25,13 +25,15 @@ namespace _3DAdamBielecki.Shading
 
         private void computeConstantColor()
         {
-            Vector normalVector = (Vector)TriangleInWorld.GetNormalVector().SubVector(0, 3);
+            Vector normalVector = TriangleInWorld.GetNormalVector();
             Vector middle = TriangleInWorld.GetMiddle();
-            Vector toCamera = (Vector)(Camera.CameraPosition - middle).Normalize(2);
+            Vector toCamera = Camera.CameraPosition - middle;
+            toCamera.Normalize();
             foreach (Light light in Lights)
             {
-                Vector toLight = (Vector)light.ComputeToLightVector(middle).SubVector(0, 3).Normalize(2);
-                double diffuse = Surface.diffuseConst * normalVector.DotProduct(toLight);
+                Vector toLight = light.ComputeToLightVector(middle);
+                toLight.Normalize();
+                double diffuse = Surface.diffuseConst * (normalVector * toLight);
                 //double specular = 
             }
         }

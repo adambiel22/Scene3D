@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using MathNet.Numerics.LinearAlgebra;
 
 namespace Algebra
@@ -8,11 +9,11 @@ namespace Algebra
         double[,] matrixArray;
         public Matrix(double[,] array)
         {
-            if (array.GetLength(1) != array.GetLength(2) || array.GetLength(1) > 4 || array.GetLength(1) == 0)
+            if (array.GetLength(0) != array.GetLength(1) || array.GetLength(0) > 4 || array.GetLength(0) == 0)
             {
                 throw new ArgumentException();
             }
-            matrixArray = array;
+            matrixArray = (double[,])array.Clone();
         }
 
         public Matrix(Vector[] array)
@@ -32,6 +33,16 @@ namespace Algebra
             matrixArray = new double[4, 4];
         }
 
+        public static Matrix CreateIdentity()
+        {
+            Matrix result = new Matrix();
+            for(int i = 0; i < 4; i++)
+            {
+                result[i, i] = 1.0;
+            }
+            return result;
+        }
+
         public double this[int index1, int intex2]
         {
             get { return matrixArray[index1, intex2]; }
@@ -49,6 +60,18 @@ namespace Algebra
             return new Matrix(matrix1.Inverse().ToArray());
         }
 
+        public Matrix Transpose()
+        {
+            Matrix result = new Matrix();
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    result[i, j] = matrixArray[j, i];
+                }
+            }
+            return result;
+        }
         public static Vector operator *(Matrix M, Vector v)
         {
             return new Vector(new double[]
@@ -74,6 +97,21 @@ namespace Algebra
                 }
             }
             return C;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                stringBuilder.Append((
+                    matrixArray[i,0],
+                    matrixArray[i, 1],
+                    matrixArray[i, 2],
+                    matrixArray[i, 3]));
+                stringBuilder.Append(';');
+            }
+            return stringBuilder.ToString();
         }
     }
 }

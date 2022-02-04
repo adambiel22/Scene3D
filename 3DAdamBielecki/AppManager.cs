@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Algebra;
 
 namespace _3DAdamBielecki
 {
@@ -23,7 +24,7 @@ namespace _3DAdamBielecki
 
         public void SetCameraPosition(int value)
         {
-            scene.Camera.CameraPosition[0] = value / 100;
+            scene.Camera.CameraPosition[1] = (double)value / 100 - 4.0;
             scene.Camera.GenerateViewMarix();
             PictureBox.Invalidate();
         }
@@ -49,9 +50,9 @@ namespace _3DAdamBielecki
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Camera = new Camera(
-                VectorExtender.Vector4D(3, 1, 0.5, 1),
-                VectorExtender.Vector4D(1, 0, 0, 1),
-                VectorExtender.Vector4D(0, 0, 1, 0));
+                new Vector(3, 0.5, 0.5, 1),
+                new Vector(0, 0, 0, 1),
+                new Vector(0, 0, 1, 0));
             scene.TransformatedBlocks.Add(new TransformatedBlock(
                 new Pyramid(),
                 new Transformation(),

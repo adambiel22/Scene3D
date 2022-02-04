@@ -22,20 +22,20 @@ namespace _3DAdamBielecki.Shading
         public void ShadePixel(int pixelX, int pixelY)
         {
 
-            var (alpha, beta, gamma) =
-                BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
+            var (alpha, beta, gamma) = (0, 0, 0);
+                //BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
             //TODO: TRZEBA TO PRZETESTOWAĆ CZY DA TE same współrzędne x,y
-            var point =
-                BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);
+            //var point =
+            //    BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);
 
             //porady ogólne:
             //wektor normaln do trjkąta można obliczyć jako średnią arytmetyczną wektorów normalnych z wierzchołków
             //jak mnożymy wektory normalne przez macierz to ostatnia współrzędna to 0;
 
-            if (!PixelTester.isPixelToDraw((int)point.x, (int)point.y, point.z))
-            {
-                return;
-            }
+            //if (!PixelTester.isPixelToDraw((int)point.x, (int)point.y, point.z))
+            //{
+            //    return;
+            //}
             Color color = computeColor(alpha, beta, gamma);
             SetPixel(pixelX, pixelY, color);
         }
