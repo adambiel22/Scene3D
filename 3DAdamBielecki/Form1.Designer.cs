@@ -34,6 +34,7 @@ namespace _3DAdamBielecki
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
             this.trackBar = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fovNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -52,6 +53,7 @@ namespace _3DAdamBielecki
             this.pictureBox.Size = new System.Drawing.Size(1091, 541);
             this.pictureBox.TabIndex = 0;
             this.pictureBox.TabStop = false;
+            this.pictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseDown);
             // 
             // fovNumericUpDown
             // 
@@ -90,11 +92,21 @@ namespace _3DAdamBielecki
             this.trackBar.Value = 50;
             this.trackBar.Scroll += new System.EventHandler(this.trackBar_Scroll);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(168, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 621);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.trackBar);
             this.Controls.Add(this.numericUpDown4);
             this.Controls.Add(this.numericUpDown3);
@@ -121,6 +133,7 @@ namespace _3DAdamBielecki
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown4;
         private System.Windows.Forms.TrackBar trackBar;
+        private System.Windows.Forms.Label label1;
     }
 }
 

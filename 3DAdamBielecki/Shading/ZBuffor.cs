@@ -4,6 +4,7 @@ namespace _3DAdamBielecki.Shading
 {
     public class ZBuffor
     {
+
         private double[,] zArray;
         public ZBuffor(int width, int height)
         {
@@ -19,7 +20,10 @@ namespace _3DAdamBielecki.Shading
 
         public bool isPixelToDraw(int x, int y, double z)
         {
-            if (Math.Log(z) <= Math.Log(zArray[x, y])) 
+            
+            if (x >= 0 && x <= zArray.GetLength(0) - 1
+                && y >= 0 && y <= zArray.GetLength(1) - 1
+                && Math.Log(z) <= Math.Log(zArray[x, y])) 
             {
                 zArray[x, y] = z;
                 return true;

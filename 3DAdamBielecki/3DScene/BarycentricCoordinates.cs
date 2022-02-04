@@ -12,19 +12,20 @@ namespace _3DAdamBielecki._3DScene
         public static (double alpha, double beta, double gamma)
             CartesianToBarycentric(Triangle triangle, double x, double y)
         {
-            double denominator = (triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
+            double denominator =
+                (triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
                 * (triangle.Verticies[0].PositionVector[0] - triangle.Verticies[2].PositionVector[0])
                 + (triangle.Verticies[2].PositionVector[0] - triangle.Verticies[1].PositionVector[0])
-                * (triangle.Verticies[1].PositionVector[0] - triangle.Verticies[1].PositionVector[2]);
+                * (triangle.Verticies[0].PositionVector[1] - triangle.Verticies[2].PositionVector[1]);
 
             double alpha = ((triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
                 * (x - triangle.Verticies[2].PositionVector[0])
                 + (triangle.Verticies[2].PositionVector[0] - triangle.Verticies[1].PositionVector[0])
-                * (y - triangle.Verticies[1].PositionVector[2])) / denominator;
+                * (y - triangle.Verticies[2].PositionVector[1])) / denominator;
             double beta = ((triangle.Verticies[2].PositionVector[1] - triangle.Verticies[0].PositionVector[1])
                 * (x - triangle.Verticies[2].PositionVector[0])
                 + (triangle.Verticies[0].PositionVector[0] - triangle.Verticies[2].PositionVector[0])
-                * (y - triangle.Verticies[1].PositionVector[2])) / denominator;
+                * (y - triangle.Verticies[2].PositionVector[1])) / denominator;
 
             return (alpha, beta, 1 - alpha - beta);
         }

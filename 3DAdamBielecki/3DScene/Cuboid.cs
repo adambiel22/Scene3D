@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace _3DAdamBielecki._3DScene
 {
-    public class Cube : Block
+    public class Cuboid : Block
     {
         private List<Vertex> vertices;
-        public Cube() : base()
+        public Cuboid(int x = 1, int y = 1, int z = 1) : base()
         {
             vertices = new List<Vertex>();
 
@@ -20,19 +20,19 @@ namespace _3DAdamBielecki._3DScene
             {
                 new Vertex(new Vector(0, 0, 0, 1),
                     new Vector(0, 0, 1, 0)),
-                new Vertex(new Vector(1, 0, 0, 1),
+                new Vertex(new Vector(x, 0, 0, 1),
                     new Vector(Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(1, 1, 0, 1),
+                new Vertex(new Vector(x, y, 0, 1),
                     new Vector(Math.Sqrt(2) / 2, -Math.Sqrt(2) /  2, 0, 0)),
-                new Vertex(new Vector(0, 1, 0, 1),
+                new Vertex(new Vector(0, y, 0, 1),
                     new Vector(-Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(0, 0, 1, 1),
+                new Vertex(new Vector(0, 0, z, 1),
                     new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(1, 0, 1, 1),
+                new Vertex(new Vector(x, 0, z, 1),
                     new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(1, 1, 1, 1),
+                new Vertex(new Vector(x, y, z, 1),
                     new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(0, 1, 1, 1),
+                new Vertex(new Vector(0, y, z, 1),
                     new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
             };
             vertices.AddRange(cubeVerices);

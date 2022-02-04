@@ -10,7 +10,7 @@ namespace _3DAdamBielecki._3DScene
     public class Pyramid : Block
     {
         private List<Vertex> vertices;
-        public Pyramid() : base()
+        public Pyramid(int x = 1, int y = 1, int z = 1) : base()
         {
             vertices = new List<Vertex>();
 
@@ -18,15 +18,15 @@ namespace _3DAdamBielecki._3DScene
             //Teraz te przy podstawie są błędne, bo nie są skierowane do środka ciężkości ostrosłupa.
             Vertex[] pyramidVerices = new Vertex[]
             {
-                new Vertex(new Vector(0, 0, 2, 1),
+                new Vertex(new Vector(0, 0, 2 * z, 1),
                     new Vector(0, 0, 1, 0)),
-                new Vertex(new Vector(1, 1, 0, 1),
+                new Vertex(new Vector(x, y, 0, 1),
                     new Vector(Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(1, -1, 0, 1),
+                new Vertex(new Vector(x, -y, 0, 1),
                     new Vector(Math.Sqrt(2) / 2, -Math.Sqrt(2) /  2, 0, 0)),
-                new Vertex(new Vector(-1, -1, 0, 1),
+                new Vertex(new Vector(-x, -y, 0, 1),
                     new Vector(-Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
-                new Vertex(new Vector(-1, 1, 0, 1),
+                new Vertex(new Vector(-x, y, 0, 1),
                     new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0))
             };
             vertices.AddRange(pyramidVerices);

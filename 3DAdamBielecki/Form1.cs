@@ -43,6 +43,12 @@ namespace _3DAdamBielecki
         private void trackBar_Scroll(object sender, EventArgs e)
         {
             appManager.SetCameraPosition(trackBar.Value);
+            label1.Text = $"{trackBar.Value}";
+        }
+
+        private void pictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            Debug.WriteLine(e.Location);
         }
     }
 }

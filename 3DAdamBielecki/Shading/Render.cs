@@ -26,6 +26,7 @@ namespace _3DAdamBielecki.Shading
             PixelShader.Lights = Scene.Lights;
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
+            PixelShader.Camera = Scene.Camera;
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
                 PixelShader.Surface = transformatedBlock.Surface;

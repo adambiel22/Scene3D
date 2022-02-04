@@ -6,8 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Algebra;
+using System.Windows.Forms;
 
 namespace _3DAdamBielecki
 {
@@ -15,6 +15,7 @@ namespace _3DAdamBielecki
     {
         private Render render;
         private Scene scene;
+        //private Timer
         public PictureBox PictureBox { get; set; }
 
         //public int GetCameraPosition()
@@ -49,23 +50,30 @@ namespace _3DAdamBielecki
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Camera = new Camera(
-                new Vector(3, 0.5, 0.5, 1),
-                new Vector(0, 0, 0, 1),
+                new Vector(50, 5, 100, 1),
+                new Vector(0, 5, 5, 1),
                 new Vector(0, 0, 1, 0));
             scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Pyramid(),
-                new Transformation(),
-                new Surface(Color.BlueViolet)));
-            scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Cube(),
+                new Pyramid(10, 10, 10),
                 new Transformation(new double[,]
                 {
-                    {2, 0, 0, -2.5},
-                    {0, 2, 0, -2.5},
-                    {0, 0, 0.25, -1},
+                    {1, 0, 0, 0},
+                    {0, 1, 0, 0},
+                    {0, 0, 1, 20},
+                    {0, 0, 0, 1}
+                }
+                    ),
+                new Surface(Color.BlueViolet)));
+            scene.TransformatedBlocks.Add(new TransformatedBlock(
+                new Cuboid(10, 10, 10),
+                new Transformation(new double[,]
+                {
+                    {1, 0, 0, 0},
+                    {0, 1, 0, 0},
+                    {0, 0, 1, 0},
                     {0, 0, 0, 1}
                 }),
-                new Surface(Color.Bisque)));
+                new Surface(Color.Bisque))) ;
             scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
             render.Scene = scene;
 
