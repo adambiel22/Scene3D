@@ -8,5 +8,9 @@ namespace _3DAdamBielecki.Shading
         public double specularConst { get; set; }
         public double ambientConst { get; set; }
         public Color Color { get; set; }
+        public Surface(Color color)
+        {
+            Color = color;
+        }
     }
 }

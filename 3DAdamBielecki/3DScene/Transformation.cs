@@ -11,6 +11,7 @@ namespace _3DAdamBielecki._3DScene
         public Transformation()
         {
             transformationMatrix = DenseMatrix.CreateIdentity(4);
+            inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
         }
 
         public void AddTransformation(Matrix matrix)

@@ -11,7 +11,7 @@ namespace _3DAdamBielecki.Shading
 {
     public abstract class PixelShader
     {
-        public Light[] Lights { get; set; }
+        public IEnumerable<Light> Lights { get; set; }
         public PixelTester PixelTester { get; set; }
         public Action<int, int, Color> SetPixel { get; set; }
         public Camera Camera { get; set; }

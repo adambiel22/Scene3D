@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace _3DAdamBielecki.Bitmapping
 {
-    public abstract class BitmapManager : IPixelSetter
+    public abstract class BitmapManager
     {
         public abstract void SetPixel(int x, int y, Color color);
         public abstract Color GetPixel(int x, int y);

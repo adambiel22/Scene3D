@@ -1,6 +1,6 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using MathNet.Numerics.LinearAlgebra;
-using System;
+﻿using System;
+using System.Diagnostics;
+using Algebra;
 
 namespace _3DAdamBielecki._3DScene
 {
@@ -10,32 +10,34 @@ namespace _3DAdamBielecki._3DScene
         private Vector cameraPosition;
         private Vector cameraTarget;
         private Vector upVector;
-        public Vector CameraPosition { get => cameraPosition; set { cameraPosition = value; generateViewMarix(); } }
-        public Vector CameraTarget { get => cameraTarget; set { cameraTarget = value; generateViewMarix(); }}
-        public Vector UpVector { get => upVector; set { upVector = value; generateViewMarix(); } }
+        public Vector CameraPosition { get => cameraPosition; set { cameraPosition = value; GenerateViewMarix(); } }
+        public Vector CameraTarget { get => cameraTarget; set { cameraTarget = value; GenerateViewMarix(); }}
+        public Vector UpVector { get => upVector; set { upVector = value; GenerateViewMarix(); } }
 
         public Camera(Vector cameraPosition, Vector cameraTarget, Vector upVector)
         {
             this.cameraPosition = cameraPosition;
             this.cameraTarget = cameraTarget;
             this.upVector = upVector;
-            generateViewMarix();
+            GenerateViewMarix();
         }
 
         public Vector LookAt(Vector vector)
         {
-            return (Vector)(viewMatrix * vector);
+            return viewMatrix * vector;
         }
 
-        private void generateViewMarix()
+        public void GenerateViewMarix()
         {
-            Vector<double> zAxis = (cameraPosition - cameraTarget).Normalize(2);
-            Vector<double> xAxis = VectorExtender.Cross(upVector, (Vector)zAxis).Normalize(2);
-            Vector<double> yAxis = VectorExtender.Cross((Vector)zAxis, (Vector)xAxis);
+
+            Vector zAxis = (cameraPosition - cameraTarget);
+            zAxis.Normalize();
+            Vector xAxis = Vector.Cross(upVector, zAxis);
+            zAxis.Normalize();
+            Vector yAxis = Vector.Cross(zAxis, xAxis);
 
             viewMatrix =
-                (Matrix)DenseMatrix.OfColumnVectors(new Vector<double>[] { xAxis, yAxis, zAxis, cameraPosition })
-                .InsertRow(3, DenseVector.OfArray(new double[] { 0, 0, 0, 1 }));
+                new Matrix(new Vector[] { xAxis, yAxis, zAxis, cameraPosition })
             viewMatrix = (Matrix)viewMatrix.Inverse();
         }
     }

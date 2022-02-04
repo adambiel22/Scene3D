@@ -17,16 +17,11 @@ namespace _3DAdamBielecki.Shading
         public PixelShader PixelShader { get; set; } 
         public PixelTester PixelTester { get; set; }
 
-        private BitmapManager bitmapManager;
-
-        Bitmap RenderScene(int width, int height)
+        public Bitmap RenderScene(int width, int height)
         {
             Bitmap bitmap = new Bitmap(width, height);
+            BitmapManager bitmapManager = new LockBitmapManager();
             bitmapManager.StartDrawing(bitmap);
-
-            TriangleProjector triangleProjector = new TriangleProjector();
-            triangleProjector.Camera = Scene.Camera;
-            triangleProjector.Projection = Scene.Projection;
 
             //TODO: inizjalizacja PixelTestera czyli Z-buffora
             PixelShader.Lights = Scene.Lights;
@@ -41,8 +36,10 @@ namespace _3DAdamBielecki.Shading
                     Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
                     //TODO: sprawdzenie czy trójkąt nie wychodzi poza obszar i czy jest zwrócony przodem do kamery
                     PixelShader.TriangleInWorld = triangleInWorld;
+                    stretchTriangle(projectedTriangle, width, height);
                     PixelShader.ProjectedTriangle = projectedTriangle;
-                    TriangleDrawer.DrawTriangle(projectedTriangle, PixelShader.ShadePixel);
+                    TriangleDrawer.DrawTriangle(projectedTriangle, PixelShader.ShadePixel,
+                        (x, y) => bitmapManager.SetPixel(x, y, Color.Black));
                 }
             }
             bitmapManager.EndDrawing();
@@ -71,6 +68,15 @@ namespace _3DAdamBielecki.Shading
                         camera.LookAt(triangle.Verticies[i].PositionVector)));
             }
             return new Triangle(projectedVerticies[0], projectedVerticies[1], projectedVerticies[2]);
+        }
+
+        private void stretchTriangle(Triangle triangle, int width, int height)
+        {
+            foreach(Vertex vertex in triangle.Verticies)
+            {
+                vertex.PositionVector[0] = (int)(width * ((vertex.PositionVector[0] + 1) / 2));
+                vertex.PositionVector[1] = (int)(height * ((vertex.PositionVector[1] + 1) / 2));
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace _3DAdamBielecki._3DScene
         public int ScreenWidth { get; set; }
         public int ScreenHeight { get; set; }
 
-        public Projection(double fieldOfView, double farPlaneDistance, double aspectRatio, double nearPlaneDistance)
+        public Projection(double fieldOfView, double farPlaneDistance, double nearPlaneDistance, double aspectRatio)
         {
             this.fieldOfView = fieldOfView;
             this.farPlaneDistance = farPlaneDistance;

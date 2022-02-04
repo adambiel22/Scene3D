@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -164,6 +165,11 @@ namespace _3DAdamBielecki.Bitmapping
         /// <param name="color"></param>
         public void SetPixel(int x, int y, Color color)
         {
+            if (x <= 0 || x >= Width || y <= 0 || y >= Height)
+            {
+                //Debug.WriteLine((x, y));
+                return;
+            }
             // Get color components count
             var cCount = Depth / 8;
 

@@ -36,6 +36,17 @@ namespace _3DAdamBielecki._3DScene
                 (Vector)((Verticies[0].PositionVector
                 + Verticies[1].PositionVector
                 + Verticies[2].PositionVector) / 3);
+            return middle;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach(Vertex vertex in Verticies)
+            {
+                stringBuilder.Append($"{vertex}");
+            }
+            return stringBuilder.ToString();
         }
     }
 

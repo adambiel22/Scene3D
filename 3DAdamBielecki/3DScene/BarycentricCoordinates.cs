@@ -1,9 +1,9 @@
-﻿using MathNet.Numerics.LinearAlgebra.Double;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Algebra;
 
 namespace _3DAdamBielecki._3DScene
 {
@@ -12,33 +12,30 @@ namespace _3DAdamBielecki._3DScene
         public static (double alpha, double beta, double gamma)
             CartesianToBarycentric(Triangle triangle, double x, double y)
         {
-            Vector euclideanVector = DenseVector.OfArray(new double[] { x, y, 0 });
+            Vector euclideanVector = new Vector(x, y, 0);
 
-            Vector v0Vector = (Vector)
-                (DenseVector.OfArray(new double[]
-                {
+            Vector v0Vector =
+                (new Vector(
                     triangle.Verticies[0].PositionVector[0],
                     triangle.Verticies[0].PositionVector[1],
                     0
-                }) - euclideanVector);
-            Vector v1Vector = (Vector)
-                (DenseVector.OfArray(new double[]
-                {
+                ) - euclideanVector);
+            Vector v1Vector =
+                (new Vector(
                     triangle.Verticies[1].PositionVector[0],
                     triangle.Verticies[1].PositionVector[1],
                     0
-                }) - euclideanVector);
-            Vector v2Vector = (Vector)
-                (DenseVector.OfArray(new double[]
-                {
+                ) - euclideanVector);
+            Vector v2Vector =
+                (new Vector(
                     triangle.Verticies[2].PositionVector[0],
                     triangle.Verticies[2].PositionVector[1],
                     0
-                }) - euclideanVector);
+                ) - euclideanVector);
 
-            double v0 = VectorExtender.Norm(VectorExtender.Cross(v2Vector, v1Vector)) / 2;
-            double v1 = VectorExtender.Norm(VectorExtender.Cross(v0Vector, v2Vector)) / 2;
-            double v2 = VectorExtender.Norm(VectorExtender.Cross(v1Vector, v0Vector)) / 2;
+            double v0 = Vector.Cross(v2Vector, v1Vector).Norm() / 2;
+            double v1 = Vector.Cross(v0Vector, v2Vector).Norm() / 2;
+            double v2 = Vector.Cross(v1Vector, v0Vector).Norm() / 2;
             double sum = v0 + v1 + v2;
 
             double alpha = v0 / sum;
@@ -51,33 +48,30 @@ namespace _3DAdamBielecki._3DScene
         public static (double alpha, double beta, double gamma)
             EuclideanToBarycentric(Triangle triangle, double x, double y, double z)
         {
-            Vector euclideanVector = DenseVector.OfArray(new double[] { x, y, z });
+            Vector euclideanVector = new Vector(x, y, z);
 
-            Vector v0Vector = (Vector)
-                (DenseVector.OfArray(new double[]
-                {
+            Vector v0Vector = 
+                (new Vector(
                     triangle.Verticies[0].PositionVector[0],
                     triangle.Verticies[0].PositionVector[1],
                     triangle.Verticies[0].PositionVector[2]
-                }) - euclideanVector);
-            Vector v1Vector = (Vector)
-                (DenseVector.OfArray(new double[]
-                {
+                ) - euclideanVector);
+            Vector v1Vector =
+                (new Vector(
                     triangle.Verticies[1].PositionVector[0],
                     triangle.Verticies[1].PositionVector[1],
                     triangle.Verticies[1].PositionVector[2]
-                }) - euclideanVector);
-            Vector v2Vector = (Vector)
-                (DenseVector.OfArray(new double[]
-                {
+                ) - euclideanVector);
+            Vector v2Vector =
+                (new Vector(
                     triangle.Verticies[2].PositionVector[0],
                     triangle.Verticies[2].PositionVector[1],
                     triangle.Verticies[2].PositionVector[2]
-                }) - euclideanVector);
+                ) - euclideanVector);
 
-            double v0 = VectorExtender.Norm(VectorExtender.Cross(v2Vector, v1Vector)) / 2;
-            double v1 = VectorExtender.Norm(VectorExtender.Cross(v0Vector, v2Vector)) / 2;
-            double v2 = VectorExtender.Norm(VectorExtender.Cross(v1Vector, v0Vector)) / 2;
+            double v0 = Vector.Cross(v2Vector, v1Vector).Norm() / 2;
+            double v1 = Vector.Cross(v0Vector, v2Vector).Norm() / 2;
+            double v2 = Vector.Cross(v1Vector, v0Vector).Norm() / 2;
             double sum = v0 + v1 + v2;
 
             double alpha = v0 / sum;

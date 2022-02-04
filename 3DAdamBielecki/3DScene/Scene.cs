@@ -7,6 +7,12 @@ namespace _3DAdamBielecki._3DScene
         public List<TransformatedBlock> TransformatedBlocks { get; private set; }
         public Camera Camera { get; set; }
         public Projection Projection { get; set; }
-        public Light[] Lights { get; set; }
+        public List<Light> Lights { get; set; }
+
+        public Scene()
+        {
+            TransformatedBlocks = new List<TransformatedBlock>();
+            Lights = new List<Light>();
+        }
     }
 }

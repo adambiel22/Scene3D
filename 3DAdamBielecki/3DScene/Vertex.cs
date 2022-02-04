@@ -1,5 +1,4 @@
 ﻿using Algebra;
-using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace _3DAdamBielecki._3DScene
 {
@@ -17,6 +16,11 @@ namespace _3DAdamBielecki._3DScene
         public Vertex(Vector positionVector)
         {
             PositionVector = positionVector;
+        }
+
+        public override string ToString()
+        {
+            return $"{(PositionVector[0], PositionVector[1], PositionVector[2])}";
         }
     }
 }
