@@ -15,17 +15,16 @@ namespace _3DAdamBielecki.Shading
         public Scene Scene { get; set; }
         public TriangleDrawer TriangleDrawer { get; set; } 
         public PixelShader PixelShader { get; set; } 
-        public PixelTester PixelTester { get; set; }
 
         public Bitmap RenderScene(int width, int height)
         {
             Bitmap bitmap = new Bitmap(width, height);
             BitmapManager bitmapManager = new LockBitmapManager();
             bitmapManager.StartDrawing(bitmap);
-
-            //TODO: inizjalizacja PixelTestera czyli Z-buffora
+            
+            ZBuffor zBuffor = new ZBuffor(width, height);
             PixelShader.Lights = Scene.Lights;
-            PixelShader.PixelTester = PixelTester;
+            PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
@@ -75,7 +74,7 @@ namespace _3DAdamBielecki.Shading
             foreach(Vertex vertex in triangle.Verticies)
             {
                 vertex.PositionVector[0] = (int)(width * ((vertex.PositionVector[0] + 1) / 2));
-                vertex.PositionVector[1] = (int)(height * ((vertex.PositionVector[1] + 1) / 2));
+                vertex.PositionVector[1] = (int)(height * ((-vertex.PositionVector[1] + 1) / 2));
             }
         }
     }

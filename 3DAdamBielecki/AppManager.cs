@@ -46,7 +46,6 @@ namespace _3DAdamBielecki
 
             render = new Render();
             render.PixelShader = new MockedPixelShader();
-            render.PixelTester = new MockedPixelTester();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Camera = new Camera(
@@ -57,6 +56,16 @@ namespace _3DAdamBielecki
                 new Pyramid(),
                 new Transformation(),
                 new Surface(Color.BlueViolet)));
+            scene.TransformatedBlocks.Add(new TransformatedBlock(
+                new Cube(),
+                new Transformation(new double[,]
+                {
+                    {2, 0, 0, -2.5},
+                    {0, 2, 0, -2.5},
+                    {0, 0, 0.25, -1},
+                    {0, 0, 0, 1}
+                }),
+                new Surface(Color.Bisque)));
             scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
             render.Scene = scene;
 

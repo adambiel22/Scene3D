@@ -12,7 +12,7 @@ namespace _3DAdamBielecki.Shading
     public abstract class PixelShader
     {
         public IEnumerable<Light> Lights { get; set; }
-        public PixelTester PixelTester { get; set; }
+        public ZBuffor ZBuffor { get; set; }
         public Action<int, int, Color> SetPixel { get; set; }
         public Camera Camera { get; set; }
         public virtual Triangle TriangleInWorld { get; set; }
@@ -23,7 +23,7 @@ namespace _3DAdamBielecki.Shading
         {
 
             var (alpha, beta, gamma) = (0, 0, 0);
-                //BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
+            BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
             //TODO: TRZEBA TO PRZETESTOWAĆ CZY DA TE same współrzędne x,y
             //var point =
             //    BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);
@@ -32,10 +32,10 @@ namespace _3DAdamBielecki.Shading
             //wektor normaln do trjkąta można obliczyć jako średnią arytmetyczną wektorów normalnych z wierzchołków
             //jak mnożymy wektory normalne przez macierz to ostatnia współrzędna to 0;
 
-            //if (!PixelTester.isPixelToDraw((int)point.x, (int)point.y, point.z))
-            //{
-            //    return;
-            //}
+            if (!ZBuffor.isPixelToDraw((int)point.x, (int)point.y, point.z))
+            {
+                return;
+            }
             Color color = computeColor(alpha, beta, gamma);
             SetPixel(pixelX, pixelY, color);
         }

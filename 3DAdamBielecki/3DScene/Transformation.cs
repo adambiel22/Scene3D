@@ -13,6 +13,18 @@ namespace _3DAdamBielecki._3DScene
             inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
         }
 
+        public Transformation(Matrix matrix)
+        {
+            transformationMatrix = Matrix.CreateIdentity() * matrix;
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
+        }
+
+        public Transformation(double[,] marixArray)
+        {
+            transformationMatrix = new Matrix(marixArray);
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
+        }
+
         public void AddTransformation(Matrix matrix)
         {
             transformationMatrix = (transformationMatrix * matrix);
@@ -22,7 +34,7 @@ namespace _3DAdamBielecki._3DScene
         public void SetTransformation(Matrix matrix)
         {
             transformationMatrix = matrix;
-            inversedTransposedTransformationMatrix = (Matrix)transformationMatrix.Inverse().Transpose();
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
 
         }
 
