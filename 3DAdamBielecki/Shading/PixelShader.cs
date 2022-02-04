@@ -2,6 +2,7 @@
 using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -22,17 +23,22 @@ namespace _3DAdamBielecki.Shading
         public void ShadePixel(int pixelX, int pixelY)
         {
 
-            var (alpha, beta, gamma) = (0, 0, 0);
-            BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
+            var (alpha, beta, gamma) = 
+                BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
             //TODO: TRZEBA TO PRZETESTOWAĆ CZY DA TE same współrzędne x,y
-            //var point =
-            //    BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);
+            var point =
+                BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);
 
             //porady ogólne:
             //wektor normaln do trjkąta można obliczyć jako średnią arytmetyczną wektorów normalnych z wierzchołków
             //jak mnożymy wektory normalne przez macierz to ostatnia współrzędna to 0;
 
-            if (!ZBuffor.isPixelToDraw((int)point.x, (int)point.y, point.z))
+            //if (pixelX == 907 && pixelY == 371)
+            //{
+            //    Debug.WriteLine("fas");
+            //}
+
+            if (!ZBuffor.isPixelToDraw(pixelX, pixelY, point.z))
             {
                 return;
             }

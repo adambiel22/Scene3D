@@ -12,37 +12,21 @@ namespace _3DAdamBielecki._3DScene
         public static (double alpha, double beta, double gamma)
             CartesianToBarycentric(Triangle triangle, double x, double y)
         {
-            Vector euclideanVector = new Vector(x, y, 0);
+            double denominator = (triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
+                * (triangle.Verticies[0].PositionVector[0] - triangle.Verticies[2].PositionVector[0])
+                + (triangle.Verticies[2].PositionVector[0] - triangle.Verticies[1].PositionVector[0])
+                * (triangle.Verticies[1].PositionVector[0] - triangle.Verticies[1].PositionVector[2]);
 
-            Vector v0Vector =
-                (new Vector(
-                    triangle.Verticies[0].PositionVector[0],
-                    triangle.Verticies[0].PositionVector[1],
-                    0
-                ) - euclideanVector);
-            Vector v1Vector =
-                (new Vector(
-                    triangle.Verticies[1].PositionVector[0],
-                    triangle.Verticies[1].PositionVector[1],
-                    0
-                ) - euclideanVector);
-            Vector v2Vector =
-                (new Vector(
-                    triangle.Verticies[2].PositionVector[0],
-                    triangle.Verticies[2].PositionVector[1],
-                    0
-                ) - euclideanVector);
+            double alpha = ((triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
+                * (x - triangle.Verticies[2].PositionVector[0])
+                + (triangle.Verticies[2].PositionVector[0] - triangle.Verticies[1].PositionVector[0])
+                * (y - triangle.Verticies[1].PositionVector[2])) / denominator;
+            double beta = ((triangle.Verticies[2].PositionVector[1] - triangle.Verticies[0].PositionVector[1])
+                * (x - triangle.Verticies[2].PositionVector[0])
+                + (triangle.Verticies[0].PositionVector[0] - triangle.Verticies[2].PositionVector[0])
+                * (y - triangle.Verticies[1].PositionVector[2])) / denominator;
 
-            double v0 = Vector.Cross(v2Vector, v1Vector).Norm() / 2;
-            double v1 = Vector.Cross(v0Vector, v2Vector).Norm() / 2;
-            double v2 = Vector.Cross(v1Vector, v0Vector).Norm() / 2;
-            double sum = v0 + v1 + v2;
-
-            double alpha = v0 / sum;
-            double beta = v1 / sum;
-            double gamma = v2 / sum;
-
-            return (alpha, beta, gamma);
+            return (alpha, beta, 1 - alpha - beta);
         }
 
         public static (double alpha, double beta, double gamma)
