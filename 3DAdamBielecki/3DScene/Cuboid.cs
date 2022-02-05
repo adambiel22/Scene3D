@@ -19,22 +19,26 @@ namespace _3DAdamBielecki._3DScene
             Vertex[] cubeVerices = new Vertex[]
             {
                 new Vertex(new Vector(0, 0, 0, 1),
-                    new Vector(0, 0, 1, 0)),
+                    new Vector(-x / 2, -y / 2, -z / 2, 0)),
                 new Vertex(new Vector(x, 0, 0, 1),
-                    new Vector(Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(x / 2, -y / 2, -z / 2, 0)),
                 new Vertex(new Vector(x, y, 0, 1),
-                    new Vector(Math.Sqrt(2) / 2, -Math.Sqrt(2) /  2, 0, 0)),
+                    new Vector(x / 2, y / 2, -z / 2, 0)),
                 new Vertex(new Vector(0, y, 0, 1),
-                    new Vector(-Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(-x / 2, y / 2, -z / 2, 0)),
                 new Vertex(new Vector(0, 0, z, 1),
-                    new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(-x / 2, -y / 2, z / 2, 0)),
                 new Vertex(new Vector(x, 0, z, 1),
-                    new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(x / 2, -y / 2, z / 2, 0)),
                 new Vertex(new Vector(x, y, z, 1),
-                    new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(x / 2, y / 2, z / 2, 0)),
                 new Vertex(new Vector(0, y, z, 1),
-                    new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(-x / 2, y / 2, z / 2, 0)),
             };
+            foreach(Vertex vertex in cubeVerices)
+            {
+                vertex.NormalVector.Normalize();
+            }
             vertices.AddRange(cubeVerices);
 
             //TODO: zastanowić się czy nie trzeba w jakiejś

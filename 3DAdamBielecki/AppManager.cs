@@ -48,7 +48,7 @@ namespace _3DAdamBielecki
             PictureBox = pictureBox;
 
             render = new Render();
-            render.PixelShader = new ConstantPixelShader();
+            render.PixelShader = new GourandPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Lights.Add(new PointLight(Color.White, 3, 2, 3));
