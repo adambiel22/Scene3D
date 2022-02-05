@@ -2,6 +2,7 @@
 using Algebra;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -21,17 +22,19 @@ namespace _3DAdamBielecki.Shading
                 Vector toLight = light.ComputeToLightVector(position);
                 toLight.Normalize();
                 Vector mirrorReflectance = normalVector * (2 * (normalVector * toLight)) - toLight;
-                double diffuse = surface.DiffuseConst * (normalVector * toLight);
-                double specular = surface.SpecularConst * Math.Pow(toCamera * mirrorReflectance, surface.NShiny);
+                double diffuse = Math.Max(surface.DiffuseConst * (normalVector * toLight), 0);
+                double specular = Math.Max(surface.SpecularConst * Math.Pow(toCamera * mirrorReflectance, surface.NShiny), 0);
                 iR += light.Color.r * (diffuse + specular);
                 iG += light.Color.g * (diffuse + specular);
                 iB += light.Color.b * (diffuse + specular);
             }
 
             //Czy trzeba dodać też Max 0? Będzie tak jak iR lub iG lub iB wyjdzie ujemne. Kiedy tak może być??
-            byte R = (byte)Math.Min(surface.Color.R * iR, 255.0);
-            byte G = (byte)Math.Min(surface.Color.G * iG, 255.0);
-            byte B = (byte)Math.Min(surface.Color.B * iB, 255.0);
+            byte R = (byte)Math.Min(Math.Max(surface.Color.R * iR, 0.0), 255.0);
+            byte G = (byte)Math.Min(Math.Max(surface.Color.G * iG, 0.0), 255.0);
+            byte B = (byte)Math.Min(Math.Max(surface.Color.B * iB, 0.0), 255.0);
+
+
 
             return Color.FromArgb(255, R, G, B);
         }

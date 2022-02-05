@@ -48,7 +48,7 @@ namespace _3DAdamBielecki
             PictureBox = pictureBox;
 
             render = new Render();
-            render.PixelShader = new GourandPixelShader();
+            render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Lights.Add(new PointLight(Color.White, 3, 2, 3));
@@ -56,28 +56,28 @@ namespace _3DAdamBielecki
                 new Vector(3, 0.5, 0.5, 1),
                 new Vector(0, 0.5, 0.5, 1),
                 new Vector(0, 0, 1, 0));
-            //pyramidTransformation = new Transformation(new double[,]
-            //    {
-            //        {1, 0, 0, -2 },
-            //        {0, 1, 0, 0 },
-            //        {0, 0, 1, 0 },
-            //        {0, 0, 0, 1 }
-            //    });
-            //scene.TransformatedBlocks.Add(new TransformatedBlock(
-            //    new Pyramid(1, 1, 1),
-            //    pyramidTransformation,
-            //    new Surface(Color.BlueViolet)));
-            cubeTransformation = new Transformation(new double[,]
+            pyramidTransformation = new Transformation(new double[,]
                 {
-                    {1, 0, 0, 0 },
+                    {1, 0, 0, -2 },
                     {0, 1, 0, 0 },
                     {0, 0, 1, 0 },
                     {0, 0, 0, 1 }
                 });
             scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Cuboid(1, 1, 1),
-                cubeTransformation,
-                new Surface(1, 1, 0.1, 100, Color.Red)));
+                new Pyramid(1, 1, 1),
+                pyramidTransformation,
+                new Surface(1, 1, 0.2, 100, Color.BlueViolet)));
+            //cubeTransformation = new Transformation(new double[,]
+            //    {
+            //        {1, 0, 0, 0 },
+            //        {0, 1, 0, 0 },
+            //        {0, 0, 1, 0 },
+            //        {0, 0, 0, 1 }
+            //    });
+            //scene.TransformatedBlocks.Add(new TransformatedBlock(
+            //    new Cuboid(1, 1, 1),
+            //    cubeTransformation,
+            //    new Surface(1, 1, 0.2, 100, Color.Aqua)));
             scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
             render.Scene = scene;
 
@@ -106,7 +106,7 @@ namespace _3DAdamBielecki
         {
             _timer.Stop();
             PictureBox.Image = null;
-            cubeTransformation.AddTransformation(new Matrix(new double[,]
+            pyramidTransformation.AddTransformation(new Matrix(new double[,]
             {
                 {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
                 {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
