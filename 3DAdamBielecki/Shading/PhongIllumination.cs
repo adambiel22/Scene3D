@@ -23,7 +23,10 @@ namespace _3DAdamBielecki.Shading
                 toLight.Normalize();
                 Vector mirrorReflectance = normalVector * (2 * (normalVector * toLight)) - toLight;
                 double diffuse = Math.Max(surface.DiffuseConst * (normalVector * toLight), 0);
-                double specular = Math.Max(surface.SpecularConst * Math.Pow(toCamera * mirrorReflectance, surface.NShiny), 0);
+                double scalarProduct = toCamera * mirrorReflectance;
+                double specular = scalarProduct >= 0
+                    ? Math.Max(surface.SpecularConst * Math.Pow(scalarProduct, surface.NShiny), 0)
+                    : 0.0;
                 iR += light.Color.r * (diffuse + specular);
                 iG += light.Color.g * (diffuse + specular);
                 iB += light.Color.b * (diffuse + specular);

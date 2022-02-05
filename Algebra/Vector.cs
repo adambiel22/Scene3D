@@ -16,6 +16,11 @@ namespace Algebra
             vectorArray = new double[] { v0, v1, v2, v3 };
         }
 
+        public Vector(Vector vector)
+        {
+            vectorArray = (double[])vector.vectorArray.Clone();
+        }
+
         public double this[int index]
         {
             get { return vectorArray[index]; }

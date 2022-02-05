@@ -15,7 +15,7 @@ namespace _3DAdamBielecki
         private System.Timers.Timer _timer;
         private Transformation pyramidTransformation;
         private Transformation cubeTransformation;
-
+        private Transformation sphereTransformation;
         public Button button;
         public PictureBox PictureBox { get; set; }
 
@@ -52,41 +52,62 @@ namespace _3DAdamBielecki
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Lights.Add(new PointLight(Color.White, 3, 2, 3));
-            scene.Camera = new Camera(
-                new Vector(3, 0.5, 0.5, 1),
-                new Vector(0, 0.5, 0.5, 1),
-                new Vector(0, 0, 1, 0));
-            pyramidTransformation = new Transformation(new double[,]
-                {
-                    {1, 0, 0, -2 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {0, 0, 0, 1 }
-                });
-            scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Pyramid(1, 1, 1),
-                pyramidTransformation,
-                new Surface(1, 1, 0.2, 100, Color.BlueViolet)));
-            //cubeTransformation = new Transformation(new double[,]
+
+            //pyramidTransformation = new Transformation(new double[,]
             //    {
-            //        {1, 0, 0, 0 },
+            //        {1, 0, 0, -2 },
             //        {0, 1, 0, 0 },
             //        {0, 0, 1, 0 },
             //        {0, 0, 0, 1 }
             //    });
             //scene.TransformatedBlocks.Add(new TransformatedBlock(
+            //    new Pyramid(1, 1, 1),
+            //    pyramidTransformation,
+            //    new Surface(1, 1, 0.2, 100, Color.BlueViolet)));
+            cubeTransformation = new Transformation(new double[,]
+                {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {0, 0, 0, 1 }
+                });
+            //scene.TransformatedBlocks.Add(new TransformatedBlock(
             //    new Cuboid(1, 1, 1),
             //    cubeTransformation,
             //    new Surface(1, 1, 0.2, 100, Color.Aqua)));
-            scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
+
+            sphereTransformation = new Transformation(new double[,]
+                {
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {0, 0, 0, 1 }
+                });
+            scene.TransformatedBlocks.Add(new TransformatedBlock(
+                new Sphere(4, 1),
+                sphereTransformation,
+                new Surface(1, 0.2, 0.2, 100, Color.Aqua)));
+            Vector cameraPosition = new Vector(6, 0, 1, 1);
+            scene.Camera = new Camera(
+                cameraPosition,
+                new Vector(0, 0, 0, 1),
+                new Vector(0, 0, 1, 0));
+            scene.Projection = new Projection(Math.PI / 2, 100, 1, (double)PictureBox.Height / PictureBox.Width);
             render.Scene = scene;
 
             _timer = timer;
             _timer.Interval = 100;
+            _timer.AutoReset = false;
             _timer.Elapsed += Timer_Elapsed;
 
             pictureBox.Click += PictureBox_Click;            
             pictureBox.Paint += paint;
+            pictureBox.Resize += PictureBox_Resize;
+        }
+
+        private void PictureBox_Resize(object sender, EventArgs e)
+        {
+            scene.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
         }
 
         private void PictureBox_Click(object sender, EventArgs e)
@@ -104,9 +125,8 @@ namespace _3DAdamBielecki
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            _timer.Stop();
-            PictureBox.Image = null;
-            pyramidTransformation.AddTransformation(new Matrix(new double[,]
+            //_timer.Stop();
+            sphereTransformation.AddTransformation(new Matrix(new double[,]
             {
                 {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
                 {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
