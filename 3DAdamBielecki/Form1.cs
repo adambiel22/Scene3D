@@ -18,21 +18,34 @@ namespace _3DAdamBielecki
     public partial class Form1 : Form
     {
         AppManager appManager;
+        private System.Timers.Timer timer;
+        bool enabled;
         public Form1()
         {
             InitializeComponent();
-            appManager = new AppManager(pictureBox);
+            enabled = false;
+            timer = new System.Timers.Timer();
+            appManager = new AppManager(pictureBox, timer);
 
             fovNumericUpDown.Maximum = 150;
             fovNumericUpDown.Minimum = 40;
-            fovNumericUpDown.Value = 90;
+            fovNumericUpDown.Value = 45;
 
             trackBar.Value = 50;
-        }
 
-        private void button1_Click(object sender, EventArgs e)
+        }
+        private void button1_Click_1(object sender, EventArgs e)
         {
-            pictureBox.Invalidate();
+            if (enabled == true)
+            {
+                enabled = false;
+                timer.Stop();
+            }
+            else
+            {
+                enabled = true;
+                timer.Start();
+            }
         }
 
         private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -50,5 +63,7 @@ namespace _3DAdamBielecki
         {
             Debug.WriteLine(e.Location);
         }
+
+
     }
 }

@@ -41,17 +41,19 @@ namespace _3DAdamBielecki._3DScene
             //odpowiedniej kolejności dodawać wiecrzchołki tych trójkątów??
             Triangles.AddRange(new Triangle[]
             {
-                new Triangle(cubeVerices[0], cubeVerices[1], cubeVerices[2]),
-                new Triangle(cubeVerices[0], cubeVerices[2], cubeVerices[3]),
-                new Triangle(cubeVerices[6], cubeVerices[5], cubeVerices[4]),
-                new Triangle(cubeVerices[6], cubeVerices[4], cubeVerices[7]),
-                new Triangle(cubeVerices[1], cubeVerices[5], cubeVerices[2]),
-                new Triangle(cubeVerices[2], cubeVerices[5], cubeVerices[6]),
-                new Triangle(cubeVerices[0], cubeVerices[3], cubeVerices[4]),
-                new Triangle(cubeVerices[2], cubeVerices[6], cubeVerices[3]),
-                new Triangle(cubeVerices[6], cubeVerices[7], cubeVerices[3]),
-                new Triangle(cubeVerices[5], cubeVerices[1], cubeVerices[0]),
-                new Triangle(cubeVerices[4], cubeVerices[5], cubeVerices[0]),
+
+                new Triangle(cubeVerices[0], cubeVerices[2], cubeVerices[1]),
+                new Triangle(cubeVerices[0], cubeVerices[3], cubeVerices[2]),
+                new Triangle(cubeVerices[6], cubeVerices[4], cubeVerices[5]),
+                new Triangle(cubeVerices[6], cubeVerices[7], cubeVerices[4]),
+                new Triangle(cubeVerices[1], cubeVerices[2], cubeVerices[5]),
+                new Triangle(cubeVerices[2], cubeVerices[6], cubeVerices[5]),
+                new Triangle(cubeVerices[0], cubeVerices[4], cubeVerices[3]),
+                new Triangle(cubeVerices[4], cubeVerices[7], cubeVerices[3]),
+                new Triangle(cubeVerices[2], cubeVerices[3], cubeVerices[6]),
+                new Triangle(cubeVerices[6], cubeVerices[3], cubeVerices[7]),
+                new Triangle(cubeVerices[5], cubeVerices[0], cubeVerices[1]),
+                new Triangle(cubeVerices[4], cubeVerices[0], cubeVerices[5]),
             });
         }
     }

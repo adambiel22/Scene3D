@@ -1,12 +1,9 @@
 ﻿using _3DAdamBielecki._3DScene;
 using _3DAdamBielecki.Shading;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Algebra;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace _3DAdamBielecki
@@ -15,8 +12,12 @@ namespace _3DAdamBielecki
     {
         private Render render;
         private Scene scene;
-        //private Timer
+        private System.Timers.Timer _timer;
+        private Transformation pyramidTransformation;
+
+        public Button button;
         public PictureBox PictureBox { get; set; }
+
 
         //public int GetCameraPosition()
         //{
@@ -41,7 +42,7 @@ namespace _3DAdamBielecki
             PictureBox.Invalidate();
         }
 
-        public AppManager(PictureBox pictureBox)
+        public AppManager(PictureBox pictureBox, System.Timers.Timer timer)
         {
             PictureBox = pictureBox;
 
@@ -50,22 +51,22 @@ namespace _3DAdamBielecki
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
             scene.Camera = new Camera(
-                new Vector(50, 5, 100, 1),
-                new Vector(0, 5, 5, 1),
+                new Vector(3, 0.5, 0.5, 1),
+                new Vector(0, 0.5, 0.5, 1),
                 new Vector(0, 0, 1, 0));
-            scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Pyramid(10, 10, 10),
-                new Transformation(new double[,]
+            pyramidTransformation = new Transformation(new double[,]
                 {
-                    {1, 0, 0, 0},
-                    {0, 1, 0, 0},
-                    {0, 0, 1, 20},
-                    {0, 0, 0, 1}
-                }
-                    ),
-                new Surface(Color.BlueViolet)));
+                    {1, 0, 0, 0 },
+                    {0, 1, 0, 0 },
+                    {0, 0, 1, 0 },
+                    {0, 0, 0, 1 }
+                });
+            //scene.TransformatedBlocks.Add(new TransformatedBlock(
+            //    new Pyramid(10, 10, 10),
+            //    pyramidTransformation,
+            //    new Surface(Color.BlueViolet)));
             scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Cuboid(10, 10, 10),
+                new Cuboid(1, 1, 1),
                 new Transformation(new double[,]
                 {
                     {1, 0, 0, 0},
@@ -73,11 +74,45 @@ namespace _3DAdamBielecki
                     {0, 0, 1, 0},
                     {0, 0, 0, 1}
                 }),
-                new Surface(Color.Bisque))) ;
+                new Surface(Color.Bisque)));
             scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
             render.Scene = scene;
 
+            _timer = timer;
+            _timer.Interval = 100;
+            _timer.Elapsed += Timer_Elapsed;
+
+            pictureBox.Click += PictureBox_Click;            
             pictureBox.Paint += paint;
+        }
+
+        private void PictureBox_Click(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            //pyramidTransformation.AddTransformation(new Matrix(new double[,]
+            //{
+            //    {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
+            //    {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
+            //    {0, 0, 1, 0 },
+            //    {0, 0, 0, 1 }
+            //}));
+            //PictureBox.Invalidate();
+            
+        }
+
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            _timer.Stop();
+            PictureBox.Image = null;
+            pyramidTransformation.AddTransformation(new Matrix(new double[,]
+            {
+                {Math.Cos(3), -Math.Sin(3), 0, 0 },
+                {Math.Sin(3), Math.Cos(3), 0, 0 },
+                {0, 0, 1, 0 },
+                {0, 0, 0, 1 }
+            }));
+            PictureBox.Invalidate();
+            //_timer.Start();
         }
 
         private void paint(object sender, PaintEventArgs e)

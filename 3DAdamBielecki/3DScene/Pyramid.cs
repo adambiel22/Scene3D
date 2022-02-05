@@ -35,10 +35,10 @@ namespace _3DAdamBielecki._3DScene
             //odpowiedniej kolejności dodawać te trójkąty??
             Triangles.AddRange(new Triangle[]
             {
-                new Triangle(pyramidVerices[0], pyramidVerices[1], pyramidVerices[2]),
+                new Triangle(pyramidVerices[0], pyramidVerices[2], pyramidVerices[1]),
                 new Triangle(pyramidVerices[0], pyramidVerices[1], pyramidVerices[4]),
                 new Triangle(pyramidVerices[0], pyramidVerices[3], pyramidVerices[2]),
-                new Triangle(pyramidVerices[0], pyramidVerices[3], pyramidVerices[4]),
+                new Triangle(pyramidVerices[0], pyramidVerices[4], pyramidVerices[3]),
                 new Triangle(pyramidVerices[1], pyramidVerices[2], pyramidVerices[3]),
                 new Triangle(pyramidVerices[1], pyramidVerices[3], pyramidVerices[4]),
             });

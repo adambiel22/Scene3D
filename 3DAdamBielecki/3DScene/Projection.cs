@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Algebra;
 
 namespace _3DAdamBielecki._3DScene
@@ -46,7 +47,7 @@ namespace _3DAdamBielecki._3DScene
                 (farPlaneDistance + nearPlaneDistance)
                 / (nearPlaneDistance - farPlaneDistance);
             projectionMatrix[2, 3] =
-                2 * nearPlaneDistance * nearPlaneDistance
+                2 * farPlaneDistance * nearPlaneDistance
                 / (nearPlaneDistance - farPlaneDistance);
             projectionMatrix[3, 2] = -1.0;
         }

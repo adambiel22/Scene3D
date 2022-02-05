@@ -35,11 +35,14 @@ namespace _3DAdamBielecki.Shading
                     Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
                     Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
                     //TODO: sprawdzenie czy trójkąt nie wychodzi poza obszar i czy jest zwrócony przodem do kamery
-                    PixelShader.TriangleInWorld = triangleInWorld;
-                    stretchTriangle(projectedTriangle, width, height);
-                    PixelShader.ProjectedTriangle = projectedTriangle;
-                    TriangleDrawer.DrawTriangle(projectedTriangle, PixelShader.ShadePixel,
-                        (x, y) => bitmapManager.SetPixel(x, y, Color.Black));
+                    if (isTriangleFrontedToCamera(projectedTriangle, Scene.Camera) && isTriangleInCube(projectedTriangle))
+                    {
+                        PixelShader.TriangleInWorld = triangleInWorld;
+                        stretchTriangle(projectedTriangle, width, height);
+                        PixelShader.ProjectedTriangle = projectedTriangle;
+                        TriangleDrawer.DrawTriangle(projectedTriangle, PixelShader.ShadePixel,
+                            (x, y) => bitmapManager.SetPixel(x, y, Color.Black));
+                    }
                 }
             }
             bitmapManager.EndDrawing();
@@ -77,6 +80,27 @@ namespace _3DAdamBielecki.Shading
                 vertex.PositionVector[0] = (int)(width * ((vertex.PositionVector[0] + 1) / 2));
                 vertex.PositionVector[1] = (int)(height * ((-vertex.PositionVector[1] + 1) / 2));
             }
+        }
+
+        private bool isTriangleInCube(Triangle triangle)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (triangle.Verticies[i].PositionVector[j] >= 1
+                        || triangle.Verticies[i].PositionVector[j] <= -1)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        private bool isTriangleFrontedToCamera(Triangle triangle, Camera camera)
+        {
+            return triangle.GetNormalVector() * camera.UpVector > 0;
         }
     }
 }

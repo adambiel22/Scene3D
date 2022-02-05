@@ -34,8 +34,6 @@ namespace _3DAdamBielecki.Shading
             //wektor normaln do trjkąta można obliczyć jako średnią arytmetyczną wektorów normalnych z wierzchołków
             //jak mnożymy wektory normalne przez macierz to ostatnia współrzędna to 0;
 
-
-
             if (!ZBuffor.isPixelToDraw(pixelX, pixelY, point.z))
             {
                 return;

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Algebra;
+﻿using Algebra;
 
 namespace _3DAdamBielecki._3DScene
 {
@@ -13,7 +8,7 @@ namespace _3DAdamBielecki._3DScene
             CartesianToBarycentric(Triangle triangle, double x, double y)
         {
             double denominator =
-                (triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
+                  (triangle.Verticies[1].PositionVector[1] - triangle.Verticies[2].PositionVector[1])
                 * (triangle.Verticies[0].PositionVector[0] - triangle.Verticies[2].PositionVector[0])
                 + (triangle.Verticies[2].PositionVector[0] - triangle.Verticies[1].PositionVector[0])
                 * (triangle.Verticies[0].PositionVector[1] - triangle.Verticies[2].PositionVector[1]);
@@ -70,17 +65,17 @@ namespace _3DAdamBielecki._3DScene
             BarycentricToEuclidean(Triangle triangle, double alpha, double beta, double gamma)
         {
             double x =
-                alpha * triangle.Verticies[0].PositionVector[0]
+                  alpha * triangle.Verticies[0].PositionVector[0]
                 + beta * triangle.Verticies[1].PositionVector[0]
                 + gamma * triangle.Verticies[2].PositionVector[0];
 
             double y =
-                alpha * triangle.Verticies[0].PositionVector[1]
+                  alpha * triangle.Verticies[0].PositionVector[1]
                 + beta * triangle.Verticies[1].PositionVector[1]
                 + gamma * triangle.Verticies[2].PositionVector[1];
 
             double z =
-                alpha * triangle.Verticies[0].PositionVector[2]
+                  alpha * triangle.Verticies[0].PositionVector[2]
                 + beta * triangle.Verticies[1].PositionVector[2]
                 + gamma * triangle.Verticies[2].PositionVector[2];
 
