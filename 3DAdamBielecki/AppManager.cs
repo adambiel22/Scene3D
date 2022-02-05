@@ -14,6 +14,7 @@ namespace _3DAdamBielecki
         private Scene scene;
         private System.Timers.Timer _timer;
         private Transformation pyramidTransformation;
+        private Transformation cubeTransformation;
 
         public Button button;
         public PictureBox PictureBox { get; set; }
@@ -54,26 +55,27 @@ namespace _3DAdamBielecki
                 new Vector(3, 0.5, 0.5, 1),
                 new Vector(0, 0.5, 0.5, 1),
                 new Vector(0, 0, 1, 0));
-            pyramidTransformation = new Transformation(new double[,]
+            //pyramidTransformation = new Transformation(new double[,]
+            //    {
+            //        {1, 0, 0, -2 },
+            //        {0, 1, 0, 0 },
+            //        {0, 0, 1, 0 },
+            //        {0, 0, 0, 1 }
+            //    });
+            //scene.TransformatedBlocks.Add(new TransformatedBlock(
+            //    new Pyramid(1, 1, 1),
+            //    pyramidTransformation,
+            //    new Surface(Color.BlueViolet)));
+            cubeTransformation = new Transformation(new double[,]
                 {
                     {1, 0, 0, 0 },
                     {0, 1, 0, 0 },
                     {0, 0, 1, 0 },
                     {0, 0, 0, 1 }
                 });
-            //scene.TransformatedBlocks.Add(new TransformatedBlock(
-            //    new Pyramid(10, 10, 10),
-            //    pyramidTransformation,
-            //    new Surface(Color.BlueViolet)));
             scene.TransformatedBlocks.Add(new TransformatedBlock(
                 new Cuboid(1, 1, 1),
-                new Transformation(new double[,]
-                {
-                    {1, 0, 0, 0},
-                    {0, 1, 0, 0},
-                    {0, 0, 1, 0},
-                    {0, 0, 0, 1}
-                }),
+                cubeTransformation,
                 new Surface(Color.Bisque)));
             scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
             render.Scene = scene;
@@ -97,22 +99,21 @@ namespace _3DAdamBielecki
             //    {0, 0, 0, 1 }
             //}));
             //PictureBox.Invalidate();
-            
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             _timer.Stop();
             PictureBox.Image = null;
-            pyramidTransformation.AddTransformation(new Matrix(new double[,]
+            cubeTransformation.AddTransformation(new Matrix(new double[,]
             {
-                {Math.Cos(3), -Math.Sin(3), 0, 0 },
-                {Math.Sin(3), Math.Cos(3), 0, 0 },
+                {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
+                {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
                 {0, 0, 1, 0 },
                 {0, 0, 0, 1 }
             }));
             PictureBox.Invalidate();
-            //_timer.Start();
+            _timer.Start();
         }
 
         private void paint(object sender, PaintEventArgs e)
