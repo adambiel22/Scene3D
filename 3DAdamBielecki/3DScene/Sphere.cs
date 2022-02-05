@@ -72,18 +72,21 @@ namespace _3DAdamBielecki._3DScene
 
             Vector w_0 = (verticies[v_0] + verticies[v_1]);
             w_0.Normalize();
+            w_0 = w_0 * radius;
             w_0[3] = 1;
-            verticies[vindex++] = w_0 * radius;
+            verticies[vindex++] = w_0;
 
             Vector w_1 = (verticies[v_1] + verticies[v_2]);
             w_1.Normalize();
+            w_1 = w_1 * radius;
             w_1[3] = 1;
-            verticies[vindex++] = w_1 * radius;
+            verticies[vindex++] = w_1;
 
             Vector w_2 = (verticies[v_2] + verticies[v_0]);
             w_2.Normalize();
+            w_2 = w_2 * radius;
             w_2[3] = 1;
-            verticies[vindex++] = w_2 * radius;
+            verticies[vindex++] = w_2;
 
             int w0Index = vindex - 3;
             int w1Index = vindex - 2;

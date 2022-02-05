@@ -19,7 +19,7 @@ namespace _3DAdamBielecki.Shading
                 (int)triangle.Verticies[2].PositionVector[1]);
             Point[] triangleVerticies = new Point[] { v0, v1, v2 };
             PolygonDrawer.FillPolygon(triangleVerticies, setPixel);
-            PolygonDrawer.DrawPolygon(triangleVerticies, setBorderPixel);
+            //PolygonDrawer.DrawPolygon(triangleVerticies, setBorderPixel);
         }
     }
 }

@@ -50,49 +50,8 @@ namespace _3DAdamBielecki
             render = new Render();
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
-            scene = new Scene();
-            scene.Lights.Add(new PointLight(Color.White, 3, 2, 3));
+            scene = new StandardScene(pictureBox.Width, pictureBox.Height);
 
-            //pyramidTransformation = new Transformation(new double[,]
-            //    {
-            //        {1, 0, 0, -2 },
-            //        {0, 1, 0, 0 },
-            //        {0, 0, 1, 0 },
-            //        {0, 0, 0, 1 }
-            //    });
-            //scene.TransformatedBlocks.Add(new TransformatedBlock(
-            //    new Pyramid(1, 1, 1),
-            //    pyramidTransformation,
-            //    new Surface(1, 1, 0.2, 100, Color.BlueViolet)));
-            cubeTransformation = new Transformation(new double[,]
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {0, 0, 0, 1 }
-                });
-            //scene.TransformatedBlocks.Add(new TransformatedBlock(
-            //    new Cuboid(1, 1, 1),
-            //    cubeTransformation,
-            //    new Surface(1, 1, 0.2, 100, Color.Aqua)));
-
-            sphereTransformation = new Transformation(new double[,]
-                {
-                    {1, 0, 0, 0 },
-                    {0, 1, 0, 0 },
-                    {0, 0, 1, 0 },
-                    {0, 0, 0, 1 }
-                });
-            scene.TransformatedBlocks.Add(new TransformatedBlock(
-                new Sphere(4, 1),
-                sphereTransformation,
-                new Surface(1, 0.2, 0.2, 100, Color.Aqua)));
-            Vector cameraPosition = new Vector(6, 0, 1, 1);
-            scene.Camera = new Camera(
-                cameraPosition,
-                new Vector(0, 0, 0, 1),
-                new Vector(0, 0, 1, 0));
-            scene.Projection = new Projection(Math.PI / 2, 100, 1, (double)PictureBox.Height / PictureBox.Width);
             render.Scene = scene;
 
             _timer = timer;
