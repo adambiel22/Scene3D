@@ -21,14 +21,18 @@ namespace _3DAdamBielecki._3DScene
                 new Vertex(new Vector(0, 0, 2 * z, 1),
                     new Vector(0, 0, 1, 0)),
                 new Vertex(new Vector(x, y, 0, 1),
-                    new Vector(Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(1, 1, -1, 0)),
                 new Vertex(new Vector(x, -y, 0, 1),
-                    new Vector(Math.Sqrt(2) / 2, -Math.Sqrt(2) /  2, 0, 0)),
+                    new Vector(1, -1, -1, 0)),
                 new Vertex(new Vector(-x, -y, 0, 1),
-                    new Vector(-Math.Sqrt(2)/2, -Math.Sqrt(2)/2, 0, 0)),
+                    new Vector(-1, -1, -1, 0)),
                 new Vertex(new Vector(-x, y, 0, 1),
-                    new Vector(-Math.Sqrt(2)/2, Math.Sqrt(2)/2, 0, 0))
+                    new Vector(-1, 1, -1, 0))
             };
+            foreach (Vertex vertex in pyramidVerices)
+            {
+                vertex.NormalVector.Normalize();
+            }
             vertices.AddRange(pyramidVerices);
 
             //TODO: zastanowić się czy nie trzeba w jakiejś
