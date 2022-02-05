@@ -50,7 +50,9 @@ namespace _3DAdamBielecki._3DScene
 
         public Vector TransformNormalVector(Vector normalVector)
         {
-            return inversedTransposedTransformationMatrix * normalVector;
+            Vector vector = inversedTransposedTransformationMatrix * normalVector;
+            vector.Normalize();
+            return vector;
         }
     }
 }

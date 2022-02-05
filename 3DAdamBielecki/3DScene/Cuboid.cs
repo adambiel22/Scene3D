@@ -10,7 +10,7 @@ namespace _3DAdamBielecki._3DScene
     public class Cuboid : Block
     {
         private List<Vertex> vertices;
-        public Cuboid(int x = 1, int y = 1, int z = 1) : base()
+        public Cuboid(double x = 1.0, double y = 1.0, double z = 1.0) : base()
         {
             vertices = new List<Vertex>();
 
@@ -18,22 +18,22 @@ namespace _3DAdamBielecki._3DScene
             //Teraz te przy podstawie są błędne, bo nie są skierowane do środka ciężkości ostrosłupa.
             Vertex[] cubeVerices = new Vertex[]
             {
-                new Vertex(new Vector(0, 0, 0, 1),
-                    new Vector(-x / 2, -y / 2, -z / 2, 0)),
-                new Vertex(new Vector(x, 0, 0, 1),
-                    new Vector(x / 2, -y / 2, -z / 2, 0)),
-                new Vertex(new Vector(x, y, 0, 1),
-                    new Vector(x / 2, y / 2, -z / 2, 0)),
-                new Vertex(new Vector(0, y, 0, 1),
-                    new Vector(-x / 2, y / 2, -z / 2, 0)),
-                new Vertex(new Vector(0, 0, z, 1),
-                    new Vector(-x / 2, -y / 2, z / 2, 0)),
-                new Vertex(new Vector(x, 0, z, 1),
-                    new Vector(x / 2, -y / 2, z / 2, 0)),
-                new Vertex(new Vector(x, y, z, 1),
-                    new Vector(x / 2, y / 2, z / 2, 0)),
-                new Vertex(new Vector(0, y, z, 1),
-                    new Vector(-x / 2, y / 2, z / 2, 0)),
+                new Vertex(new Vector(0.0, 0.0, 0.0, 1.0),
+                    new Vector(-x / 2.0, -y / 2.0, -z / 2, 0)),
+                new Vertex(new Vector(x, 0.0, 0.0, 1.0),
+                    new Vector(x / 2.0, -y / 2.0, -z / 2.0, 0.0)),
+                new Vertex(new Vector(x, y, 0.0, 1.0),
+                    new Vector(x / 2.0, y / 2.0, -z / 2.0, 0.0)),
+                new Vertex(new Vector(0.0, y, 0.0, 1.0),
+                    new Vector(-x / 2.0, y / 2.0, -z / 2.0, 0.0)),
+                new Vertex(new Vector(0.0, 0.0, z, 1.0),
+                    new Vector(-x / 2.0, -y / 2.0, z / 2.0, 0.0)),
+                new Vertex(new Vector(x, 0.0, z, 1.0),
+                    new Vector(x / 2.0, -y / 2.0, z / 2.0, 0.0)),
+                new Vertex(new Vector(x, y, z, 1.0),
+                    new Vector(x / 2.0, y / 2.0, z / 2.0, 0.0)),
+                new Vertex(new Vector(0.0, y, z, 1.0),
+                    new Vector(-x / 2.0, y / 2.0, z / 2.0, 0.0)),
             };
             foreach(Vertex vertex in cubeVerices)
             {

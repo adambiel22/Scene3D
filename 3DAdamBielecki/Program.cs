@@ -21,6 +21,5 @@ namespace _3DAdamBielecki
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
         }
-
     }
 }
