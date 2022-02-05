@@ -34,7 +34,6 @@ namespace _3DAdamBielecki.Shading
                 {
                     Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
                     Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
-                    //TODO: sprawdzenie czy trójkąt nie wychodzi poza obszar i czy jest zwrócony przodem do kamery
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.Camera) && isTriangleInCube(projectedTriangle))
                     {
                         PixelShader.TriangleInWorld = triangleInWorld;

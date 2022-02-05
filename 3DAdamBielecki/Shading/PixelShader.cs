@@ -22,6 +22,7 @@ namespace _3DAdamBielecki.Shading
 
         public void ShadePixel(int pixelX, int pixelY)
         {
+
             var (alpha, beta, gamma) = 
                 BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
             //TODO: TRZEBA TO PRZETESTOWAĆ CZY DA TE same współrzędne x,y

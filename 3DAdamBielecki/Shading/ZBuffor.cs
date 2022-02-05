@@ -23,9 +23,9 @@ namespace _3DAdamBielecki.Shading
             
             if (x >= 0 && x <= zArray.GetLength(0) - 1
                 && y >= 0 && y <= zArray.GetLength(1) - 1
-                && Math.Log(z) <= Math.Log(zArray[x, y])) 
+                && Math.Log(z + 1) <= Math.Log(zArray[x, y])) 
             {
-                zArray[x, y] = z;
+                zArray[x, y] = z + 1;
                 return true;
             }
             return false;
