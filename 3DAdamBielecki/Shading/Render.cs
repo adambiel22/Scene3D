@@ -36,7 +36,7 @@ namespace _3DAdamBielecki.Shading
                     Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.Camera) && isTriangleInCube(projectedTriangle))
                     {
-                        PixelShader.TriangleInWorld = triangleInWorld;
+                        PixelShader.SetTriangleInWorld(triangleInWorld);
                         stretchTriangle(projectedTriangle, width, height);
                         PixelShader.ProjectedTriangle = projectedTriangle;
                         TriangleDrawer.DrawTriangle(projectedTriangle, PixelShader.ShadePixel,

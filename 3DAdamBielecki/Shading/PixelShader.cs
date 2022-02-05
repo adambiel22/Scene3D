@@ -16,9 +16,10 @@ namespace _3DAdamBielecki.Shading
         public ZBuffor ZBuffor { get; set; }
         public Action<int, int, Color> SetPixel { get; set; }
         public Camera Camera { get; set; }
-        public virtual Triangle TriangleInWorld { get; set; }
         public Triangle ProjectedTriangle { get; set; }
         public Surface Surface { get; set; }
+
+        public abstract void SetTriangleInWorld(Triangle triangle);
 
         public void ShadePixel(int pixelX, int pixelY)
         {

@@ -48,9 +48,10 @@ namespace _3DAdamBielecki
             PictureBox = pictureBox;
 
             render = new Render();
-            render.PixelShader = new MockedPixelShader();
+            render.PixelShader = new ConstantPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new Scene();
+            scene.Lights.Add(new PointLight(Color.White, 3, 2, 3));
             scene.Camera = new Camera(
                 new Vector(3, 0.5, 0.5, 1),
                 new Vector(0, 0.5, 0.5, 1),
@@ -76,7 +77,7 @@ namespace _3DAdamBielecki
             scene.TransformatedBlocks.Add(new TransformatedBlock(
                 new Cuboid(1, 1, 1),
                 cubeTransformation,
-                new Surface(Color.Bisque)));
+                new Surface(1, 1, 0.1, 100, Color.Red)));
             scene.Projection = new Projection(Math.PI / 4, 100, 1, 1);
             render.Scene = scene;
 
