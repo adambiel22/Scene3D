@@ -15,6 +15,8 @@ namespace _3DAdamBielecki
         private Transformation pyramidTransformation;
         private Transformation cubeTransformation;
         private Transformation sphereTransformation;
+        double angle;
+        double angleIncrement;
         public Button button;
         public PictureBox PictureBox { get; set; }
 
@@ -49,10 +51,13 @@ namespace _3DAdamBielecki
             render = new Render();
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
-            scene = new StandardScene(pictureBox.Width, pictureBox.Height);
+            scene = new PyramidScene(pictureBox.Width, pictureBox.Height);
+            pyramidTransformation = scene.TransformatedBlocks[0].Transformation;
 
             render.Scene = scene;
 
+            angle = 0.0;
+            angleIncrement = 0.1;
             _timer = timer;
             _timer.Interval = 100;
             _timer.AutoReset = false;
@@ -84,11 +89,17 @@ namespace _3DAdamBielecki
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             //_timer.Stop();
-            sphereTransformation.AddTransformation(new Matrix(new double[,]
+            angle += angleIncrement;
+            pyramidTransformation.SetTransformation(new Matrix(new double[,]
             {
-                {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
-                {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
-                {0, 0, 1, 0 },
+                //{Math.Cos(angle), -Math.Sin(angle), 0, 50 },
+                //{Math.Sin(angle), Math.Cos(angle), 0, 50 },
+                //{0, 0, 1, 5 },
+                //{0, 0, 0, 1 }
+
+                {Math.Cos(2*angle), 0 , -Math.Sin(2*angle), 50 },
+                {0, 1, 0, 50 },
+                {Math.Sin(2*angle), 0, Math.Cos(2*angle), 5 },
                 {0, 0, 0, 1 }
             }));
             PictureBox.Invalidate();
