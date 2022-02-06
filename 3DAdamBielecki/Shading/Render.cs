@@ -38,15 +38,16 @@ namespace _3DAdamBielecki
             {
                 PixelShader.Surface = transformatedBlock.Surface;
                 // przenieść transformację całego bloku tutaj
-                foreach(Triangle triangle in transformatedBlock.Triangles)
+                foreach ((int, int, int) triangle in transformatedBlock.Triangles) 
                 {
-                    //Debug.WriteLine($"Transformating triangle: {triangle}");
-                    Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
-                    //Debug.WriteLine($"Triangle in world: {triangleInWorld}");
+                    Triangle triangleInWorld = transformTriangle(
+                        new Triangle(
+                            transformatedBlock.Verticies[triangle.Item1],
+                            transformatedBlock.Verticies[triangle.Item2],
+                            transformatedBlock.Verticies[triangle.Item3]),
+                        transformatedBlock.Transformation);
                     Triangle projectedTriangle = projectTriangle(triangleInWorld,
                         Scene.CurrentCamera, Scene.CurrentCamera.Projection);
-                    //Debug.WriteLine($"Projected triangle: {projectedTriangle}");
-                    //Debug.WriteLine("");
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.CurrentCamera) && isTriangleInCube(projectedTriangle))
                     {
                         PixelShader.SetTriangleInWorld(triangleInWorld);

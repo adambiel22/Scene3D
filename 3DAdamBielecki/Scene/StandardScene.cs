@@ -17,7 +17,7 @@ namespace _3DAdamBielecki
             defineCameras(width, height);
 
             TransformatedBlock floor = new TransformatedBlock(
-                new RectangleFace(100, 100, 5),
+                new RectangleFace(100, 100, 20),
                 new Transformation(new double[,]
                 {
                     { 1, 0, 0, 0 },
@@ -27,6 +27,7 @@ namespace _3DAdamBielecki
                 }),
                 new Surface(1, 0.1, 0.2, 2, Color.Gray)
                 );
+            TransformatedBlocks.Add(floor);
 
             sphere = new TransformatedBlock(
                 new Sphere(3, 2.5),
@@ -77,7 +78,7 @@ namespace _3DAdamBielecki
                 );
 
 
-            TransformatedBlocks.Add(floor);
+
             TransformatedBlocks.Add(sphere);
             TransformatedBlocks.Add(pyramid1);
             TransformatedBlocks.Add(pyramid2);
@@ -100,7 +101,7 @@ namespace _3DAdamBielecki
                 new Vector(50, 50, 0, 1),
                 new Vector(0, 0, 1, 0),
                 new Projection(Math.PI / 1.2, 100, 0.25, (double)height / width)));
-            SetCurrentCamera(1);
+            SetCurrentCamera(0);
         }
 
         private void definePhillars()

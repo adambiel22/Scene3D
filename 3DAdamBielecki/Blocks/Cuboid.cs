@@ -9,14 +9,10 @@ namespace _3DAdamBielecki
 {
     public class Cuboid : Block
     {
-        private List<Vertex> vertices;
+
         public Cuboid(double x = 1.0, double y = 1.0, double z = 1.0) : base()
         {
-            vertices = new List<Vertex>();
-
-            //TODO: zmienić na odpowiednie wektory normalne.
-            //Teraz te przy podstawie są błędne, bo nie są skierowane do środka ciężkości ostrosłupa.
-            Vertex[] cubeVerices = new Vertex[]
+            Verticies = new Vertex[]
             {
                 new Vertex(new Vector(0.0, 0.0, 0.0, 1.0),
                     new Vector(-x / 2.0, -y / 2.0, -z / 2, 0)),
@@ -35,29 +31,25 @@ namespace _3DAdamBielecki
                 new Vertex(new Vector(0.0, y, z, 1.0),
                     new Vector(-x / 2.0, y / 2.0, z / 2.0, 0.0)),
             };
-            foreach(Vertex vertex in cubeVerices)
+            foreach(Vertex vertex in Verticies)
             {
                 vertex.NormalVector.Normalize();
             }
-            vertices.AddRange(cubeVerices);
 
-            //TODO: zastanowić się czy nie trzeba w jakiejś
-            //odpowiedniej kolejności dodawać wiecrzchołki tych trójkątów??
-            Triangles.AddRange(new Triangle[]
+            Triangles.AddRange(new (int, int, int)[]
             {
-
-                new Triangle(cubeVerices[0], cubeVerices[2], cubeVerices[1]),
-                new Triangle(cubeVerices[0], cubeVerices[3], cubeVerices[2]),
-                new Triangle(cubeVerices[6], cubeVerices[4], cubeVerices[5]),
-                new Triangle(cubeVerices[6], cubeVerices[7], cubeVerices[4]),
-                new Triangle(cubeVerices[1], cubeVerices[2], cubeVerices[5]),
-                new Triangle(cubeVerices[2], cubeVerices[6], cubeVerices[5]),
-                new Triangle(cubeVerices[0], cubeVerices[4], cubeVerices[3]),
-                new Triangle(cubeVerices[4], cubeVerices[7], cubeVerices[3]),
-                new Triangle(cubeVerices[2], cubeVerices[3], cubeVerices[6]),
-                new Triangle(cubeVerices[6], cubeVerices[3], cubeVerices[7]),
-                new Triangle(cubeVerices[5], cubeVerices[0], cubeVerices[1]),
-                new Triangle(cubeVerices[4], cubeVerices[0], cubeVerices[5]),
+                (0, 2, 1),
+                (0, 3, 2),
+                (6, 4, 5),
+                (6, 7, 4),
+                (1, 2, 5),
+                (2, 6, 5),
+                (0, 4, 3),
+                (4, 7, 3),
+                (2, 3, 6),
+                (6, 3, 7),
+                (5, 0, 1),
+                (4, 0, 5),
             });
         }
     }

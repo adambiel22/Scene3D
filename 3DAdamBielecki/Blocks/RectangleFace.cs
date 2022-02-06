@@ -9,7 +9,6 @@ namespace _3DAdamBielecki
 {
     public class RectangleFace : Block
     {
-        private Vertex[,] verticies;
         public RectangleFace(double x, double y, int triangulationLevel)
         {
             int levelX;
@@ -31,15 +30,15 @@ namespace _3DAdamBielecki
             }
             double xLen = x / levelX;
             double yLen = y / levelY;
-                
 
-            verticies = new Vertex[levelX + 1, levelY + 1];
+
+            Verticies = new Vertex[(levelX + 1) * (levelY + 1)];
 
             for (int i = 0; i <= levelX; i++)
             {
                 for (int j = 0; j <= levelY; j++)
-                {
-                    verticies[i, j] = new Vertex(
+                { 
+                    Verticies[i * (levelX + 1) + j] = new Vertex(
                         new Vector(xLen * i, yLen * j, 0, 1),
                         new Vector(0, 0, 1, 0));
                 }
@@ -48,14 +47,14 @@ namespace _3DAdamBielecki
             {
                 for (int j = 0; j < levelY; j++)
                 {
-                    Triangles.Add(new Triangle(
-                        verticies[i, j],
-                        verticies[i + 1, j],
-                        verticies[i + 1, j + 1]));
-                    Triangles.Add(new Triangle(
-                        verticies[i, j],
-                        verticies[i + 1, j + 1],
-                        verticies[i, j + 1]));
+                    Triangles.Add((
+                        i * (levelX + 1) + j,
+                        (i + 1) * (levelX + 1) + j,
+                        (i + 1) * (levelX + 1)+ j + 1));
+                    Triangles.Add((
+                        i * (levelX + 1) + j,
+                        (i + 1) * (levelX + 1) + j + 1,
+                        i * (levelX + 1) + j + 1));
                 }
             }
 
