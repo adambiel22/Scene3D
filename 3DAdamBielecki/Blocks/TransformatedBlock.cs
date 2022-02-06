@@ -6,10 +6,10 @@ namespace _3DAdamBielecki
         public Transformation Transformation { get; private set; }
         public Surface Surface { get; private set; }
 
-        public TransformatedBlock(Block block, Transformation transformation, Surface surface)
+        public TransformatedBlock(Block block, Transformation transformation, Surface surface) : base(0) 
         {
             Triangles = block.Triangles;
-            Verticies = block.Verticies;
+            Verticies = (Vertex[])block.Verticies.Clone();
             Transformation = transformation;
             Surface = surface;
         }

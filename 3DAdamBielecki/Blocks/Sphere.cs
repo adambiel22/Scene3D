@@ -13,7 +13,7 @@ namespace _3DAdamBielecki
         private int triangulationLevel;
         private double radius;
 
-        public Sphere(int triangulationLevel, double radius)
+        public Sphere(int triangulationLevel, double radius) : base(2 * (int)Math.Pow(4, triangulationLevel))
         {
             this.triangulationLevel = triangulationLevel;
             this.radius = radius;
@@ -47,7 +47,6 @@ namespace _3DAdamBielecki
 
         private void initializeVerticies()
         {
-            Verticies = new Vertex[2 * (int)Math.Pow(4, triangulationLevel)];
             Vector position;
             Vector normalVector;
             position = new Vector(0, 0, radius, 1);

@@ -40,12 +40,12 @@ namespace _3DAdamBielecki
                 // przenieść transformację całego bloku tutaj
                 foreach ((int, int, int) triangle in transformatedBlock.Triangles) 
                 {
-                    Triangle triangleInWorld = transformTriangle(
-                        new Triangle(
-                            transformatedBlock.Verticies[triangle.Item1],
-                            transformatedBlock.Verticies[triangle.Item2],
-                            transformatedBlock.Verticies[triangle.Item3]),
-                        transformatedBlock.Transformation);
+                    Triangle triangleInWorld =
+                        transformatedBlock.Transformation.TransformTriangle(
+                            new Triangle(
+                                transformatedBlock.Verticies[triangle.Item1],
+                                transformatedBlock.Verticies[triangle.Item2],
+                                transformatedBlock.Verticies[triangle.Item3]));
                     Triangle projectedTriangle = projectTriangle(triangleInWorld,
                         Scene.CurrentCamera, Scene.CurrentCamera.Projection);
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.CurrentCamera) && isTriangleInCube(projectedTriangle))
