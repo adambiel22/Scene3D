@@ -9,6 +9,7 @@ namespace _3DAdamBielecki
         public TransformatedBlock(Block block, Transformation transformation, Surface surface)
         {
             Triangles = block.Triangles;
+            Verticies = block.Verticies;
             Transformation = transformation;
             Surface = surface;
         }
