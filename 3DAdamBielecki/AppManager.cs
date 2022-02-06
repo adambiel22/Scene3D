@@ -14,11 +14,6 @@ namespace _3DAdamBielecki
         private Scene scene;
         private System.Timers.Timer timer;
         private Stopwatch stopwatch;
-        private Transformation pyramidTransformation;
-        private Transformation cubeTransformation;
-        private Transformation sphereTransformation;
-        double angle;
-        double angleIncrement;
         bool timerRunning;
         public Button button;
         private int counter;
@@ -73,14 +68,11 @@ namespace _3DAdamBielecki
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new StandardScene(pictureBox.Width, pictureBox.Height);
-            pyramidTransformation = scene.TransformatedBlocks[1].Transformation;
 
             render.Scene = scene;
 
             timerRunning = false;
             counter = 0;
-            angle = 0.0;
-            angleIncrement = 0.1;
             timer = new System.Timers.Timer();
             stopwatch = new Stopwatch();
             timer.Interval = 100;
@@ -109,7 +101,6 @@ namespace _3DAdamBielecki
 
         private void pictureBox_paint(object sender, PaintEventArgs e)
         {
-            //PictureBox.Image = render.RenderScene(PictureBox.Width, PictureBox.Height);
             e.Graphics.DrawImage(
                 render.RenderScene(PictureBox.Width, PictureBox.Height),
                 new Point(0, 0));
