@@ -13,7 +13,7 @@ namespace _3DAdamBielecki
         private TransformatedBlock sphere;
         public StandardScene(int width, int height) : base()
         {
-            Lights.Add(new PointLight(Color.White, 100, 100, 100));
+            defineLights();
             defineCameras(width, height);
 
             TransformatedBlock floor = new TransformatedBlock(
@@ -87,6 +87,13 @@ namespace _3DAdamBielecki
             Animations.Add(new OffsetAnnimation(sphere, Cameras[1], new Vector(0, 0, 2.5), 10, 30.0)) ;
 
             definePhillars();
+        }
+
+        private void defineLights()
+        {
+            Lights.Add(new PointLight(Color.White, 100, 100, 100));
+            Lights.Add(new Reflector(Color.Red, new Vector(0, 0, 0, 1),
+                new Vector(50, 50, 0, 1), 10));
         }
 
         private void defineCameras(int height, int width)
