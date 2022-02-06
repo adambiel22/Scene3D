@@ -1,6 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,14 @@ namespace _3DAdamBielecki
     {
         public Scene Scene { get; set; }
         public TriangleDrawer TriangleDrawer { get; set; } 
-        public PixelShader PixelShader { get; set; } 
+        public PixelShader PixelShader { get; set; }
+
+        private int counter;
+
+        public Render()
+        {
+            this.counter = 0;
+        }
 
         public Bitmap RenderScene(int width, int height)
         {
@@ -25,13 +33,19 @@ namespace _3DAdamBielecki
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
             PixelShader.Camera = Scene.Camera;
+            //Debug.WriteLine($"Rendering no: {++counter}");
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
                 PixelShader.Surface = transformatedBlock.Surface;
+                // przenieść transformację całego bloku tutaj
                 foreach(Triangle triangle in transformatedBlock.Triangles)
                 {
+                    //Debug.WriteLine($"Transformating triangle: {triangle}");
                     Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
+                    //Debug.WriteLine($"Triangle in world: {triangleInWorld}");
                     Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
+                    //Debug.WriteLine($"Projected triangle: {projectedTriangle}");
+                    //Debug.WriteLine("");
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.Camera) && isTriangleInCube(projectedTriangle))
                     {
                         PixelShader.SetTriangleInWorld(triangleInWorld);
@@ -45,6 +59,7 @@ namespace _3DAdamBielecki
             bitmapManager.EndDrawing();
             return bitmap;
         }
+
 
         private Triangle transformTriangle(Triangle triangle, Transformation transformation)
         {

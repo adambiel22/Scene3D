@@ -18,7 +18,7 @@ namespace _3DAdamBielecki
                 cameraPosition,
                 new Vector(50, 50, 0, 1),
                 new Vector(0, 0, 1, 0));
-            Projection = new Projection(Math.PI / 2, 400, 50, (double)height / width);
+            Projection = new Projection(Math.PI / 4, 400, 50, (double)height / width);
             //Lights.Add(new PointLight(Color.White, 3, 2, 3));
 
             TransformatedBlock floor = new TransformatedBlock(

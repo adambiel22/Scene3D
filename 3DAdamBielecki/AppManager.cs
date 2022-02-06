@@ -4,6 +4,7 @@ using System.Drawing;
 using Algebra;
 using System.Timers;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace _3DAdamBielecki
 {
@@ -17,7 +18,10 @@ namespace _3DAdamBielecki
         private Transformation sphereTransformation;
         double angle;
         double angleIncrement;
+        bool timerRunning;
         public Button button;
+        private int counter;
+
         public PictureBox PictureBox { get; set; }
 
 
@@ -30,7 +34,7 @@ namespace _3DAdamBielecki
         {
             scene.Camera.CameraPosition[1] = (double)value / 100 - 4.0;
             scene.Camera.GenerateViewMarix();
-            PictureBox.Invalidate();
+            if (!timerRunning) PictureBox.Invalidate();
         }
 
         public int GetFieldOfView()
@@ -41,10 +45,24 @@ namespace _3DAdamBielecki
         public void SetFieldOfView(int value)
         {
             scene.Projection.FieldOfView = value * Math.PI / 180 ;
-            PictureBox.Invalidate();
+            if (!timerRunning) PictureBox.Invalidate();
         }
 
-        public AppManager(PictureBox pictureBox, System.Timers.Timer timer)
+        public void TimerButtonClick(object sender, EventArgs e)
+        {
+            if (timerRunning)
+            {
+                timerRunning = false;
+                _timer.Stop();
+            }
+            else
+            {
+                timerRunning = true;
+                _timer.Start();
+            }
+        }
+
+        public AppManager(PictureBox pictureBox)
         {
             PictureBox = pictureBox;
 
@@ -52,14 +70,16 @@ namespace _3DAdamBielecki
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new PyramidScene(pictureBox.Width, pictureBox.Height);
-            pyramidTransformation = scene.TransformatedBlocks[0].Transformation;
+            pyramidTransformation = scene.TransformatedBlocks[1].Transformation;
 
             render.Scene = scene;
 
+            timerRunning = false;
+            counter = 0;
             angle = 0.0;
             angleIncrement = 0.1;
-            _timer = timer;
-            _timer.Interval = 100;
+            _timer = new System.Timers.Timer();
+            _timer.Interval = 1;
             _timer.AutoReset = false;
             _timer.Elapsed += Timer_Elapsed;
 
@@ -88,7 +108,7 @@ namespace _3DAdamBielecki
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //_timer.Stop();
+            //Debug.WriteLine($"Frame no: {++counter}");
             angle += angleIncrement;
             pyramidTransformation.SetTransformation(new Matrix(new double[,]
             {
@@ -101,14 +121,17 @@ namespace _3DAdamBielecki
                 {0, 1, 0, 50 },
                 {Math.Sin(2*angle), 0, Math.Cos(2*angle), 5 },
                 {0, 0, 0, 1 }
-            }));
+            })) ;
             PictureBox.Invalidate();
-            _timer.Start();
         }
 
         private void paint(object sender, PaintEventArgs e)
         {
-            PictureBox.Image = render.RenderScene(PictureBox.Width, PictureBox.Height);
+            //PictureBox.Image = render.RenderScene(PictureBox.Width, PictureBox.Height);
+            e.Graphics.DrawImage(
+                render.RenderScene(PictureBox.Width, PictureBox.Height),
+                new Point(0, 0));
+            if (timerRunning) _timer.Start();
         }
     }
 }

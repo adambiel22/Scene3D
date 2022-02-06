@@ -18,10 +18,10 @@ namespace _3DAdamBielecki
                 cameraPosition,
                 new Vector(50, 50, 0, 1),
                 new Vector(0, 0, 1, 0));
-            Projection = new Projection(Math.PI / 2, 400, 50, (double)height / width);
+            Projection = new Projection(Math.PI / 4, 400, 50, (double)height / width);
 
             TransformatedBlock floor = new TransformatedBlock(
-                new Cuboid(100, 100, 5),
+                new RectangleFace(100, 100, 10),
                 new Transformation(new double[,]
                 {
                     { 1, 0, 0, 0 },
@@ -43,7 +43,7 @@ namespace _3DAdamBielecki
                 new Surface(1, 1, 0.2, 10, Color.Red)
                 );
 
-            //TransformatedBlocks.Add(floor);
+            TransformatedBlocks.Add(floor);
             TransformatedBlocks.Add(pyramid);
         }
     }

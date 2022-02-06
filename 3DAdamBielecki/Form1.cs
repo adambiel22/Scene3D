@@ -20,8 +20,7 @@ namespace _3DAdamBielecki
         {
             InitializeComponent();
             enabled = false;
-            timer = new System.Timers.Timer();
-            appManager = new AppManager(pictureBox, timer);
+            appManager = new AppManager(pictureBox);
 
             fovNumericUpDown.Maximum = 150;
             fovNumericUpDown.Minimum = 40;
@@ -29,23 +28,11 @@ namespace _3DAdamBielecki
 
             trackBar.Value = 50;
 
+            button1.Click += appManager.TimerButtonClick;
         }
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            if (enabled == true)
-            {
-                enabled = false;
-                timer.Stop();
-            }
-            else
-            {
-                enabled = true;
-                timer.Start();
-            }
-        }
-
         private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
+            Debug.WriteLine("fov changed");
             appManager.SetFieldOfView((int)fovNumericUpDown.Value);
         }
 
