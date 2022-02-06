@@ -40,12 +40,12 @@ namespace _3DAdamBielecki
 
         public int GetFieldOfView()
         {
-            return (int)(scene.Projection.FieldOfView * 180 / Math.PI);
+            return (int)(scene.CurrentCamera.Projection.FieldOfView * 180 / Math.PI);
         }
 
         public void SetFieldOfView(int value)
         {
-            scene.Projection.FieldOfView = value * Math.PI / 180 ;
+            scene.CurrentCamera.Projection.FieldOfView = value * Math.PI / 180 ;
             if (!timerRunning) PictureBox.Invalidate();
         }
 
@@ -93,7 +93,7 @@ namespace _3DAdamBielecki
 
         private void PictureBox_Resize(object sender, EventArgs e)
         {
-            scene.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
+            scene.CurrentCamera.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)

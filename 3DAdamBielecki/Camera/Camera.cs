@@ -11,14 +11,16 @@ namespace _3DAdamBielecki
         private Vector cameraTarget;
         private Vector upVector;
         public Vector CameraPosition { get => cameraPosition; set { cameraPosition = value; GenerateViewMarix(); } }
-        public Vector CameraTarget { get => cameraTarget; set { cameraTarget = value; GenerateViewMarix(); }}
+        public Vector CameraTarget { get => cameraTarget; set { cameraTarget = value; GenerateViewMarix(); } }
         public Vector UpVector { get => upVector; set { upVector = value; GenerateViewMarix(); } }
+        public Projection Projection { get; set; }
 
-        public Camera(Vector cameraPosition, Vector cameraTarget, Vector upVector)
+        public Camera(Vector cameraPosition, Vector cameraTarget, Vector upVector, Projection projection)
         {
             this.cameraPosition = cameraPosition;
             this.cameraTarget = cameraTarget;
             this.upVector = upVector;
+            Projection = projection;
             GenerateViewMarix();
         }
 

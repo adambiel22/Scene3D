@@ -7,7 +7,6 @@ namespace _3DAdamBielecki
         public List<TransformatedBlock> TransformatedBlocks { get; private set; }
         public Camera CurrentCamera { get; private set; }
         public List<Camera> Cameras { get; private set; }
-        public Projection Projection { get; set; }
         public List<Light> Lights { get; private set; }
         public List<IAnimation> Animations { get; private set; }
 
