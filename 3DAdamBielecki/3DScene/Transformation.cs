@@ -31,6 +31,13 @@ namespace _3DAdamBielecki
             inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
         }
 
+        public void AddTransformation(double[,] matrixArray)
+        {
+            transformationMatrix = transformationMatrix 
+                * new Matrix(matrixArray);
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
+        }
+
         public void SetTransformation(Matrix matrix)
         {
             transformationMatrix = matrix;

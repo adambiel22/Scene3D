@@ -69,7 +69,7 @@ namespace _3DAdamBielecki
             render = new Render();
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
-            scene = new PyramidScene(pictureBox.Width, pictureBox.Height);
+            scene = new StandardScene(pictureBox.Width, pictureBox.Height);
             pyramidTransformation = scene.TransformatedBlocks[1].Transformation;
 
             render.Scene = scene;

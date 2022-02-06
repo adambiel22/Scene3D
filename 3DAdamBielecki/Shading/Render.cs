@@ -109,7 +109,6 @@ namespace _3DAdamBielecki
             }
             return true;
         }
-
         private bool isTriangleFrontedToCamera(Triangle triangle, Camera camera)
         {
             return triangle.GetNormalVector() * camera.UpVector > 0;
