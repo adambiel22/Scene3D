@@ -43,7 +43,8 @@ namespace _3DAdamBielecki
                     //Debug.WriteLine($"Transformating triangle: {triangle}");
                     Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
                     //Debug.WriteLine($"Triangle in world: {triangleInWorld}");
-                    Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.CurrentCamera, Scene.Projection);
+                    Triangle projectedTriangle = projectTriangle(triangleInWorld,
+                        Scene.CurrentCamera, Scene.CurrentCamera.Projection);
                     //Debug.WriteLine($"Projected triangle: {projectedTriangle}");
                     //Debug.WriteLine("");
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.CurrentCamera) && isTriangleInCube(projectedTriangle))

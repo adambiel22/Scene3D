@@ -14,11 +14,6 @@ namespace _3DAdamBielecki
         private Scene scene;
         private System.Timers.Timer timer;
         private Stopwatch stopwatch;
-        private Transformation pyramidTransformation;
-        private Transformation cubeTransformation;
-        private Transformation sphereTransformation;
-        double angle;
-        double angleIncrement;
         bool timerRunning;
         public Button button;
         private int counter;
@@ -40,12 +35,12 @@ namespace _3DAdamBielecki
 
         public int GetFieldOfView()
         {
-            return (int)(scene.Projection.FieldOfView * 180 / Math.PI);
+            return (int)(scene.CurrentCamera.Projection.FieldOfView * 180 / Math.PI);
         }
 
         public void SetFieldOfView(int value)
         {
-            scene.Projection.FieldOfView = value * Math.PI / 180 ;
+            scene.CurrentCamera.Projection.FieldOfView = value * Math.PI / 180 ;
             if (!timerRunning) PictureBox.Invalidate();
         }
 
@@ -73,14 +68,11 @@ namespace _3DAdamBielecki
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new StandardScene(pictureBox.Width, pictureBox.Height);
-            pyramidTransformation = scene.TransformatedBlocks[1].Transformation;
 
             render.Scene = scene;
 
             timerRunning = false;
             counter = 0;
-            angle = 0.0;
-            angleIncrement = 0.1;
             timer = new System.Timers.Timer();
             stopwatch = new Stopwatch();
             timer.Interval = 100;
@@ -93,7 +85,7 @@ namespace _3DAdamBielecki
 
         private void PictureBox_Resize(object sender, EventArgs e)
         {
-            scene.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
+            scene.CurrentCamera.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
@@ -109,7 +101,6 @@ namespace _3DAdamBielecki
 
         private void pictureBox_paint(object sender, PaintEventArgs e)
         {
-            //PictureBox.Image = render.RenderScene(PictureBox.Width, PictureBox.Height);
             e.Graphics.DrawImage(
                 render.RenderScene(PictureBox.Width, PictureBox.Height),
                 new Point(0, 0));

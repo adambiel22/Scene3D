@@ -17,10 +17,9 @@ namespace _3DAdamBielecki
             Cameras.Add(new Camera(
                 cameraPosition,
                 new Vector(50, 50, 0, 1),
-                new Vector(0, 0, 1, 0)));
+                new Vector(0, 0, 1, 0),
+                new Projection(Math.PI / 4, 400, 50, (double)height / width)));
             SetCurrentCamera(0);
-
-            Projection = new Projection(Math.PI / 4, 400, 50, (double)height / width);
 
             TransformatedBlock floor = new TransformatedBlock(
                 new RectangleFace(100, 100, 10),

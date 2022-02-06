@@ -14,8 +14,7 @@ namespace _3DAdamBielecki
         public StandardScene(int width, int height) : base()
         {
             Lights.Add(new PointLight(Color.White, 100, 100, 100));
-            defineCameras();
-            Projection = new Projection(Math.PI / 1.2, 100, 0.25, (double)height / width);
+            defineCameras(width, height);
 
             TransformatedBlock floor = new TransformatedBlock(
                 new RectangleFace(100, 100, 5),
@@ -89,16 +88,18 @@ namespace _3DAdamBielecki
             definePhillars();
         }
 
-        private void defineCameras()
+        private void defineCameras(int height, int width)
         {
             Cameras.Add(new Camera(
                 new Vector(300, 50, 50, 1),
                 new Vector(50, 50, 0, 1),
-                new Vector(0, 0, 1, 0)));
+                new Vector(0, 0, 1, 0),
+                new Projection(Math.PI / 4, 400, 50, (double)height / width)));
             Cameras.Add(new Camera(
                 new Vector(300, 50, 50, 1),
                 new Vector(50, 50, 0, 1),
-                new Vector(0, 0, 1, 0)));
+                new Vector(0, 0, 1, 0),
+                new Projection(Math.PI / 1.2, 100, 0.25, (double)height / width)));
             SetCurrentCamera(1);
         }
 
