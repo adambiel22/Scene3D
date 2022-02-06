@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DAdamBielecki._3DScene
+namespace _3DAdamBielecki
 {
     public class Sphere : Block
     {

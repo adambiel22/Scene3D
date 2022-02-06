@@ -1,6 +1,5 @@
-﻿using _3DAdamBielecki.Shading;
-
-namespace _3DAdamBielecki._3DScene
+﻿
+namespace _3DAdamBielecki
 {
     public class TransformatedBlock : Block
     {

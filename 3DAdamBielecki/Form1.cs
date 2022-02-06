@@ -8,10 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using _3DAdamBielecki._3DScene;
-using _3DAdamBielecki.Bitmapping;
-using _3DAdamBielecki.Shading;
-using MathNet.Numerics.LinearAlgebra.Double;
 
 namespace _3DAdamBielecki
 {

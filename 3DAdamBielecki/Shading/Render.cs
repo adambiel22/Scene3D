@@ -1,6 +1,4 @@
-﻿using _3DAdamBielecki._3DScene;
-using _3DAdamBielecki.Bitmapping;
-using MathNet.Numerics.LinearAlgebra.Double;
+﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DAdamBielecki.Shading
+namespace _3DAdamBielecki
 {
     public class Render
     {

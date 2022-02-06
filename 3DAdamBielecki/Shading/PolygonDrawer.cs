@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DAdamBielecki.Shading
+namespace _3DAdamBielecki
 {
     public static class PolygonDrawer
     {

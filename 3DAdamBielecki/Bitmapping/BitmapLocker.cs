@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
-namespace _3DAdamBielecki.Bitmapping
+namespace _3DAdamBielecki
 {
     //source: https://www.codeproject.com/Tips/240428/Work-with-Bitmaps-Faster-in-Csharp-3
     public class BitmapLocker : IDisposable

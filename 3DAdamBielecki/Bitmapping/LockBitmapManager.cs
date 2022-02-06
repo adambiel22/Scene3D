@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DAdamBielecki.Bitmapping
+namespace _3DAdamBielecki
 {
     class LockBitmapManager : BitmapManager
     {

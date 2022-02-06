@@ -1,5 +1,4 @@
-﻿using _3DAdamBielecki._3DScene;
-using Algebra;
+﻿using Algebra;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DAdamBielecki.Shading
+namespace _3DAdamBielecki
 {
     public static class PhongIllumination
     {

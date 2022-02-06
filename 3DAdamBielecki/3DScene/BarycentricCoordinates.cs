@@ -1,6 +1,6 @@
 ﻿using Algebra;
 
-namespace _3DAdamBielecki._3DScene
+namespace _3DAdamBielecki
 {
     public static class BarycentricCoordinates
     {

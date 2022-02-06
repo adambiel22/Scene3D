@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace _3DAdamBielecki._3DScene
+namespace _3DAdamBielecki
 {
     public class Scene
     {

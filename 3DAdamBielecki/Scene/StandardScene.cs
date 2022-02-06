@@ -1,5 +1,4 @@
-﻿using _3DAdamBielecki.Shading;
-using Algebra;
+﻿using Algebra;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _3DAdamBielecki._3DScene
+namespace _3DAdamBielecki
 {
     public class StandardScene : Scene
     {

@@ -1,8 +1,7 @@
-﻿using _3DAdamBielecki._3DScene;
-using System;
+﻿using System;
 using System.Drawing;
 
-namespace _3DAdamBielecki.Shading
+namespace _3DAdamBielecki
 {
     public class TriangleDrawer
     {

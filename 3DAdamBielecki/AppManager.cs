@@ -1,5 +1,4 @@
-﻿using _3DAdamBielecki._3DScene;
-using _3DAdamBielecki.Shading;
+﻿
 using System;
 using System.Drawing;
 using Algebra;

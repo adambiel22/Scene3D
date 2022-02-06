@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace _3DAdamBielecki.Shading
+namespace _3DAdamBielecki
 {
     public class Surface
     {
