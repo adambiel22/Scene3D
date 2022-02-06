@@ -13,22 +13,11 @@ namespace _3DAdamBielecki
         private int triangulationLevel;
         private double radius;
 
-        public Sphere(int triangulationLevel, double radius) : base(2 * (int)Math.Pow(4, triangulationLevel))
+        public Sphere(int triangulationLevel, double radius) : base(2 * (int)Math.Pow(4, triangulationLevel) - 2)
         {
             this.triangulationLevel = triangulationLevel;
             this.radius = radius;
             generateTriangulation();
-            //Triangle t = Triangles[0];
-            //Triangles = new List<Triangle>();
-            //Triangles.Add(t);
-            //foreach (Vector vector in Verticies)
-            //{
-            //    Debug.WriteLine(vector);
-            //}
-            //foreach (Triangle tr in Triangles)
-            //{
-            //    Debug.WriteLine(tr);
-            //}
         }
 
         private void generateTriangulation()

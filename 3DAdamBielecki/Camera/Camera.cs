@@ -29,6 +29,19 @@ namespace _3DAdamBielecki
             return viewMatrix * vector;
         }
 
+
+        public Vertex[] ProjectVericies(Vertex[] verticies)
+        {
+            Vertex[] transformedVericies = new Vertex[verticies.Length];
+            for (int i = 0; i < verticies.Length; i++)
+            {
+                transformedVericies[i] = new Vertex(
+                    Projection.Project(
+                        LookAt(verticies[i].PositionVector)));
+            }
+            return transformedVericies;
+        }
+
         public void GenerateViewMarix()
         {
             Vector zAxis = (cameraPosition - cameraTarget);

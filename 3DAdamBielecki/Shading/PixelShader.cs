@@ -19,10 +19,13 @@ namespace _3DAdamBielecki
 
         public void ShadePixel(int pixelX, int pixelY)
         {
+            if (pixelX == 842 && pixelY == 536)
+            {
+                Debug.WriteLine("fasd");
+            }
             var (alpha, beta, gamma) = 
                 BarycentricCoordinates.CartesianToBarycentric(ProjectedTriangle, pixelX, pixelY);
-            //TODO: TRZEBA TO PRZETESTOWAĆ CZY DA TE same współrzędne x,y
-            // nie daje tych samych współrzędnych ...
+
 
             var point =
                 BarycentricCoordinates.BarycentricToEuclidean(ProjectedTriangle, alpha, beta, gamma);

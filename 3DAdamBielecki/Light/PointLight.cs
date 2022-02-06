@@ -11,10 +11,13 @@ namespace _3DAdamBielecki
     public class PointLight : Light
     {
         public Vector Position { get; set; }
-        public override Vector ComputeToLightVector(Vector point)
+        
+        public override (Vector, (double r, double g, double b))
+            ComputeToLightVector(Vector point)
         {
-            return Position - point;
+            return (Position - point, Color);
         }
+
         public PointLight(Color color, double x, double y, double z) : base(color)
         {
             Position = new Vector(x, y, z, 1);

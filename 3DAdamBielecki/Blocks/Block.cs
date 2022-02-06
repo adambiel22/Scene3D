@@ -6,7 +6,7 @@ namespace _3DAdamBielecki
     public class Block
     {
         public List<(int, int, int)> Triangles { get; protected set; }
-        public Vertex[] Verticies { get; protected set; } 
+        public Vertex[] Verticies { get; set; } 
         public Block(int vertexNo)
         {
             Verticies = new Vertex[vertexNo];

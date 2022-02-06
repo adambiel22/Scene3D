@@ -134,13 +134,20 @@ namespace _3DAdamBielecki
 
         public Block TransformBlock(Block block)
         {
-            Block transformedBlock = new Block(block.Verticies.Length);
+            Block transformedBlock = new Block(0);
             transformedBlock.Triangles.AddRange(block.Triangles);
-            for (int i = 0; i < block.Verticies.Length; i++)
-            {
-                transformedBlock.Verticies[i] = TransformVertex(block.Verticies[i]);
-            }
+            transformedBlock.Verticies = TransformVerticies(block.Verticies);
             return transformedBlock;
+        }
+
+        public Vertex[] TransformVerticies(Vertex[] verticies)
+        {
+            Vertex[] transformedVerticies = new Vertex[verticies.Length];
+            for (int i = 0; i < verticies.Length; i++)
+            {
+                transformedVerticies[i] = TransformVertex(verticies[i]);
+            }
+            return transformedVerticies;
         }
     }
 }

@@ -38,16 +38,25 @@ namespace _3DAdamBielecki
             {
                 PixelShader.Surface = transformatedBlock.Surface;
                 // przenieść transformację całego bloku tutaj
+                Vertex[] verticiesInWorld =
+                    transformatedBlock
+                    .Transformation
+                    .TransformVerticies(transformatedBlock.Verticies);
+                //Vertex[] projectedVerticies =
+                //    Scene.CurrentCamera.ProjectVericies(verticiesInWorld);
                 foreach ((int, int, int) triangle in transformatedBlock.Triangles) 
                 {
                     Triangle triangleInWorld =
-                        transformatedBlock.Transformation.TransformTriangle(
-                            new Triangle(
-                                transformatedBlock.Verticies[triangle.Item1],
-                                transformatedBlock.Verticies[triangle.Item2],
-                                transformatedBlock.Verticies[triangle.Item3]));
-                    Triangle projectedTriangle = projectTriangle(triangleInWorld,
-                        Scene.CurrentCamera, Scene.CurrentCamera.Projection);
+                        new Triangle(
+                            verticiesInWorld[triangle.Item1],
+                            verticiesInWorld[triangle.Item2],
+                            verticiesInWorld[triangle.Item3]);
+                    Triangle projectedTriangle =
+                        projectTriangle(triangleInWorld, Scene.CurrentCamera, Scene.CurrentCamera.Projection);
+                        //new Triangle(
+                        //    projectedVerticies[triangle.Item1],
+                        //    projectedVerticies[triangle.Item2],
+                        //    projectedVerticies[triangle.Item3]);
                     if (isTriangleFrontedToCamera(projectedTriangle, Scene.CurrentCamera) && isTriangleInCube(projectedTriangle))
                     {
                         PixelShader.SetTriangleInWorld(triangleInWorld);
@@ -60,19 +69,6 @@ namespace _3DAdamBielecki
             }
             bitmapManager.EndDrawing();
             return bitmap;
-        }
-
-
-        private Triangle transformTriangle(Triangle triangle, Transformation transformation)
-        {
-            Vertex[] verticiesInWorld = new Vertex[3];
-            for (int i = 0; i < 3; i++)
-            {
-                verticiesInWorld[i] = new Vertex(
-                    transformation.TransformPoint(triangle.Verticies[i].PositionVector),
-                    transformation.TransformNormalVector(triangle.Verticies[i].NormalVector));
-            }
-            return new Triangle(verticiesInWorld[0], verticiesInWorld[1], verticiesInWorld[2]);
         }
 
         private Triangle projectTriangle(Triangle triangle, Camera camera, Projection projection)
