@@ -22,7 +22,7 @@ namespace _3DAdamBielecki
             SetCurrentCamera(0);
 
             TransformatedBlock floor = new TransformatedBlock(
-                new RectangleFace(100, 100, 10),
+                new RectangleFaceXY(100, 100, 10),
                 new Transformation(new double[,]
                 {
                     { 1, 0, 0, 0 },

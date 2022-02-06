@@ -9,7 +9,7 @@ namespace _3DAdamBielecki
 {
     public class Pyramid : Block
     {
-        public Pyramid(double x = 1.0, double y = 1.0, double z = 1.0) : base()
+        public Pyramid(double x = 1.0, double y = 1.0, double z = 1.0) : base(5)
         {
             Verticies = new Vertex[]
             {

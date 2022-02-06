@@ -17,7 +17,7 @@ namespace _3DAdamBielecki
             defineCameras(width, height);
 
             TransformatedBlock floor = new TransformatedBlock(
-                new RectangleFace(100, 100, 20),
+                new RectangleFaceXY(100, 100, 20),
                 new Transformation(new double[,]
                 {
                     { 1, 0, 0, 0 },
@@ -100,7 +100,7 @@ namespace _3DAdamBielecki
                 new Vector(300, 50, 50, 1),
                 new Vector(50, 50, 0, 1),
                 new Vector(0, 0, 1, 0),
-                new Projection(Math.PI / 1.2, 100, 0.25, (double)height / width)));
+                new Projection(Math.PI / 1.1, 100, 0.1, (double)height / width)));
             SetCurrentCamera(0);
         }
 
@@ -108,7 +108,7 @@ namespace _3DAdamBielecki
         {
             double h = 50 * Math.Sqrt(3) / 2.0;
             TransformatedBlock phillar1 = new TransformatedBlock(
-                new Cuboid(4.0, 4.0, 30.0),
+                new Cuboid(5, 4.0, 4.0, 30.0),
                 new Transformation(new double[,]
                 {
                                 { 1, 0, 0, 25 },
@@ -119,7 +119,7 @@ namespace _3DAdamBielecki
                 new Surface(1, 0, 0.2, 10, Color.BurlyWood)
             ) ;
             TransformatedBlock phillar2 = new TransformatedBlock(
-                new Cuboid(4.0, 4.0, 30.0),
+                new Cuboid(5, 4.0, 4.0, 30.0),
                 new Transformation(new double[,]
                 {
                                 { 1, 0, 0, 50 },
@@ -130,7 +130,7 @@ namespace _3DAdamBielecki
                 new Surface(1, 0, 0.2, 10, Color.BurlyWood)
             );
             TransformatedBlock phillar3 = new TransformatedBlock(
-                new Cuboid(4.0, 4.0, 30.0),
+                new Cuboid(5, 4.0, 4.0, 30.0),
                 new Transformation(new double[,]
                 {
                                 { 1, 0, 0, 75 },
