@@ -1,6 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra.Double;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,14 @@ namespace _3DAdamBielecki
     {
         public Scene Scene { get; set; }
         public TriangleDrawer TriangleDrawer { get; set; } 
-        public PixelShader PixelShader { get; set; } 
+        public PixelShader PixelShader { get; set; }
+
+        private int counter;
+
+        public Render()
+        {
+            this.counter = 0;
+        }
 
         public Bitmap RenderScene(int width, int height)
         {
@@ -24,15 +32,21 @@ namespace _3DAdamBielecki
             PixelShader.Lights = Scene.Lights;
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
-            PixelShader.Camera = Scene.Camera;
+            PixelShader.Camera = Scene.CurrentCamera;
+            //Debug.WriteLine($"Rendering no: {++counter}");
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
                 PixelShader.Surface = transformatedBlock.Surface;
+                // przenieść transformację całego bloku tutaj
                 foreach(Triangle triangle in transformatedBlock.Triangles)
                 {
+                    //Debug.WriteLine($"Transformating triangle: {triangle}");
                     Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
-                    Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
-                    if (isTriangleFrontedToCamera(projectedTriangle, Scene.Camera) && isTriangleInCube(projectedTriangle))
+                    //Debug.WriteLine($"Triangle in world: {triangleInWorld}");
+                    Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.CurrentCamera, Scene.Projection);
+                    //Debug.WriteLine($"Projected triangle: {projectedTriangle}");
+                    //Debug.WriteLine("");
+                    if (isTriangleFrontedToCamera(projectedTriangle, Scene.CurrentCamera) && isTriangleInCube(projectedTriangle))
                     {
                         PixelShader.SetTriangleInWorld(triangleInWorld);
                         stretchTriangle(projectedTriangle, width, height);
@@ -45,6 +59,7 @@ namespace _3DAdamBielecki
             bitmapManager.EndDrawing();
             return bitmap;
         }
+
 
         private Triangle transformTriangle(Triangle triangle, Transformation transformation)
         {
@@ -94,7 +109,6 @@ namespace _3DAdamBielecki
             }
             return true;
         }
-
         private bool isTriangleFrontedToCamera(Triangle triangle, Camera camera)
         {
             return triangle.GetNormalVector() * camera.UpVector > 0;

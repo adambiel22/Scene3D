@@ -4,6 +4,7 @@ using System.Drawing;
 using Algebra;
 using System.Timers;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace _3DAdamBielecki
 {
@@ -11,11 +12,17 @@ namespace _3DAdamBielecki
     {
         private Render render;
         private Scene scene;
-        private System.Timers.Timer _timer;
+        private System.Timers.Timer timer;
+        private Stopwatch stopwatch;
         private Transformation pyramidTransformation;
         private Transformation cubeTransformation;
         private Transformation sphereTransformation;
+        double angle;
+        double angleIncrement;
+        bool timerRunning;
         public Button button;
+        private int counter;
+
         public PictureBox PictureBox { get; set; }
 
 
@@ -26,9 +33,9 @@ namespace _3DAdamBielecki
 
         public void SetCameraPosition(int value)
         {
-            scene.Camera.CameraPosition[1] = (double)value / 100 - 4.0;
-            scene.Camera.GenerateViewMarix();
-            PictureBox.Invalidate();
+            scene.CurrentCamera.CameraPosition[1] = (double)value / 100 - 4.0;
+            scene.CurrentCamera.GenerateViewMarix();
+            if (!timerRunning) PictureBox.Invalidate();
         }
 
         public int GetFieldOfView()
@@ -39,10 +46,26 @@ namespace _3DAdamBielecki
         public void SetFieldOfView(int value)
         {
             scene.Projection.FieldOfView = value * Math.PI / 180 ;
-            PictureBox.Invalidate();
+            if (!timerRunning) PictureBox.Invalidate();
         }
 
-        public AppManager(PictureBox pictureBox, System.Timers.Timer timer)
+        public void TimerButtonClick(object sender, EventArgs e)
+        {
+            if (timerRunning)
+            {
+                timerRunning = false;
+                timer.Stop();
+                stopwatch.Reset();
+            }
+            else
+            {
+                timerRunning = true;
+                timer.Start();
+                stopwatch.Restart();
+            }
+        }
+
+        public AppManager(PictureBox pictureBox)
         {
             PictureBox = pictureBox;
 
@@ -50,16 +73,21 @@ namespace _3DAdamBielecki
             render.PixelShader = new PhongPixelShader();
             render.TriangleDrawer = new TriangleDrawer();
             scene = new StandardScene(pictureBox.Width, pictureBox.Height);
+            pyramidTransformation = scene.TransformatedBlocks[1].Transformation;
 
             render.Scene = scene;
 
-            _timer = timer;
-            _timer.Interval = 100;
-            _timer.AutoReset = false;
-            _timer.Elapsed += Timer_Elapsed;
-
-            pictureBox.Click += PictureBox_Click;            
-            pictureBox.Paint += paint;
+            timerRunning = false;
+            counter = 0;
+            angle = 0.0;
+            angleIncrement = 0.1;
+            timer = new System.Timers.Timer();
+            stopwatch = new Stopwatch();
+            timer.Interval = 100;
+            timer.AutoReset = false;
+            timer.Elapsed += Timer_Elapsed;
+         
+            pictureBox.Paint += pictureBox_paint;
             pictureBox.Resize += PictureBox_Resize;
         }
 
@@ -68,36 +96,24 @@ namespace _3DAdamBielecki
             scene.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
         }
 
-        private void PictureBox_Click(object sender, EventArgs e)
-        {
-            _timer.Stop();
-            //pyramidTransformation.AddTransformation(new Matrix(new double[,]
-            //{
-            //    {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
-            //    {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
-            //    {0, 0, 1, 0 },
-            //    {0, 0, 0, 1 }
-            //}));
-            //PictureBox.Invalidate();
-        }
-
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            //_timer.Stop();
-            sphereTransformation.AddTransformation(new Matrix(new double[,]
+            double secondsTimeOffset = stopwatch.Elapsed.TotalSeconds;
+            stopwatch.Restart();
+            foreach (IAnimation animation in scene.Animations)
             {
-                {Math.Cos(0.1), -Math.Sin(0.1), 0, 0 },
-                {Math.Sin(0.1), Math.Cos(0.1), 0, 0 },
-                {0, 0, 1, 0 },
-                {0, 0, 0, 1 }
-            }));
+                animation.NextFrame(secondsTimeOffset);
+            }
             PictureBox.Invalidate();
-            _timer.Start();
         }
 
-        private void paint(object sender, PaintEventArgs e)
+        private void pictureBox_paint(object sender, PaintEventArgs e)
         {
-            PictureBox.Image = render.RenderScene(PictureBox.Width, PictureBox.Height);
+            //PictureBox.Image = render.RenderScene(PictureBox.Width, PictureBox.Height);
+            e.Graphics.DrawImage(
+                render.RenderScene(PictureBox.Width, PictureBox.Height),
+                new Point(0, 0));
+            if (timerRunning) timer.Start();
         }
     }
 }

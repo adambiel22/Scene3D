@@ -10,7 +10,7 @@ namespace _3DAdamBielecki
     public class Pyramid : Block
     {
         private List<Vertex> vertices;
-        public Pyramid(int x = 1, int y = 1, int z = 1) : base()
+        public Pyramid(double x = 1.0, double y = 1.0, double z = 1.0) : base()
         {
             vertices = new List<Vertex>();
 
