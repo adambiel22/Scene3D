@@ -32,7 +32,7 @@ namespace _3DAdamBielecki
             PixelShader.Lights = Scene.Lights;
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
-            PixelShader.Camera = Scene.Camera;
+            PixelShader.Camera = Scene.CurrentCamera;
             //Debug.WriteLine($"Rendering no: {++counter}");
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
@@ -43,10 +43,10 @@ namespace _3DAdamBielecki
                     //Debug.WriteLine($"Transformating triangle: {triangle}");
                     Triangle triangleInWorld = transformTriangle(triangle, transformatedBlock.Transformation);
                     //Debug.WriteLine($"Triangle in world: {triangleInWorld}");
-                    Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.Camera, Scene.Projection);
+                    Triangle projectedTriangle = projectTriangle(triangleInWorld, Scene.CurrentCamera, Scene.Projection);
                     //Debug.WriteLine($"Projected triangle: {projectedTriangle}");
                     //Debug.WriteLine("");
-                    if (isTriangleFrontedToCamera(projectedTriangle, Scene.Camera) && isTriangleInCube(projectedTriangle))
+                    if (isTriangleFrontedToCamera(projectedTriangle, Scene.CurrentCamera) && isTriangleInCube(projectedTriangle))
                     {
                         PixelShader.SetTriangleInWorld(triangleInWorld);
                         stretchTriangle(projectedTriangle, width, height);

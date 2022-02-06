@@ -14,10 +14,12 @@ namespace _3DAdamBielecki
         {
             Lights.Add(new PointLight(Color.White, 100, 100, 100));
             Vector cameraPosition = new Vector(300, 50, 50, 1);
-            Camera = new Camera(
+            Cameras.Add(new Camera(
                 cameraPosition,
                 new Vector(50, 50, 0, 1),
-                new Vector(0, 0, 1, 0));
+                new Vector(0, 0, 1, 0)));
+            SetCurrentCamera(0);
+
             Projection = new Projection(Math.PI / 4, 400, 50, (double)height / width);
 
             TransformatedBlock floor = new TransformatedBlock(

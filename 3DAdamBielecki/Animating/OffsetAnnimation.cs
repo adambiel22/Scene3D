@@ -1,13 +1,14 @@
 ﻿using Algebra;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace _3DAdamBielecki
 {
-    public class OffsetAnnimation : BlockAnimation
+    public class OffsetAnnimation : BlockWithCameraAnimation
     {
         private Vector velocityVector;
         private double distance;
@@ -20,8 +21,9 @@ namespace _3DAdamBielecki
 
         public double Lenght { get; private set; }
 
-        public OffsetAnnimation(TransformatedBlock transformatedBlock, double velocity, double length)
-            : base(transformatedBlock)
+        public OffsetAnnimation(
+            TransformatedBlock transformatedBlock, Camera camera, Vector cameraOffset,
+            double velocity, double length) : base(transformatedBlock, camera, cameraOffset)
         {
             velocityVector = new Vector(1, 0, 0, 0);
             velocityVector = velocityVector * velocity;
@@ -31,7 +33,7 @@ namespace _3DAdamBielecki
 
         public override void NextFrame(double timeOffset)
         {
-            changeVelocityVector(timeOffset);
+            if (changeVelocityVector(timeOffset)) return;
             Vector offset = new Vector(
                 timeOffset * velocityVector[0],
                 timeOffset * velocityVector[1],
@@ -45,18 +47,38 @@ namespace _3DAdamBielecki
                 { 0, 0, 1, offset[2] },
                 { 0, 0, 0, 1 },
             });
+            Camera.CameraPosition =
+                TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
+            Camera.CameraTarget = Camera.CameraPosition + velocityVector;
         }
 
-        private void changeVelocityVector(double timeOffset)
+        private bool changeVelocityVector(double timeOffset)
         {
-            distance += timeOffset * velocityVector.Norm();
-            if (distance >= Lenght)
+            double norm = velocityVector.Norm();
+            double newDistance = distance + timeOffset * norm;
+            Debug.WriteLine(newDistance);
+            if (newDistance >= Lenght)
             {
+                double difference = newDistance - distance;
                 velocityVector[0] *= -1;
                 velocityVector[1] *= -1;
                 velocityVector[2] *= -1;
-                distance = 0;
+                TransformatedBlock
+                    .Transformation
+                    .AddTransformation(new double[,]
+                {
+                    { 1, 0, 0, velocityVector[0] / norm * difference },
+                    { 0, 1, 0, velocityVector[1] / norm * difference },
+                    { 0, 0, 1, velocityVector[2] / norm * difference },
+                    { 0, 0, 0, 1 },
+                });
+
+                distance = difference;
+                return true;
             }
+            distance = newDistance;
+            return false;
+
         }
     }
 }

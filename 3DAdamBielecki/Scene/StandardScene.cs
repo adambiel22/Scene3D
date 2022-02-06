@@ -10,16 +10,12 @@ namespace _3DAdamBielecki
 {
     public class StandardScene : Scene
     {
+        private TransformatedBlock sphere;
         public StandardScene(int width, int height) : base()
         {
             Lights.Add(new PointLight(Color.White, 100, 100, 100));
-            Vector cameraPosition = new Vector(300, 50, 50, 1);
-            Camera = new Camera(
-                cameraPosition,
-                new Vector(50, 50, 0, 1),
-                new Vector(0, 0, 1, 0));
-            Projection = new Projection(Math.PI / 4, 400, 50, (double)height / width);
-            //Lights.Add(new PointLight(Color.White, 3, 2, 3));
+            defineCameras();
+            Projection = new Projection(Math.PI / 1.2, 100, 0.25, (double)height / width);
 
             TransformatedBlock floor = new TransformatedBlock(
                 new RectangleFace(100, 100, 5),
@@ -33,7 +29,7 @@ namespace _3DAdamBielecki
                 new Surface(1, 0.1, 0.2, 2, Color.Gray)
                 );
 
-            TransformatedBlock sphere = new TransformatedBlock(
+            sphere = new TransformatedBlock(
                 new Sphere(3, 2.5),
                 new Transformation(new double[,]
                 {
@@ -88,7 +84,22 @@ namespace _3DAdamBielecki
             TransformatedBlocks.Add(pyramid2);
             TransformatedBlocks.Add(pyramid3);
 
+            Animations.Add(new OffsetAnnimation(sphere, Cameras[1], new Vector(0, 0, 2.5), 10, 30.0)) ;
+
             definePhillars();
+        }
+
+        private void defineCameras()
+        {
+            Cameras.Add(new Camera(
+                new Vector(300, 50, 50, 1),
+                new Vector(50, 50, 0, 1),
+                new Vector(0, 0, 1, 0)));
+            Cameras.Add(new Camera(
+                new Vector(300, 50, 50, 1),
+                new Vector(50, 50, 0, 1),
+                new Vector(0, 0, 1, 0)));
+            SetCurrentCamera(1);
         }
 
         private void definePhillars()
