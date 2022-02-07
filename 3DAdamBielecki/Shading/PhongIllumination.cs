@@ -21,7 +21,7 @@ namespace _3DAdamBielecki
                 (Vector toLight, var lightColor) = light.ComputeToLightVector(position);
                 toLight.Normalize();
                 Vector mirrorReflectance = normalVector * (2 * (normalVector * toLight)) - toLight;
-                double diffuse = Math.Max(surface.DiffuseConst * (normalVector * toLight), 0);
+                double diffuse = Math.Max(surface.DiffuseConst * (normalVector * toLight), 0.0);
                 double scalarProduct = toCamera * mirrorReflectance;
                 double specular = scalarProduct >= 0
                     ? Math.Max(surface.SpecularConst * Math.Pow(scalarProduct, surface.NShiny), 0)

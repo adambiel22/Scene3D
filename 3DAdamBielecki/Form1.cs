@@ -125,7 +125,7 @@ namespace _3DAdamBielecki
             appManager.Render.Fogg.Near = nearTrackBar.Value / 100.0;
             farTrackBar.Minimum = nearTrackBar.Value;
             nearLabel.Text = nearTrackBar.Value.ToString();
-            pictureBox.Invalidate();
+            if (appManager.Render.Fogg.Enabled) pictureBox.Invalidate();
         }
 
         private void farTrackBar_Scroll(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace _3DAdamBielecki
             appManager.Render.Fogg.Far = farTrackBar.Value / 100.0;
             nearTrackBar.Maximum = farTrackBar.Value;
             farLabel.Text = farTrackBar.Value.ToString();
-            pictureBox.Invalidate();
+            if (appManager.Render.Fogg.Enabled) pictureBox.Invalidate();
         }
     }
 }

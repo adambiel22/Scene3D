@@ -1,6 +1,7 @@
 ﻿using Algebra;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,8 +31,10 @@ namespace _3DAdamBielecki
             Vector lightTarget = LightTarget - Position;
             lightTarget.Normalize();
 
-            double factor = 
-                Math.Max(Math.Pow(outLight * lightTarget, Exponent), 0.0);
+            double scalarProd = outLight * lightTarget;
+            double factor = scalarProd >= 0
+                ? Math.Max(Math.Pow(scalarProd, Exponent), 0.0)
+                : 0.0;
 
             return (Position - point,
                 (

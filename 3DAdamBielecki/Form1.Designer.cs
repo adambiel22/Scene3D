@@ -416,7 +416,6 @@ namespace _3DAdamBielecki
         private System.Windows.Forms.TabPage shadingTabPage;
         private System.Windows.Forms.TabControl shadingTab;
         private System.Windows.Forms.TabPage cameraTabPage;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListView camerasListView;
         private System.Windows.Forms.GroupBox groupBox2;

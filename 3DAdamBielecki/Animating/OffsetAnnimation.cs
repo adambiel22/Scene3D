@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace _3DAdamBielecki
 {
-    public class OffsetAnnimation : BlockWithCameraAnimation
+    public class OffsetAnnimation : BlockWithCamerasAnimation
     {
         private Vector velocityVector;
         private double distance;
@@ -21,9 +21,10 @@ namespace _3DAdamBielecki
 
         public double Lenght { get; private set; }
 
-        public OffsetAnnimation(
-            TransformatedBlock transformatedBlock, Camera camera, Vector cameraOffset,
-            double velocity, double length) : base(transformatedBlock, camera, cameraOffset)
+        public OffsetAnnimation(TransformatedBlock transformatedBlock,
+            Vector cameraOffset, Camera followCamera, Camera fixedCamera, Reflector reflector,
+            double velocity, double length)
+            : base(transformatedBlock, cameraOffset, followCamera, fixedCamera, reflector)
         {
             velocityVector = new Vector(1, 0, 0, 0);
             velocityVector = velocityVector * velocity;
@@ -47,16 +48,20 @@ namespace _3DAdamBielecki
                 { 0, 0, 1, offset[2] },
                 { 0, 0, 0, 1 },
             });
-            Camera.CameraPosition =
+            FixedCamera.CameraPosition =
                 TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
-            Camera.CameraTarget = Camera.CameraPosition + velocityVector;
+            FixedCamera.CameraTarget = FixedCamera.CameraPosition + velocityVector;
+
+            FollowCamera.CameraTarget = TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
+
+            Reflector.Position = TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
+            Reflector.LightTarget = FixedCamera.CameraPosition + velocityVector;
         }
 
         private bool changeVelocityVector(double timeOffset)
         {
             double norm = velocityVector.Norm();
             double newDistance = distance + timeOffset * norm;
-            Debug.WriteLine(newDistance);
             if (newDistance >= Lenght)
             {
                 double difference = newDistance - distance;
@@ -72,13 +77,17 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, velocityVector[2] / norm * difference },
                     { 0, 0, 0, 1 },
                 });
-
+                FixedCamera.CameraPosition =
+                    TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
+                FixedCamera.CameraTarget = FixedCamera.CameraPosition + velocityVector;
+                FollowCamera.CameraTarget = TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
+                Reflector.Position = TransformatedBlock.Transformation.TransformPoint(new Vector(0, 0, 0, 1)) + CameraOffset;
+                Reflector.LightTarget = FixedCamera.CameraPosition + velocityVector;
                 distance = difference;
                 return true;
             }
             distance = newDistance;
             return false;
-
         }
     }
 }
