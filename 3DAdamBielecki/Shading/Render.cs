@@ -16,10 +16,6 @@ namespace _3DAdamBielecki
         public PixelShader PixelShader { get; set; }
         public Fogg Fogg { get; set; }
 
-        public Render()
-        {
-        }
-
         public Bitmap RenderScene(int width, int height)
         {
             Bitmap bitmap = new Bitmap(width, height);
@@ -33,8 +29,6 @@ namespace _3DAdamBielecki
             PixelShader.Camera = Scene.CurrentCamera;
             PixelShader.Fogg = Fogg;
 
-            Debug.WriteLine($"Near:{Fogg.Near}, Far:{Fogg.Far}, Enable: {Fogg.Enabled}");
-
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
                 PixelShader.Surface = transformatedBlock.Surface;
@@ -43,7 +37,7 @@ namespace _3DAdamBielecki
                     .Transformation
                     .TransformVerticies(transformatedBlock.Verticies);
                 //Vertex[] projectedVerticies =
-                //    Scene.CurrentCamera.ProjectVericies(verticiesInWorld);
+                    //Scene.CurrentCamera.ProjectVericies(verticiesInWorld);
                 foreach ((int, int, int) triangle in transformatedBlock.Triangles) 
                 {
                     Triangle triangleInWorld =

@@ -119,8 +119,12 @@ namespace _3DAdamBielecki
         private void pictureBox_paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(
-                Render.RenderScene(PictureBox.Width, PictureBox.Height),
-                new Point(0, 0));
+                Render.RenderScene(
+                    (int)(PictureBox.Width * 1.5),
+                    (int)(PictureBox.Height * 1.5)),
+                new Point(
+                    (int)(-0.25 * PictureBox.Width),
+                    (int)(-0.25 * PictureBox.Height)));
             if (timerRunning) timer.Start();
         }
     }
