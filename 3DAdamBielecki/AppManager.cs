@@ -93,11 +93,11 @@ namespace _3DAdamBielecki
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            double secondsTimeOffset = stopwatch.Elapsed.TotalSeconds;
+            TimeSpan timeOffset = stopwatch.Elapsed;
             stopwatch.Restart();
             foreach (IAnimation animation in Scene.Animations)
             {
-                animation.NextFrame(secondsTimeOffset);
+                animation.NextFrame(timeOffset);
             }
             PictureBox.Invalidate();
         }

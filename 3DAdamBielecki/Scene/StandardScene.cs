@@ -83,7 +83,7 @@ namespace _3DAdamBielecki
             TransformatedBlocks.Add(pyramid3);
 
             Animations.Add(new OffsetAnnimation(sphere, new Vector(0, 0, 2.5),
-                Cameras[1], Cameras[2], (Reflector)Lights[0], 10, 30.0)) ;
+                Cameras[1], Cameras[2], (Reflector)Lights[0], 10, 30.0));
 
             definePhillars();
         }
@@ -198,6 +198,8 @@ namespace _3DAdamBielecki
             TransformatedBlocks.Add(diamond1);
             TransformatedBlocks.Add(diamond2);
             TransformatedBlocks.Add(diamond3);
+
+            Animations.Add(new DiamondAnimation(diamond1, diamond2, diamond3, Math.PI / 2 ));
         }
     }
 }

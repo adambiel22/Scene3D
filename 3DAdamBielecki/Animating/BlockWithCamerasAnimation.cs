@@ -27,6 +27,6 @@ namespace _3DAdamBielecki
             Reflector = reflector;
         }
 
-        public abstract void NextFrame(double timeOffset);
+        public abstract void NextFrame(TimeSpan timeOffset);
     }
 }

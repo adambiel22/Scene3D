@@ -32,13 +32,14 @@ namespace _3DAdamBielecki
             distance = 0.0;
         }
 
-        public override void NextFrame(double timeOffset)
+        public override void NextFrame(TimeSpan timeOffset)
         {
-            if (changeVelocityVector(timeOffset)) return;
+            double timeOffsetSeconds = timeOffset.TotalSeconds;
+            if (changeVelocityVector(timeOffsetSeconds)) return;
             Vector offset = new Vector(
-                timeOffset * velocityVector[0],
-                timeOffset * velocityVector[1],
-                timeOffset * velocityVector[2]);
+                timeOffsetSeconds * velocityVector[0],
+                timeOffsetSeconds * velocityVector[1],
+                timeOffsetSeconds * velocityVector[2]);
             TransformatedBlock
                 .Transformation
                 .AddTransformation(new double[,]

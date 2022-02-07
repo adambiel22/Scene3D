@@ -8,6 +8,6 @@ namespace _3DAdamBielecki
 {
     public interface IAnimation
     {
-        public abstract void NextFrame(double timeOffset);
+        public abstract void NextFrame(TimeSpan timeOffset);
     }
 }
