@@ -15,11 +15,8 @@ namespace _3DAdamBielecki
         public TriangleDrawer TriangleDrawer { get; set; } 
         public PixelShader PixelShader { get; set; }
 
-        private int counter;
-
         public Render()
         {
-            this.counter = 0;
         }
 
         public Bitmap RenderScene(int width, int height)
@@ -33,7 +30,7 @@ namespace _3DAdamBielecki
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
             PixelShader.Camera = Scene.CurrentCamera;
-            PixelShader.Fogg = new Fogg(Color.White, 0.8, 0.9, true);
+            PixelShader.Fogg = new Fogg(Color.White, 0.8, 0.9, false);
 
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {

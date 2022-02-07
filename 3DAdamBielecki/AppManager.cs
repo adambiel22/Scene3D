@@ -10,13 +10,12 @@ namespace _3DAdamBielecki
 {
     public class AppManager
     {
-        private Render render;
-        private Scene scene;
+        public Render Render { get; private set; }
+        public Scene Scene { get; private set; }
         private System.Timers.Timer timer;
         private Stopwatch stopwatch;
         bool timerRunning;
         public Button button;
-        private int counter;
 
         public PictureBox PictureBox { get; set; }
 
@@ -28,19 +27,19 @@ namespace _3DAdamBielecki
 
         public void SetCameraPosition(int value)
         {
-            scene.CurrentCamera.CameraPosition[1] = (double)value / 100 - 4.0;
-            scene.CurrentCamera.GenerateViewMarix();
+            Scene.CurrentCamera.CameraPosition[1] = (double)value / 100 - 4.0;
+            Scene.CurrentCamera.GenerateViewMarix();
             if (!timerRunning) PictureBox.Invalidate();
         }
 
         public int GetFieldOfView()
         {
-            return (int)(scene.CurrentCamera.Projection.FieldOfView * 180 / Math.PI);
+            return (int)(Scene.CurrentCamera.Projection.FieldOfView * 180 / Math.PI);
         }
 
         public void SetFieldOfView(int value)
         {
-            scene.CurrentCamera.Projection.FieldOfView = value * Math.PI / 180 ;
+            Scene.CurrentCamera.Projection.FieldOfView = value * Math.PI / 180 ;
             if (!timerRunning) PictureBox.Invalidate();
         }
 
@@ -64,15 +63,14 @@ namespace _3DAdamBielecki
         {
             PictureBox = pictureBox;
 
-            render = new Render();
-            render.PixelShader = new PhongPixelShader();
-            render.TriangleDrawer = new TriangleDrawer();
-            scene = new StandardScene(pictureBox.Width, pictureBox.Height);
+            Render = new Render();
+            Render.PixelShader = new ConstantPixelShader();
+            Render.TriangleDrawer = new TriangleDrawer();
+            Scene = new StandardScene(pictureBox.Width, pictureBox.Height);
 
-            render.Scene = scene;
+            Render.Scene = Scene;
 
             timerRunning = false;
-            counter = 0;
             timer = new System.Timers.Timer();
             stopwatch = new Stopwatch();
             timer.Interval = 100;
@@ -85,24 +83,42 @@ namespace _3DAdamBielecki
 
         private void PictureBox_Resize(object sender, EventArgs e)
         {
-            scene.CurrentCamera.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
+            Scene.Cameras.ForEach((camera) =>
+            {
+                camera.Projection.AspectRatio = (double)PictureBox.Height / PictureBox.Width;
+            });
+            PictureBox.Invalidate();
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             double secondsTimeOffset = stopwatch.Elapsed.TotalSeconds;
             stopwatch.Restart();
-            foreach (IAnimation animation in scene.Animations)
+            foreach (IAnimation animation in Scene.Animations)
             {
                 animation.NextFrame(secondsTimeOffset);
             }
             PictureBox.Invalidate();
         }
 
+        internal void StopAnimation()
+        {
+            timerRunning = false;
+            timer.Stop();
+            stopwatch.Reset();
+        }
+
+        internal void StartAnimation()
+        {
+            timerRunning = true;
+            timer.Start();
+            stopwatch.Restart();
+        }
+
         private void pictureBox_paint(object sender, PaintEventArgs e)
         {
             e.Graphics.DrawImage(
-                render.RenderScene(PictureBox.Width, PictureBox.Height),
+                Render.RenderScene(PictureBox.Width, PictureBox.Height),
                 new Point(0, 0));
             if (timerRunning) timer.Start();
         }

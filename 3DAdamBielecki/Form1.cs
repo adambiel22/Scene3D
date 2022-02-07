@@ -14,13 +14,21 @@ namespace _3DAdamBielecki
     public partial class Form1 : Form
     {
         AppManager appManager;
-        private System.Timers.Timer timer;
-        bool enabled;
         public Form1()
         {
             InitializeComponent();
-            enabled = false;
             appManager = new AppManager(pictureBox);
+            
+            foreach(Camera camera in appManager.Scene.Cameras)
+            {
+                var item = new ListViewItem(camera.Name);
+                item.Tag = camera;
+                camerasListView.Items.Add(item);
+            }
+            if (camerasListView.Items.Count > 0)
+            {
+                camerasListView.Items[0].Selected = true;
+            }
 
             fovNumericUpDown.Maximum = 150;
             fovNumericUpDown.Minimum = 40;
@@ -28,7 +36,6 @@ namespace _3DAdamBielecki
 
             trackBar.Value = 50;
 
-            button1.Click += appManager.TimerButtonClick;
         }
         private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
@@ -47,6 +54,42 @@ namespace _3DAdamBielecki
             Debug.WriteLine(e.Location);
         }
 
+        private void camerLlistView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (camerasListView.SelectedIndices.Count > 0)
+            {
+                appManager.Scene.SetCurrentCamera(camerasListView.SelectedIndices[0]);
+                pictureBox.Invalidate();
+            }
+        }
 
+        private void radioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (constantRadioButton.Checked)
+            {
+                appManager.Render.PixelShader = new ConstantPixelShader();
+            }
+            else if (gourandRadioButton.Checked)
+            {
+                appManager.Render.PixelShader = new GourandPixelShader();
+            }
+            else if (constantRadioButton.Checked)
+            {
+                appManager.Render.PixelShader = new PhongPixelShader();
+            }
+            pictureBox.Invalidate();
+        }
+
+        private void animationCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (animationCheckBox.Checked)
+            {
+                appManager.StartAnimation();
+            }   
+            else
+            {
+                appManager.StopAnimation();
+            }
+        }
     }
 }

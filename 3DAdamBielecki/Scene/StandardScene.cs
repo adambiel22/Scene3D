@@ -91,7 +91,7 @@ namespace _3DAdamBielecki
 
         private void defineLights()
         {
-            Lights.Add(new PointLight(Color.White, 100, 100, 100));
+            //Lights.Add(new PointLight(Color.White, 100, 100, 100));
             Lights.Add(new Reflector(Color.Red, new Vector(0, 0, 0, 1),
                 new Vector(50, 50, 0, 1), 10));
         }
@@ -102,12 +102,20 @@ namespace _3DAdamBielecki
                 new Vector(300, 50, 50, 1),
                 new Vector(50, 50, 0, 1),
                 new Vector(0, 0, 1, 0),
-                new Projection(Math.PI / 4, 400, 50, (double)height / width)));
+                new Projection(Math.PI / 4, 400, 50, (double)height / width),
+                "Static camera"));
+            Cameras.Add(new Camera(
+                new Vector(50, 0, 10, 1),
+                new Vector(50, 50, 0, 1),
+                new Vector(0, 0, 1, 0),
+                new Projection(Math.PI / 4, 100, 1, (double)height / width),
+                "Follow camera"));
             Cameras.Add(new Camera(
                 new Vector(300, 50, 50, 1),
                 new Vector(50, 50, 0, 1),
                 new Vector(0, 0, 1, 0),
-                new Projection(Math.PI / 1.1, 100, 0.1, (double)height / width)));
+                new Projection(Math.PI / 1.1, 100, 0.1, (double)height / width),
+                "Dynamic camera"));
             SetCurrentCamera(0);
         }
 
