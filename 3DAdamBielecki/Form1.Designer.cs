@@ -39,12 +39,23 @@ namespace _3DAdamBielecki
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.camerasListView = new System.Windows.Forms.ListView();
             this.shadingTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.gridCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.phongRadioButton = new System.Windows.Forms.RadioButton();
             this.gourandRadioButton = new System.Windows.Forms.RadioButton();
             this.constantRadioButton = new System.Windows.Forms.RadioButton();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.animationCheckBox = new System.Windows.Forms.CheckBox();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.farLabel = new System.Windows.Forms.Label();
+            this.nearLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.farTrackBar = new System.Windows.Forms.TrackBar();
+            this.nearTrackBar = new System.Windows.Forms.TrackBar();
+            this.foggCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fovNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -53,8 +64,13 @@ namespace _3DAdamBielecki
             this.cameraTabPage.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.shadingTabPage.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.farTrackBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nearTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -114,6 +130,7 @@ namespace _3DAdamBielecki
             this.shadingTab.Controls.Add(this.cameraTabPage);
             this.shadingTab.Controls.Add(this.shadingTabPage);
             this.shadingTab.Controls.Add(this.tabPage1);
+            this.shadingTab.Controls.Add(this.tabPage3);
             this.shadingTab.Dock = System.Windows.Forms.DockStyle.Right;
             this.shadingTab.Location = new System.Drawing.Point(874, 0);
             this.shadingTab.Multiline = true;
@@ -121,6 +138,7 @@ namespace _3DAdamBielecki
             this.shadingTab.SelectedIndex = 0;
             this.shadingTab.Size = new System.Drawing.Size(313, 621);
             this.shadingTab.TabIndex = 8;
+            this.shadingTab.SelectedIndexChanged += new System.EventHandler(this.shadingTab_SelectedIndexChanged);
             // 
             // cameraTabPage
             // 
@@ -157,6 +175,7 @@ namespace _3DAdamBielecki
             // 
             // shadingTabPage
             // 
+            this.shadingTabPage.Controls.Add(this.groupBox3);
             this.shadingTabPage.Controls.Add(this.groupBox2);
             this.shadingTabPage.Location = new System.Drawing.Point(4, 29);
             this.shadingTabPage.Name = "shadingTabPage";
@@ -165,6 +184,27 @@ namespace _3DAdamBielecki
             this.shadingTabPage.TabIndex = 1;
             this.shadingTabPage.Text = "Shading";
             this.shadingTabPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.gridCheckBox);
+            this.groupBox3.Location = new System.Drawing.Point(8, 520);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(294, 60);
+            this.groupBox3.TabIndex = 1;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Other";
+            // 
+            // gridCheckBox
+            // 
+            this.gridCheckBox.AutoSize = true;
+            this.gridCheckBox.Location = new System.Drawing.Point(7, 26);
+            this.gridCheckBox.Name = "gridCheckBox";
+            this.gridCheckBox.Size = new System.Drawing.Size(59, 24);
+            this.gridCheckBox.TabIndex = 0;
+            this.gridCheckBox.Text = "Grid";
+            this.gridCheckBox.UseVisualStyleBackColor = true;
+            this.gridCheckBox.CheckedChanged += new System.EventHandler(this.gridCheckBox_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -237,6 +277,96 @@ namespace _3DAdamBielecki
             this.animationCheckBox.UseVisualStyleBackColor = true;
             this.animationCheckBox.CheckedChanged += new System.EventHandler(this.animationCheckBox_CheckedChanged);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.groupBox4);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(305, 588);
+            this.tabPage3.TabIndex = 3;
+            this.tabPage3.Text = "Fogg";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.farLabel);
+            this.groupBox4.Controls.Add(this.nearLabel);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.farTrackBar);
+            this.groupBox4.Controls.Add(this.nearTrackBar);
+            this.groupBox4.Controls.Add(this.foggCheckBox);
+            this.groupBox4.Location = new System.Drawing.Point(5, 3);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(294, 278);
+            this.groupBox4.TabIndex = 2;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Fogg";
+            // 
+            // farLabel
+            // 
+            this.farLabel.AutoSize = true;
+            this.farLabel.Location = new System.Drawing.Point(237, 180);
+            this.farLabel.Name = "farLabel";
+            this.farLabel.Size = new System.Drawing.Size(17, 20);
+            this.farLabel.TabIndex = 5;
+            this.farLabel.Text = "a";
+            // 
+            // nearLabel
+            // 
+            this.nearLabel.AutoSize = true;
+            this.nearLabel.Location = new System.Drawing.Point(237, 77);
+            this.nearLabel.Name = "nearLabel";
+            this.nearLabel.Size = new System.Drawing.Size(17, 20);
+            this.nearLabel.TabIndex = 3;
+            this.nearLabel.Text = "a";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(7, 180);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(77, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Far border";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(7, 77);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(90, 20);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Near border";
+            // 
+            // farTrackBar
+            // 
+            this.farTrackBar.Location = new System.Drawing.Point(6, 203);
+            this.farTrackBar.Maximum = 100;
+            this.farTrackBar.Name = "farTrackBar";
+            this.farTrackBar.Size = new System.Drawing.Size(281, 56);
+            this.farTrackBar.TabIndex = 2;
+            // 
+            // nearTrackBar
+            // 
+            this.nearTrackBar.Location = new System.Drawing.Point(7, 100);
+            this.nearTrackBar.Maximum = 100;
+            this.nearTrackBar.Name = "nearTrackBar";
+            this.nearTrackBar.Size = new System.Drawing.Size(281, 56);
+            this.nearTrackBar.TabIndex = 1;
+            // 
+            // foggCheckBox
+            // 
+            this.foggCheckBox.AutoSize = true;
+            this.foggCheckBox.Location = new System.Drawing.Point(6, 26);
+            this.foggCheckBox.Name = "foggCheckBox";
+            this.foggCheckBox.Size = new System.Drawing.Size(114, 24);
+            this.foggCheckBox.TabIndex = 0;
+            this.foggCheckBox.Text = "Fogg enable";
+            this.foggCheckBox.UseVisualStyleBackColor = true;
+            this.foggCheckBox.CheckedChanged += new System.EventHandler(this.foggCheckBox_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -260,10 +390,17 @@ namespace _3DAdamBielecki
             this.cameraTabPage.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.shadingTabPage.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.farTrackBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nearTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -288,6 +425,17 @@ namespace _3DAdamBielecki
         private System.Windows.Forms.RadioButton constantRadioButton;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.CheckBox animationCheckBox;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox gridCheckBox;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar farTrackBar;
+        private System.Windows.Forms.TrackBar nearTrackBar;
+        private System.Windows.Forms.CheckBox foggCheckBox;
+        private System.Windows.Forms.Label farLabel;
+        private System.Windows.Forms.Label nearLabel;
     }
 }
 

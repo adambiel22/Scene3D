@@ -30,6 +30,17 @@ namespace _3DAdamBielecki
                 camerasListView.Items[0].Selected = true;
             }
 
+            nearTrackBar.Value = (int)(appManager.Render.Fogg.Near * 100);
+            farTrackBar.Minimum = (int)(appManager.Render.Fogg.Near * 100);
+            nearLabel.Text = nearTrackBar.Value.ToString();
+
+            nearTrackBar.Maximum = (int)(appManager.Render.Fogg.Far * 100);
+            farTrackBar.Value = (int)(appManager.Render.Fogg.Far * 100);
+            farLabel.Text = farTrackBar.Value.ToString();
+
+            nearTrackBar.Scroll += nearTrackBar_Scroll;
+            farTrackBar.Scroll += farTrackBar_Scroll;
+
             fovNumericUpDown.Maximum = 150;
             fovNumericUpDown.Minimum = 40;
             fovNumericUpDown.Value = 45;
@@ -73,7 +84,7 @@ namespace _3DAdamBielecki
             {
                 appManager.Render.PixelShader = new GourandPixelShader();
             }
-            else if (constantRadioButton.Checked)
+            else if (phongRadioButton.Checked)
             {
                 appManager.Render.PixelShader = new PhongPixelShader();
             }
@@ -90,6 +101,39 @@ namespace _3DAdamBielecki
             {
                 appManager.StopAnimation();
             }
+        }
+
+        private void shadingTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            appManager.Render.TriangleDrawer.GridEnable = gridCheckBox.Checked;
+            pictureBox.Invalidate();
+        }
+
+        private void foggCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            appManager.Render.PixelShader.Fogg.Enabled = foggCheckBox.Checked;
+            pictureBox.Invalidate();
+        }
+
+        private void nearTrackBar_Scroll(object sender, EventArgs e)
+        {
+            appManager.Render.Fogg.Near = nearTrackBar.Value / 100.0;
+            farTrackBar.Minimum = nearTrackBar.Value;
+            nearLabel.Text = nearTrackBar.Value.ToString();
+            pictureBox.Invalidate();
+        }
+
+        private void farTrackBar_Scroll(object sender, EventArgs e)
+        {
+            appManager.Render.Fogg.Far = farTrackBar.Value / 100.0;
+            nearTrackBar.Maximum = farTrackBar.Value;
+            farLabel.Text = farTrackBar.Value.ToString();
+            pictureBox.Invalidate();
         }
     }
 }

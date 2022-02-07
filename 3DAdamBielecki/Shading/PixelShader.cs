@@ -16,6 +16,11 @@ namespace _3DAdamBielecki
         public Surface Surface { get; set; }
         public Fogg Fogg { get; set; }
 
+        protected PixelShader()
+        {
+            Fogg = new Fogg(Color.White, 0.8, 0.9, false);
+        }
+
         public abstract void SetTriangleInWorld(Triangle triangle);
 
         public void ShadePixel(int pixelX, int pixelY)

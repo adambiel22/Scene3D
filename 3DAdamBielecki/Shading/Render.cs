@@ -14,6 +14,7 @@ namespace _3DAdamBielecki
         public Scene Scene { get; set; }
         public TriangleDrawer TriangleDrawer { get; set; } 
         public PixelShader PixelShader { get; set; }
+        public Fogg Fogg { get; set; }
 
         public Render()
         {
@@ -30,7 +31,9 @@ namespace _3DAdamBielecki
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
             PixelShader.Camera = Scene.CurrentCamera;
-            PixelShader.Fogg = new Fogg(Color.White, 0.8, 0.9, false);
+            PixelShader.Fogg = Fogg;
+
+            Debug.WriteLine($"Near:{Fogg.Near}, Far:{Fogg.Far}, Enable: {Fogg.Enabled}");
 
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
@@ -59,7 +62,9 @@ namespace _3DAdamBielecki
                         PixelShader.SetTriangleInWorld(triangleInWorld);
                         stretchTriangle(projectedTriangle, width, height);
                         PixelShader.ProjectedTriangle = projectedTriangle;
-                        TriangleDrawer.DrawTriangle(projectedTriangle, PixelShader.ShadePixel,
+                        TriangleDrawer.DrawTriangle(
+                            projectedTriangle,
+                            PixelShader.ShadePixel,
                             (x, y) => bitmapManager.SetPixel(x, y, Color.Black));
                     }
                 }

@@ -5,7 +5,9 @@ namespace _3DAdamBielecki
 {
     public class TriangleDrawer
     {
-        public void DrawTriangle(Triangle triangle, Action<int,int> setPixel, Action<int, int> setBorderPixel)
+        public bool GridEnable { get; set; }
+        public void DrawTriangle(Triangle triangle, Action<int,int> setPixel,
+            Action<int, int> setBorderPixel)
         {
             Point v0 = new Point(
                 (int)triangle.Verticies[0].PositionVector[0],
@@ -18,7 +20,10 @@ namespace _3DAdamBielecki
                 (int)triangle.Verticies[2].PositionVector[1]);
             Point[] triangleVerticies = new Point[] { v0, v1, v2 };
             PolygonDrawer.FillPolygon(triangleVerticies, setPixel);
-            PolygonDrawer.DrawPolygon(triangleVerticies, setBorderPixel);
+            if (GridEnable)
+            {
+                PolygonDrawer.DrawPolygon(triangleVerticies, setBorderPixel);
+            }
         }
     }
 }

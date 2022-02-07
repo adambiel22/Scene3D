@@ -66,6 +66,7 @@ namespace _3DAdamBielecki
             Render = new Render();
             Render.PixelShader = new ConstantPixelShader();
             Render.TriangleDrawer = new TriangleDrawer();
+            Render.Fogg = new Fogg(Color.White, 0.8, 0.9, false);
             Scene = new StandardScene(pictureBox.Width, pictureBox.Height);
 
             Render.Scene = Scene;
