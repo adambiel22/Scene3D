@@ -33,11 +33,11 @@ namespace _3DAdamBielecki
             PixelShader.ZBuffor = zBuffor;
             PixelShader.SetPixel = bitmapManager.SetPixel;
             PixelShader.Camera = Scene.CurrentCamera;
-            //Debug.WriteLine($"Rendering no: {++counter}");
+            PixelShader.Fogg = new Fogg(Color.White, 0.8, 0.9, true);
+
             foreach(TransformatedBlock transformatedBlock in Scene.TransformatedBlocks)
             {
                 PixelShader.Surface = transformatedBlock.Surface;
-                // przenieść transformację całego bloku tutaj
                 Vertex[] verticiesInWorld =
                     transformatedBlock
                     .Transformation
