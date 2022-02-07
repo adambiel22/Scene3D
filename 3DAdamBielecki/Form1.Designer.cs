@@ -56,6 +56,9 @@ namespace _3DAdamBielecki
             this.farTrackBar = new System.Windows.Forms.TrackBar();
             this.nearTrackBar = new System.Windows.Forms.TrackBar();
             this.foggCheckBox = new System.Windows.Forms.CheckBox();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.lightsListView = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fovNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
@@ -71,6 +74,8 @@ namespace _3DAdamBielecki
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.farTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nearTrackBar)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox
@@ -131,6 +136,7 @@ namespace _3DAdamBielecki
             this.shadingTab.Controls.Add(this.shadingTabPage);
             this.shadingTab.Controls.Add(this.tabPage1);
             this.shadingTab.Controls.Add(this.tabPage3);
+            this.shadingTab.Controls.Add(this.tabPage2);
             this.shadingTab.Dock = System.Windows.Forms.DockStyle.Right;
             this.shadingTab.Location = new System.Drawing.Point(874, 0);
             this.shadingTab.Multiline = true;
@@ -143,12 +149,12 @@ namespace _3DAdamBielecki
             // cameraTabPage
             // 
             this.cameraTabPage.Controls.Add(this.groupBox1);
-            this.cameraTabPage.Location = new System.Drawing.Point(4, 29);
+            this.cameraTabPage.Location = new System.Drawing.Point(4, 54);
             this.cameraTabPage.Name = "cameraTabPage";
             this.cameraTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.cameraTabPage.Size = new System.Drawing.Size(305, 588);
+            this.cameraTabPage.Size = new System.Drawing.Size(305, 563);
             this.cameraTabPage.TabIndex = 0;
-            this.cameraTabPage.Text = "Camera";
+            this.cameraTabPage.Text = "Cameras";
             this.cameraTabPage.UseVisualStyleBackColor = true;
             // 
             // groupBox1
@@ -177,10 +183,10 @@ namespace _3DAdamBielecki
             // 
             this.shadingTabPage.Controls.Add(this.groupBox3);
             this.shadingTabPage.Controls.Add(this.groupBox2);
-            this.shadingTabPage.Location = new System.Drawing.Point(4, 29);
+            this.shadingTabPage.Location = new System.Drawing.Point(4, 54);
             this.shadingTabPage.Name = "shadingTabPage";
             this.shadingTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.shadingTabPage.Size = new System.Drawing.Size(305, 588);
+            this.shadingTabPage.Size = new System.Drawing.Size(305, 563);
             this.shadingTabPage.TabIndex = 1;
             this.shadingTabPage.Text = "Shading";
             this.shadingTabPage.UseVisualStyleBackColor = true;
@@ -258,10 +264,10 @@ namespace _3DAdamBielecki
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.animationCheckBox);
-            this.tabPage1.Location = new System.Drawing.Point(4, 29);
+            this.tabPage1.Location = new System.Drawing.Point(4, 54);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(305, 588);
+            this.tabPage1.Size = new System.Drawing.Size(305, 563);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Animation";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -280,10 +286,10 @@ namespace _3DAdamBielecki
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.groupBox4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 29);
+            this.tabPage3.Location = new System.Drawing.Point(4, 54);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(305, 588);
+            this.tabPage3.Size = new System.Drawing.Size(305, 563);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "Fogg";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -367,6 +373,39 @@ namespace _3DAdamBielecki
             this.foggCheckBox.UseVisualStyleBackColor = true;
             this.foggCheckBox.CheckedChanged += new System.EventHandler(this.foggCheckBox_CheckedChanged);
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox5);
+            this.tabPage2.Location = new System.Drawing.Point(4, 54);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(305, 563);
+            this.tabPage2.TabIndex = 4;
+            this.tabPage2.Text = "Lights";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.lightsListView);
+            this.groupBox5.Location = new System.Drawing.Point(3, 3);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(299, 140);
+            this.groupBox5.TabIndex = 1;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Lights";
+            // 
+            // lightsListView
+            // 
+            this.lightsListView.CheckBoxes = true;
+            this.lightsListView.HideSelection = false;
+            this.lightsListView.Location = new System.Drawing.Point(6, 26);
+            this.lightsListView.MultiSelect = false;
+            this.lightsListView.Name = "lightsListView";
+            this.lightsListView.Size = new System.Drawing.Size(287, 108);
+            this.lightsListView.TabIndex = 0;
+            this.lightsListView.UseCompatibleStateImageBehavior = false;
+            this.lightsListView.View = System.Windows.Forms.View.List;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -401,6 +440,8 @@ namespace _3DAdamBielecki
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.farTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nearTrackBar)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -435,6 +476,9 @@ namespace _3DAdamBielecki
         private System.Windows.Forms.CheckBox foggCheckBox;
         private System.Windows.Forms.Label farLabel;
         private System.Windows.Forms.Label nearLabel;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.ListView lightsListView;
     }
 }
 

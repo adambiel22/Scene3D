@@ -16,7 +16,8 @@ namespace _3DAdamBielecki
         public int Exponent { get; }
 
         public Reflector(Color color, Vector lightPosition,
-            Vector lightTarget, int exponent) : base(color)
+            Vector lightTarget, int exponent,
+            bool enabled = true, string name = "") : base(color, enabled, name)
         {
             Position = new Vector(lightPosition);
             LightTarget = new Vector(lightTarget);

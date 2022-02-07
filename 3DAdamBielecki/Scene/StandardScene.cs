@@ -83,16 +83,16 @@ namespace _3DAdamBielecki
             TransformatedBlocks.Add(pyramid3);
 
             Animations.Add(new OffsetAnnimation(sphere, new Vector(0, 0, 2.5),
-                Cameras[1], Cameras[2], (Reflector)Lights[0], 10, 30.0));
+                Cameras[1], Cameras[2], (Reflector)Lights[1], 10, 30.0));
 
             definePhillars();
         }
 
         private void defineLights()
         {
-            //Lights.Add(new PointLight(Color.White, 100, 100, 100));
+            Lights.Add(new PointLight(Color.White, 100, 100, 100, true, "Point Light"));
             Lights.Add(new Reflector(Color.White, new Vector(0, 0, 0, 1),
-                new Vector(50, 50, 0, 1), 10));
+                new Vector(50, 50, 0, 1), 10, true, "Reflector"));
         }
 
         private void defineCameras(int height, int width)

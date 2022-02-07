@@ -18,7 +18,9 @@ namespace _3DAdamBielecki
             return (Position - point, Color);
         }
 
-        public PointLight(Color color, double x, double y, double z) : base(color)
+        public PointLight(Color color,
+            double x, double y, double z,
+            bool enabled = true, string name = "") : base(color, enabled, name)
         {
             Position = new Vector(x, y, z, 1);
         }

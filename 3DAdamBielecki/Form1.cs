@@ -30,6 +30,15 @@ namespace _3DAdamBielecki
                 camerasListView.Items[0].Selected = true;
             }
 
+            foreach (Light light in appManager.Scene.Lights)
+            {
+                var item = new ListViewItem(light.Name);
+                item.Tag = light;
+                item.Checked = light.Enabled;
+                lightsListView.Items.Add(item);
+            }
+            lightsListView.ItemCheck += LightsListView_ItemCheck;
+
             nearTrackBar.Value = (int)(appManager.Render.Fogg.Near * 100);
             farTrackBar.Minimum = (int)(appManager.Render.Fogg.Near * 100);
             nearLabel.Text = nearTrackBar.Value.ToString();
@@ -48,6 +57,13 @@ namespace _3DAdamBielecki
             trackBar.Value = 50;
 
         }
+
+        private void LightsListView_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            ((Light)lightsListView.Items[e.Index].Tag).Enabled = e.NewValue == CheckState.Checked;
+            pictureBox.Invalidate();
+        }
+
         private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
         {
             Debug.WriteLine("fov changed");

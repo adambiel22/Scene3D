@@ -18,17 +18,20 @@ namespace _3DAdamBielecki
             (double iR, double iG, double iB) = (surface.AmbientConst, surface.AmbientConst, surface.AmbientConst);
             foreach (Light light in lights)
             {
-                (Vector toLight, var lightColor) = light.ComputeToLightVector(position);
-                toLight.Normalize();
-                Vector mirrorReflectance = normalVector * (2 * (normalVector * toLight)) - toLight;
-                double diffuse = Math.Max(surface.DiffuseConst * (normalVector * toLight), 0.0);
-                double scalarProduct = toCamera * mirrorReflectance;
-                double specular = scalarProduct >= 0
-                    ? Math.Max(surface.SpecularConst * Math.Pow(scalarProduct, surface.NShiny), 0)
-                    : 0.0;
-                iR += lightColor.r * (diffuse + specular);
-                iG += lightColor.g * (diffuse + specular);
-                iB += lightColor.b * (diffuse + specular);
+                if (light.Enabled)
+                {
+                    (Vector toLight, var lightColor) = light.ComputeToLightVector(position);
+                    toLight.Normalize();
+                    Vector mirrorReflectance = normalVector * (2 * (normalVector * toLight)) - toLight;
+                    double diffuse = Math.Max(surface.DiffuseConst * (normalVector * toLight), 0.0);
+                    double scalarProduct = toCamera * mirrorReflectance;
+                    double specular = scalarProduct >= 0
+                        ? Math.Max(surface.SpecularConst * Math.Pow(scalarProduct, surface.NShiny), 0)
+                        : 0.0;
+                    iR += lightColor.r * (diffuse + specular);
+                    iG += lightColor.g * (diffuse + specular);
+                    iB += lightColor.b * (diffuse + specular);
+                }
             }
 
             //Czy trzeba dodać też Max 0? Będzie tak jak iR lub iG lub iB wyjdzie ujemne. Kiedy tak może być??
