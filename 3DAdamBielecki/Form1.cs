@@ -50,12 +50,6 @@ namespace _3DAdamBielecki
             nearTrackBar.Scroll += nearTrackBar_Scroll;
             farTrackBar.Scroll += farTrackBar_Scroll;
 
-            fovNumericUpDown.Maximum = 150;
-            fovNumericUpDown.Minimum = 40;
-            fovNumericUpDown.Value = 45;
-
-            trackBar.Value = 50;
-
         }
 
         private void LightsListView_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -64,17 +58,17 @@ namespace _3DAdamBielecki
             pictureBox.Invalidate();
         }
 
-        private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
-        {
-            Debug.WriteLine("fov changed");
-            appManager.SetFieldOfView((int)fovNumericUpDown.Value);
-        }
+        //private void fovNumericUpDown_ValueChanged(object sender, EventArgs e)
+        //{
+        //    Debug.WriteLine("fov changed");
+        //    appManager.SetFieldOfView((int)fovNumericUpDown.Value);
+        //}
 
-        private void trackBar_Scroll(object sender, EventArgs e)
-        {
-            appManager.SetCameraPosition(trackBar.Value);
-            label1.Text = $"{trackBar.Value}";
-        }
+        //private void trackBar_Scroll(object sender, EventArgs e)
+        //{
+        //    appManager.SetCameraPosition(trackBar.Value);
+        //    label1.Text = $"{trackBar.Value}";
+        //}
 
         private void pictureBox_MouseDown(object sender, MouseEventArgs e)
         {

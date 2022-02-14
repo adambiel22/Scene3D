@@ -74,7 +74,7 @@ namespace _3DAdamBielecki
             timerRunning = false;
             timer = new System.Timers.Timer();
             stopwatch = new Stopwatch();
-            timer.Interval = 100;
+            timer.Interval = 3;
             timer.AutoReset = false;
             timer.Elapsed += Timer_Elapsed;
          
@@ -120,11 +120,11 @@ namespace _3DAdamBielecki
         {
             e.Graphics.DrawImage(
                 Render.RenderScene(
-                    (int)(PictureBox.Width * 1.5),
-                    (int)(PictureBox.Height * 1.5)),
+                    (int)(PictureBox.Width),
+                    (int)(PictureBox.Height)),
                 new Point(
-                    (int)(-0.25 * PictureBox.Width),
-                    (int)(-0.25 * PictureBox.Height)));
+                    0,
+                    0));
             if (timerRunning) timer.Start();
         }
     }
