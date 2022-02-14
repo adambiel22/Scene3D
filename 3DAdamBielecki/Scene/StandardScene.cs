@@ -38,7 +38,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 2.5 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 1, 0.001, 10, Color.Red)
+                new Surface(1, 1, 0.1, 10, Color.Red)
                 );
 
             TransformatedBlock pyramid1 = new TransformatedBlock(
@@ -50,7 +50,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 1, 0.001, 10, Color.Coral)
+                new Surface(1, 1, 0.1, 10, Color.Coral)
                 );
 
             TransformatedBlock pyramid2 = new TransformatedBlock(
@@ -62,7 +62,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 1, 0.001, 10, Color.CornflowerBlue)
+                new Surface(1, 1, 0.1, 10, Color.CornflowerBlue)
                 );
 
             TransformatedBlock pyramid3 = new TransformatedBlock(
@@ -74,7 +74,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 1, 0.001, 10, Color.Azure)
+                new Surface(1, 1, 0.1, 10, Color.Azure)
                 );
 
             TransformatedBlocks.Add(sphere);
@@ -83,7 +83,7 @@ namespace _3DAdamBielecki
             TransformatedBlocks.Add(pyramid3);
 
             Animations.Add(new OffsetAnnimation(sphere, new Vector(0, 0, 2.5),
-                Cameras[1], Cameras[2], (Reflector)Lights[1], 10, 30.0));
+                Cameras[1], Cameras[2], (Reflector)Lights[2], 10, 30.0));
 
             definePhillars();
         }
@@ -91,6 +91,7 @@ namespace _3DAdamBielecki
         private void defineLights()
         {
             Lights.Add(new PointLight(Color.White, 100, 100, 100, true, "Point Light"));
+            Lights.Add(new DirectionLight(new Vector(0, -1, 0.2), Color.White, true, "Direction Light"));
             Lights.Add(new Reflector(Color.White, new Vector(50, 50, 5, 1),
                 new Vector(40, 50, 5, 1), 10, true, "Reflector"));
         }
@@ -130,7 +131,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 0, 0.001, 10, Color.BurlyWood)
+                new Surface(1, 0, 0.1, 10, Color.BurlyWood)
             ) ;
 
             TransformatedBlock phillar2 = new TransformatedBlock(
@@ -142,7 +143,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 0, 0.001, 10, Color.BurlyWood)
+                new Surface(1, 0, 0.1, 10, Color.BurlyWood)
             );
             TransformatedBlock phillar3 = new TransformatedBlock(
                 new Cuboid(5, 4.0, 4.0, 15.0),
@@ -153,7 +154,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 0, 0.001, 10, Color.BurlyWood)
+                new Surface(1, 0, 0.1, 10, Color.BurlyWood)
             );
 
             TransformatedBlock diamond1 = new TransformatedBlock(
@@ -165,7 +166,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 20.0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 0.3, 0.001, 5, Color.Magenta)
+                new Surface(1, 0.3, 0.1, 5, Color.Magenta)
                 );
 
             TransformatedBlock diamond2 = new TransformatedBlock(
@@ -177,7 +178,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 20.0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 0.3, 0.001, 5, Color.Magenta)
+                new Surface(1, 0.3, 0.1, 5, Color.Magenta)
                 );
 
             TransformatedBlock diamond3 = new TransformatedBlock(
@@ -189,7 +190,7 @@ namespace _3DAdamBielecki
                     { 0, 0, 1, 20.0 },
                     { 0, 0, 0, 1 },
                 }),
-                new Surface(1, 0.3, 0.001, 5, Color.Magenta)
+                new Surface(1, 0.3, 0.1, 5, Color.Magenta)
                 );
 
             TransformatedBlocks.Add(phillar1);
