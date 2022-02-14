@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace _3DAdamBielecki
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         AppManager appManager;
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             appManager = new AppManager(pictureBox);
@@ -28,6 +28,10 @@ namespace _3DAdamBielecki
             if (camerasListView.Items.Count > 0)
             {
                 camerasListView.Items[0].Selected = true;
+                fovTrackBar.Value =
+                    (int)(appManager.Scene.CurrentCamera.Projection.FieldOfView
+                    * 180.0 / Math.PI);
+                fovLabel.Text = fovTrackBar.Value.ToString();
             }
 
             foreach (Light light in appManager.Scene.Lights)
@@ -49,7 +53,6 @@ namespace _3DAdamBielecki
 
             nearTrackBar.Scroll += nearTrackBar_Scroll;
             farTrackBar.Scroll += farTrackBar_Scroll;
-
         }
 
         private void LightsListView_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -75,7 +78,7 @@ namespace _3DAdamBielecki
             Debug.WriteLine(e.Location);
         }
 
-        private void camerLlistView_SelectedIndexChanged(object sender, EventArgs e)
+        private void cameraslistView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (camerasListView.SelectedIndices.Count > 0)
             {
@@ -113,11 +116,6 @@ namespace _3DAdamBielecki
             }
         }
 
-        private void shadingTab_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void gridCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             appManager.Render.TriangleDrawer.GridEnable = gridCheckBox.Checked;
@@ -144,6 +142,48 @@ namespace _3DAdamBielecki
             nearTrackBar.Maximum = farTrackBar.Value;
             farLabel.Text = farTrackBar.Value.ToString();
             if (appManager.Render.Fogg.Enabled) pictureBox.Invalidate();
+        }
+
+        private void lightsListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lightsListView.SelectedIndices.Count > 0)
+            {
+
+                Reflector reflector =
+                    lightsListView.Items[lightsListView.SelectedIndices[0]].Tag as Reflector;
+                if (reflector != null)
+                {
+                    reflectorDirectionTrackBar.Enabled = true;
+                    reflectorDirectionTrackBar.Value =
+                        (int)(180 * reflector.AngleOffset / Math.PI) + 90;
+                    reflectorDirectionLabel.Text = reflectorDirectionTrackBar.Value.ToString();
+                }
+                else
+                {
+                    reflectorDirectionTrackBar.Enabled = false;
+                }
+            }
+        }
+
+        private void reflectorDirectionTrackBar_Scroll(object sender, EventArgs e)
+        {
+            if (lightsListView.SelectedIndices.Count > 0)
+            {
+                Reflector reflector =
+                lightsListView.Items[lightsListView.SelectedIndices[0]].Tag as Reflector;
+                reflector.AngleOffset =
+                    (reflectorDirectionTrackBar.Value - 90.0) * Math.PI / 180.0;
+                reflectorDirectionLabel.Text = reflectorDirectionTrackBar.Value.ToString();
+                pictureBox.Invalidate();
+            }
+        }
+
+        private void fovTrackBar_Scroll(object sender, EventArgs e)
+        {
+            appManager.Scene.CurrentCamera.Projection.FieldOfView =
+                fovTrackBar.Value * Math.PI / 180.0;
+            fovLabel.Text = fovTrackBar.Value.ToString();
+            pictureBox.Invalidate();
         }
     }
 }
