@@ -1,7 +1,7 @@
 ﻿
 namespace _3DAdamBielecki
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -32,6 +32,10 @@ namespace _3DAdamBielecki
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.shadingTab = new System.Windows.Forms.TabControl();
             this.cameraTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.fovLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.fovTrackBar = new System.Windows.Forms.TrackBar();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.camerasListView = new System.Windows.Forms.ListView();
             this.shadingTabPage = new System.Windows.Forms.TabPage();
@@ -53,11 +57,17 @@ namespace _3DAdamBielecki
             this.nearTrackBar = new System.Windows.Forms.TrackBar();
             this.foggCheckBox = new System.Windows.Forms.CheckBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.reflectorDirectionLabel = new System.Windows.Forms.Label();
+            this.reflectorDirectionTrackBar = new System.Windows.Forms.TrackBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.lightsListView = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.shadingTab.SuspendLayout();
             this.cameraTabPage.SuspendLayout();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fovTrackBar)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.shadingTabPage.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,6 +78,8 @@ namespace _3DAdamBielecki
             ((System.ComponentModel.ISupportInitialize)(this.farTrackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nearTrackBar)).BeginInit();
             this.tabPage2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reflectorDirectionTrackBar)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -98,10 +110,10 @@ namespace _3DAdamBielecki
             this.shadingTab.SelectedIndex = 0;
             this.shadingTab.Size = new System.Drawing.Size(313, 621);
             this.shadingTab.TabIndex = 8;
-            this.shadingTab.SelectedIndexChanged += new System.EventHandler(this.shadingTab_SelectedIndexChanged);
             // 
             // cameraTabPage
             // 
+            this.cameraTabPage.Controls.Add(this.groupBox6);
             this.cameraTabPage.Controls.Add(this.groupBox1);
             this.cameraTabPage.Location = new System.Drawing.Point(4, 54);
             this.cameraTabPage.Name = "cameraTabPage";
@@ -110,6 +122,46 @@ namespace _3DAdamBielecki
             this.cameraTabPage.TabIndex = 0;
             this.cameraTabPage.Text = "Cameras";
             this.cameraTabPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.fovLabel);
+            this.groupBox6.Controls.Add(this.label1);
+            this.groupBox6.Controls.Add(this.fovTrackBar);
+            this.groupBox6.Location = new System.Drawing.Point(3, 134);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(293, 421);
+            this.groupBox6.TabIndex = 4;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Camera settings";
+            // 
+            // fovLabel
+            // 
+            this.fovLabel.AutoSize = true;
+            this.fovLabel.Location = new System.Drawing.Point(230, 32);
+            this.fovLabel.Name = "fovLabel";
+            this.fovLabel.Size = new System.Drawing.Size(50, 20);
+            this.fovLabel.TabIndex = 2;
+            this.fovLabel.Text = "label4";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "label1";
+            // 
+            // fovTrackBar
+            // 
+            this.fovTrackBar.Location = new System.Drawing.Point(6, 63);
+            this.fovTrackBar.Maximum = 150;
+            this.fovTrackBar.Minimum = 40;
+            this.fovTrackBar.Name = "fovTrackBar";
+            this.fovTrackBar.Size = new System.Drawing.Size(281, 56);
+            this.fovTrackBar.TabIndex = 0;
+            this.fovTrackBar.Value = 40;
             // 
             // groupBox1
             // 
@@ -131,7 +183,7 @@ namespace _3DAdamBielecki
             this.camerasListView.TabIndex = 4;
             this.camerasListView.UseCompatibleStateImageBehavior = false;
             this.camerasListView.View = System.Windows.Forms.View.List;
-            this.camerasListView.SelectedIndexChanged += new System.EventHandler(this.camerLlistView_SelectedIndexChanged);
+            this.camerasListView.SelectedIndexChanged += new System.EventHandler(this.cameraslistView_SelectedIndexChanged);
             // 
             // shadingTabPage
             // 
@@ -329,6 +381,7 @@ namespace _3DAdamBielecki
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.groupBox7);
             this.tabPage2.Controls.Add(this.groupBox5);
             this.tabPage2.Location = new System.Drawing.Point(4, 54);
             this.tabPage2.Name = "tabPage2";
@@ -337,6 +390,45 @@ namespace _3DAdamBielecki
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "Lights";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label5);
+            this.groupBox7.Controls.Add(this.reflectorDirectionLabel);
+            this.groupBox7.Controls.Add(this.reflectorDirectionTrackBar);
+            this.groupBox7.Location = new System.Drawing.Point(9, 150);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(287, 405);
+            this.groupBox7.TabIndex = 2;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Light settings";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 33);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(132, 20);
+            this.label5.TabIndex = 2;
+            this.label5.Text = "Reflector direction";
+            // 
+            // reflectorDirectionLabel
+            // 
+            this.reflectorDirectionLabel.AutoSize = true;
+            this.reflectorDirectionLabel.Location = new System.Drawing.Point(229, 33);
+            this.reflectorDirectionLabel.Name = "reflectorDirectionLabel";
+            this.reflectorDirectionLabel.Size = new System.Drawing.Size(17, 20);
+            this.reflectorDirectionLabel.TabIndex = 1;
+            this.reflectorDirectionLabel.Text = "a";
+            // 
+            // reflectorDirectionTrackBar
+            // 
+            this.reflectorDirectionTrackBar.Location = new System.Drawing.Point(7, 64);
+            this.reflectorDirectionTrackBar.Maximum = 180;
+            this.reflectorDirectionTrackBar.Name = "reflectorDirectionTrackBar";
+            this.reflectorDirectionTrackBar.Size = new System.Drawing.Size(274, 56);
+            this.reflectorDirectionTrackBar.TabIndex = 0;
+            this.reflectorDirectionTrackBar.Scroll += new System.EventHandler(this.reflectorDirectionTrackBar_Scroll);
             // 
             // groupBox5
             // 
@@ -359,21 +451,25 @@ namespace _3DAdamBielecki
             this.lightsListView.TabIndex = 0;
             this.lightsListView.UseCompatibleStateImageBehavior = false;
             this.lightsListView.View = System.Windows.Forms.View.List;
+            this.lightsListView.SelectedIndexChanged += new System.EventHandler(this.lightsListView_SelectedIndexChanged);
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 621);
             this.Controls.Add(this.shadingTab);
             this.Controls.Add(this.pictureBox);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.shadingTab.ResumeLayout(false);
             this.cameraTabPage.ResumeLayout(false);
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fovTrackBar)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.shadingTabPage.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -388,6 +484,9 @@ namespace _3DAdamBielecki
             ((System.ComponentModel.ISupportInitialize)(this.farTrackBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nearTrackBar)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.reflectorDirectionTrackBar)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -421,6 +520,14 @@ namespace _3DAdamBielecki
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.ListView lightsListView;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label fovLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TrackBar fovTrackBar;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label reflectorDirectionLabel;
+        private System.Windows.Forms.TrackBar reflectorDirectionTrackBar;
     }
 }
 

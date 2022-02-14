@@ -13,6 +13,7 @@ namespace _3DAdamBielecki
     {
         public Vector Position { get; set; }
         public Vector LightTarget { get; set; }
+        public double AngleOffset { get; set; }
         public int Exponent { get; }
 
         public Reflector(Color color, Vector lightPosition,
@@ -22,6 +23,7 @@ namespace _3DAdamBielecki
             Position = new Vector(lightPosition);
             LightTarget = new Vector(lightTarget);
             Exponent = exponent;
+            AngleOffset = 0;
         }
 
         public override (Vector, (double r, double g, double b))
@@ -31,6 +33,9 @@ namespace _3DAdamBielecki
             outLight.Normalize();
             Vector lightTarget = LightTarget - Position;
             lightTarget.Normalize();
+            Transformation trasformation = new Transformation();
+            trasformation.AddZAxisRotation(AngleOffset);
+            lightTarget = trasformation.TransformNormalVector(lightTarget);
 
             double scalarProd = outLight * lightTarget;
             double factor = scalarProd >= 0
