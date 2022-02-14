@@ -138,20 +138,19 @@ namespace _3DAdamBielecki
             // fovLabel
             // 
             this.fovLabel.AutoSize = true;
-            this.fovLabel.Location = new System.Drawing.Point(230, 32);
+            this.fovLabel.Location = new System.Drawing.Point(237, 40);
             this.fovLabel.Name = "fovLabel";
-            this.fovLabel.Size = new System.Drawing.Size(50, 20);
+            this.fovLabel.Size = new System.Drawing.Size(0, 20);
             this.fovLabel.TabIndex = 2;
-            this.fovLabel.Text = "label4";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 51);
+            this.label1.Location = new System.Drawing.Point(6, 39);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
+            this.label1.Size = new System.Drawing.Size(93, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.label1.Text = "Field of view";
             // 
             // fovTrackBar
             // 
@@ -162,6 +161,7 @@ namespace _3DAdamBielecki
             this.fovTrackBar.Size = new System.Drawing.Size(281, 56);
             this.fovTrackBar.TabIndex = 0;
             this.fovTrackBar.Value = 40;
+            this.fovTrackBar.Scroll += new System.EventHandler(this.fovTrackBar_Scroll);
             // 
             // groupBox1
             // 
@@ -417,12 +417,12 @@ namespace _3DAdamBielecki
             this.reflectorDirectionLabel.AutoSize = true;
             this.reflectorDirectionLabel.Location = new System.Drawing.Point(229, 33);
             this.reflectorDirectionLabel.Name = "reflectorDirectionLabel";
-            this.reflectorDirectionLabel.Size = new System.Drawing.Size(17, 20);
+            this.reflectorDirectionLabel.Size = new System.Drawing.Size(0, 20);
             this.reflectorDirectionLabel.TabIndex = 1;
-            this.reflectorDirectionLabel.Text = "a";
             // 
             // reflectorDirectionTrackBar
             // 
+            this.reflectorDirectionTrackBar.Enabled = false;
             this.reflectorDirectionTrackBar.Location = new System.Drawing.Point(7, 64);
             this.reflectorDirectionTrackBar.Maximum = 180;
             this.reflectorDirectionTrackBar.Name = "reflectorDirectionTrackBar";

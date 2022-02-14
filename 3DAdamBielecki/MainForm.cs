@@ -28,6 +28,10 @@ namespace _3DAdamBielecki
             if (camerasListView.Items.Count > 0)
             {
                 camerasListView.Items[0].Selected = true;
+                fovTrackBar.Value =
+                    (int)(appManager.Scene.CurrentCamera.Projection.FieldOfView
+                    * 180.0 / Math.PI);
+                fovLabel.Text = fovTrackBar.Value.ToString();
             }
 
             foreach (Light light in appManager.Scene.Lights)
@@ -49,7 +53,6 @@ namespace _3DAdamBielecki
 
             nearTrackBar.Scroll += nearTrackBar_Scroll;
             farTrackBar.Scroll += farTrackBar_Scroll;
-
         }
 
         private void LightsListView_ItemCheck(object sender, ItemCheckEventArgs e)
@@ -152,7 +155,8 @@ namespace _3DAdamBielecki
                 {
                     reflectorDirectionTrackBar.Enabled = true;
                     reflectorDirectionTrackBar.Value =
-                        (int)(180 * reflector.AngleOffset / Math.PI);
+                        (int)(180 * reflector.AngleOffset / Math.PI) + 90;
+                    reflectorDirectionLabel.Text = reflectorDirectionTrackBar.Value.ToString();
                 }
                 else
                 {
@@ -172,6 +176,14 @@ namespace _3DAdamBielecki
                 reflectorDirectionLabel.Text = reflectorDirectionTrackBar.Value.ToString();
                 pictureBox.Invalidate();
             }
+        }
+
+        private void fovTrackBar_Scroll(object sender, EventArgs e)
+        {
+            appManager.Scene.CurrentCamera.Projection.FieldOfView =
+                fovTrackBar.Value * Math.PI / 180.0;
+            fovLabel.Text = fovTrackBar.Value.ToString();
+            pictureBox.Invalidate();
         }
     }
 }
