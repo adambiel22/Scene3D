@@ -50,6 +50,15 @@ namespace _3DAdamBielecki
                 });
             inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
         }
+
+        public void SetPosition(Vector position)
+        {
+            transformationMatrix[0, 3] = position[0];
+            transformationMatrix[1, 3] = position[1];
+            transformationMatrix[2, 3] = position[2];
+            inversedTransposedTransformationMatrix = transformationMatrix.Inverse().Transpose();
+        }
+
         public void AddXAxisRotation(double angle)
         {
             transformationMatrix = transformationMatrix *

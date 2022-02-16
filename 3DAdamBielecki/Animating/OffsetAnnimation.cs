@@ -32,7 +32,7 @@ namespace _3DAdamBielecki
             distance = 0.0;
         }
 
-        public override void NextFrame(TimeSpan timeOffset)
+        public override void UpdateFrame(TimeSpan timeOffset)
         {
             double timeOffsetSeconds = timeOffset.TotalSeconds;
             if (changeVelocityVector(timeOffsetSeconds)) return;

@@ -97,7 +97,7 @@ namespace _3DAdamBielecki
             stopwatch.Restart();
             foreach (IAnimation animation in Scene.Animations)
             {
-                animation.NextFrame(timeOffset);
+                animation.UpdateFrame(timeOffset);
             }
             PictureBox.Invalidate();
         }

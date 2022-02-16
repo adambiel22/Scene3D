@@ -24,7 +24,7 @@ namespace _3DAdamBielecki
             AngleVelocity = angleVelocity;
         }
 
-        public void NextFrame(TimeSpan timeOffset)
+        public void UpdateFrame(TimeSpan timeOffset)
         {
             double timeOffsetSeconds = timeOffset.TotalSeconds;
             double dAngle = AngleVelocity * timeOffsetSeconds;
