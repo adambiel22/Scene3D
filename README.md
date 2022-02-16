@@ -13,9 +13,11 @@ You can adjust following settings:
 ### Lights
 - enabling and disabling lights
 - changing direction of reflector
+    - to change direction of reflector first you should select list view item with reflector
 ### Cameras
-- changing current camera
-- changing field of View
+- selecting current camera
+    - to select a camera you should select a list view item
+- changing field of View of current camera
 ### Shading
 - changing shading mode
     - constant

@@ -74,7 +74,7 @@ namespace _3DAdamBielecki
             timerRunning = false;
             timer = new System.Timers.Timer();
             stopwatch = new Stopwatch();
-            timer.Interval = 3;
+            timer.Interval = 1;
             timer.AutoReset = false;
             timer.Elapsed += Timer_Elapsed;
          
