@@ -185,5 +185,10 @@ namespace _3DAdamBielecki
             fovLabel.Text = fovTrackBar.Value.ToString();
             pictureBox.Invalidate();
         }
+
+        private void shadingTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

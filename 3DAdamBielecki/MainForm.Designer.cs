@@ -110,6 +110,7 @@ namespace _3DAdamBielecki
             this.shadingTab.SelectedIndex = 0;
             this.shadingTab.Size = new System.Drawing.Size(313, 621);
             this.shadingTab.TabIndex = 8;
+            this.shadingTab.SelectedIndexChanged += new System.EventHandler(this.shadingTab_SelectedIndexChanged);
             // 
             // cameraTabPage
             // 
@@ -200,7 +201,7 @@ namespace _3DAdamBielecki
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.gridCheckBox);
-            this.groupBox3.Location = new System.Drawing.Point(8, 520);
+            this.groupBox3.Location = new System.Drawing.Point(3, 134);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(294, 60);
             this.groupBox3.TabIndex = 1;
